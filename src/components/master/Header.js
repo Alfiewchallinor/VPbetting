@@ -1,15 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import DefaultSideMenu from "./DefaultSideMenu";
-import $ from "jquery"
-
+import $ from "jquery";
 
 class Header extends React.Component {
-  
   state = {
     isMenuOpen: false,
   };
-  
 
   showSidebar = () => {
     const isOpen = this.state.isMenuOpen;
@@ -23,7 +20,7 @@ class Header extends React.Component {
     $("#container, #remover").hide();
     $("#LOGIN, #nav, #Header").show();
   };
-  
+
   render() {
     const isOpen = this.state.isMenuOpen;
     return (
@@ -31,8 +28,6 @@ class Header extends React.Component {
         {/*navigation inserted here */}
         <section id="whenSignedOut">
           <button onClick={this.login} id="LOGIN"
-          
-          >
             LOGIN
           </button>
         </section>

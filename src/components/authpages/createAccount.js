@@ -15,10 +15,10 @@ export default function CreateAccount() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError("Failed to create an account");
     }
+    
 
     try {
       setError("");
