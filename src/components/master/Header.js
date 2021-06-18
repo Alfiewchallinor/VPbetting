@@ -27,7 +27,7 @@ class Header extends React.Component {
       <div>
         {/*navigation inserted here */}
         <section id="whenSignedOut">
-          <button onClick={this.login} id="LOGIN"
+          <button onClick={this.login} id="LOGIN">
             LOGIN
           </button>
         </section>
