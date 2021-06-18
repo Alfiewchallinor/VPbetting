@@ -1,5 +1,7 @@
 {
   "projects": {
+    "prod": "vpbetting-120f3",
+    "dev": "vpbetting-120f3",
     "default": "vpbetting-120f3"
   }
 }
