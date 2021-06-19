@@ -2794,7 +2794,7 @@
   }
 
 
-  .errormessage {
+  .errormessageUniversal {
     color: rgb(236, 16, 16);
     background-color: rgb(255, 221, 221);
     font-family: 'roboto', sans-serif;
@@ -2810,6 +2810,63 @@
     text-align: center;
     user-select: none;
   }
+  .errormessageEmail {
+    background-color: rgba(255, 0, 0, 0.08);
+    font-family: 'roboto', sans-serif;
+    width: 362px;
+    left: 20px;
+    height: 40px;
+    position: relative;
+    border-radius: 0.17em;
+    font-size: 20px;
+    border: none;
+    top: -414px;
+    text-align: center;
+    user-select: none;
+  }
+  .errormessagePasswordOne {
+    background-color: rgba(255, 0, 0, 0.08);
+    font-family: 'roboto', sans-serif;
+    width: 362px;
+    left: 20px;
+    height: 40px;
+    position: relative;
+    border-radius: 0.17em;
+    font-size: 20px;
+    border: none;
+    top: -369px;
+    text-align: center;
+    user-select: none;
+  }
+  .errormessagePasswordRepeat {
+    background-color: rgba(255, 0, 0, 0.08);
+    font-family: 'roboto', sans-serif;
+    width: 362px;
+    left: 20px;
+    height: 40px;
+    position: relative;
+    border-radius: 0.17em;
+    font-size: 20px;
+    border: none;
+    top: -324px;
+    text-align: center;
+    user-select: none;
+  }
+  .termsUnverified {
+    background-color: rgba(255, 0, 0, 0.08);
+    font-family: 'roboto', sans-serif;
+    width: 30px;
+    left: 20px;
+    height: 30px;
+    position: relative;
+    border-radius: 0.17em;
+    font-size: 20px;
+    border: none;
+    top: -300px;
+    text-align: center;
+    user-select: none;
+
+  }
   
   .tosverify {
     height: 30px;
@@ -2822,7 +2879,13 @@
     top: 364px;
     background-color: transparent;
     border: rgb(187, 187, 187) solid 1px;
-    transition: all 0.01s
+    transition: all 0.01s;
+    appearance: none;
+    -webkit-appearance: none;
+    background-position: center;
+    background-size: 150%;
+    z-index: 100;
+
   }
 
   .tosinstruction {
@@ -2832,4 +2895,16 @@
     position: absolute;
     font-size: 14.6px;
     user-select: none;
+  }
+
+
+  .errorPasswordDiv {
+    width: 362px;
+    background-color: rgba(255, 0, 0, 0.115);
+    height: 40px;
+    border-radius: 0.17em;
+    left: 20px;
+    top: -414px;
+    position: relative;
+    color: transparent
   }

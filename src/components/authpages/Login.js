@@ -6,7 +6,6 @@ import Logotopleft from "../master/logotopleft.js/Logotopleft";
 export default function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
-    const tosConfirmRef = useRef();
     const { createAccount } = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);

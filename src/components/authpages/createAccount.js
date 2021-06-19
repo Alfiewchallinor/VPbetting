@@ -3,10 +3,10 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Logotopleft from "../master/logotopleft.js/Logotopleft";
+import $ from "jquery"
 
 
 export default function CreateAccount() {
-  var passwordone = document.getElementById("passwordOne")
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -14,16 +14,31 @@ export default function CreateAccount() {
   const tosConfirmRef = useRef();
   const { createAccount } = useAuth();
   const [error, setError] = useState("");
+  const [passwordMatch, setErrorpwd] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  const tosButton = () => {
+    
+    const tosconfirmButton = document.querySelector(".tosverify") 
+    if(tosconfirmButton.checked ===true) {
+      $(".tosverify").css("background", "url('../images/checkbox.jpg')");
+      $(".tosverify").css("background-size", "100%" )
+    } else {
+      $(".tosverify").css("background", "transparent");
+    }
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Passwords do not match");
+      return setError("Passwords don't match");
     }
-    
-    if(passwordRef.current.value > 5) {
+    if(passwordRef.current.value.length < 8 || passwordConfirmRef.current.value.length < 8) {
       return setError("Password is not secure enough")
+    }
+    const tosconfirmButton = document.querySelector(".tosverify")
+    if(tosconfirmButton.checked !== true) {
+      return setError("Please agree to the TOS & Privacy Policy")
     }
     
 
@@ -32,7 +47,7 @@ export default function CreateAccount() {
       setLoading(true);
       await createAccount(emailRef.current.value, passwordRef.current.value);
     } catch {
-      setError("Failed to create an account");
+      setError("Email has already been taken");
     }
     setLoading(false);
   }
@@ -77,7 +92,7 @@ export default function CreateAccount() {
               className="tosverify"
               type="checkbox"
               ref={tosConfirmRef}
-              required
+              onClick={tosButton}
             /> 
             <p className="tosinstruction">
               By creating a VPbetting account, I understand
@@ -103,7 +118,12 @@ export default function CreateAccount() {
               {" "}
               Login{" "}
             </Link>
-            {error && <div className="errormessage">{error}</div>}
+            {error && <div className="errormessageUniversal">{error}</div>}
+            {error && <div className="errormessageEmail"></div>}
+            {error &&<div className="errormessagePasswordOne"></div>}
+            {error &&<div className="errormessagePasswordRepeat"></div>}
+            {error &&<div className="termsUnverified"></div>}
+            
           </div>
         </div>
       </div>
