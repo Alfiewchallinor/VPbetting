@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from "react-router-dom";
+import Logotopleft from '../logotopleft.js/Logotopleft';
 
 const  Changingheader = () => {
 
@@ -15,9 +15,8 @@ const  Changingheader = () => {
       };
     return (
         <header id="Header" className="header" onLoad={headerfunc}>
-          <Link to="/">
-            <img src="images/Logodesign2.png" id="logo" alt="topleftlogo" />
-          </Link>
+          <Logotopleft />
+
         </header>
     )
 }

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import DefaultSideMenu from "./DefaultSideMenu";
 import $ from "jquery";
+import Loginicon from "./login/loginicon";
 
 class Header extends React.Component {
   state = {
@@ -25,19 +26,9 @@ class Header extends React.Component {
     const isOpen = this.state.isMenuOpen;
     return (
       <div>
-        {/*navigation inserted here */}
-        <section id="whenSignedOut">
-          <button onClick={this.login} id="LOGIN">
-            LOGIN
-          </button>
-        </section>
-        <section id="whenSignedIn" hidden="{true}">
-          <Link to="/">
-            <button id="userdetailslink" />
-          </Link>
-        </section>
         {/*-UNIVERSAL SIDE-MENU-*/}
         <DefaultSideMenu />
+        <Loginicon />
         <div
           id="remover"
           onClick={this.closeSidebar}

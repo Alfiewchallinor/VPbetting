@@ -1,9 +1,12 @@
-import { Alert } from "bootstrap";
+
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import Logotopleft from "../master/logotopleft.js/Logotopleft";
+
 
 export default function CreateAccount() {
+  var passwordone = document.getElementById("passwordOne")
 
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -16,7 +19,11 @@ export default function CreateAccount() {
   async function handleSubmit(e) {
     e.preventDefault();
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError("Failed to create an account");
+      return setError("Passwords do not match");
+    }
+    
+    if(passwordRef.current.value > 5) {
+      return setError("Password is not secure enough")
     }
     
 
@@ -25,14 +32,16 @@ export default function CreateAccount() {
       setLoading(true);
       await createAccount(emailRef.current.value, passwordRef.current.value);
     } catch {
-      setError("Password is not secure enough");
+      setError("Failed to create an account");
     }
     setLoading(false);
   }
   return (
-    <div className="bodydiv">
+    <div className="bodydiv" onContextMenu={(e)=> e.preventDefault()}>
+      
+      <Logotopleft />
       <div id="formcontainer">
-        <div id="boxhh">
+        <div className="formcont">
           <h2 className="titleca">Create Account</h2>
 
           <form onSubmit={handleSubmit}>
@@ -52,6 +61,7 @@ export default function CreateAccount() {
                 type="password"
                 ref={passwordRef}
                 required
+                id="passwordOne"
               />
             </div>
             <div id="password-confirm">

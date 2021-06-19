@@ -227,7 +227,7 @@ class Home extends React.Component {
             >
               Create an account now to join the fun by clicking 
               <Link to="/createAccount" id="span_click">
-               <pre> here. </pre>
+               <br /> here.
               </Link>
             </p>
           </div>

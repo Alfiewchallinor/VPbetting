@@ -2698,7 +2698,7 @@
     
   }
 
-  #boxhh {
+  .formcont {
     position: absolute;
     top: 50%;
     height: 482px;
@@ -2708,7 +2708,9 @@
     transform: translate(0, -50%);
     border: rgb(187, 187, 187) solid 1px;
     justify-content: center;
-    
+  }
+  .formContainerLogin {
+    height: 350px;
   }
 
   .titleca {
@@ -2744,7 +2746,7 @@
   }
 
   .confirmbutton {
-    width: 407px;
+    width: 362px;
     left: 19px;
     position: relative;
     top: 162px;
@@ -2761,6 +2763,10 @@
     background-color: #2563EB;
   }
 
+  .loginButton {
+    top: 111px;
+  }
+
 
   #thelabels {
     position: relative;
@@ -2775,10 +2781,13 @@
     position: relative;
     top: 195px;
     font-family: 'roboto', sans-serif;
-    
+    user-select: none;
     text-align: center;
   }
 
+  .dontHaveAccountText {
+    top: 156px;
+  }
   .theinput:focus {
     outline: none;
     border-bottom: 2px solid #2563EB;
@@ -2822,9 +2831,5 @@
     top: 361px;
     position: absolute;
     font-size: 14.6px;
+    user-select: none;
   }
-
-
-
-
-  
