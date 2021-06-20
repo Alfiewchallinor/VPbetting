@@ -54,6 +54,12 @@ export default function MyAccount() {
             <button id="updateprofileBtn">UPDATE PROFILE</button>
             </div></section>
             <div id="lineDividerMyAccount"></div>
+            <section id="sectionbelow" className="sectionbelow">
+                <p className="changepassword">Password</p>
+                <button id="updatepasswordBtn">RESET PASSWORD</button>
+                <p className="passwordInstruction">Upon resetting your Password you will recieve an email which will have further instructions given.</p>
+            </section>
+            <button className="deleteaccountBtn">UPDATE PROFILE</button>
             </div>
             </div>
 

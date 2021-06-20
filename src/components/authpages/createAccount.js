@@ -115,7 +115,7 @@ export default function CreateAccount() {
                 Terms of Use
               </Link>{" "}</em>
               and{" "}<em>
-              <Link to="/termsOfService" style={{ color: "#3B82F6" }}>
+              <Link to="/Privacypolicy" style={{ color: "#3B82F6" }}>
                 {" "}
                 Privacy Policy<span style={{color: "black"}}>.</span>{" "}
               </Link></em>

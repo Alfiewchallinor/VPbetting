@@ -2931,6 +2931,12 @@
     padding-bottom: 40px;
     top: -154px;
   }
+  #hiddenpasswordreal {
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.959);
+  }
+
   .makeAbsolute2 {
     position: absolute;
     left: 140px;
@@ -2939,12 +2945,11 @@
 
   .profileContainer {
     position: absolute;
-    top: 30%;
+    top: 90px;
     height: 700px;
     width: 600px;
     min-width: 400px;
     border-radius: 0.8em;
-    transform: translate(0, -30%);
     background: rgba(0, 0, 0, 0.089);
     justify-content: center;
   }
@@ -2955,8 +2960,8 @@
     height: 400px;
     position: relative;
     left: 35px;
-    border-bottom-left-radius: 0.8em;
-    border-bottom-right-radius: 0.8em;
+    top: 30px;
+    border-radius: 0.8em;
   }
   .titleMyAccount {
   position: absolute;
@@ -2988,11 +2993,12 @@
   #defaultLogo {
     width: 120px;
     height: 120px;
-    padding-top: 5px;
+    padding-top: 10px;
     position: relative;
     left: 50%;
     transform: translate(-50%, 0);
-    cursor: pointer
+    cursor: pointer;
+    font-family: 'roboto', sans-serif;
   }
 
   .hiddentext {
@@ -3001,34 +3007,39 @@
     font-size: 22px;
     top: 160px;
     position: absolute;
+    font-family: 'roboto', sans-serif;
   }
 
   #hiddentextclicker, #otherhiddentextclicker {
-    margin-left: 100px;
+    margin-left: 110px;
     color: rgb(255, 92, 92);
     font-size: 16px;
     top: 160px;
     position: absolute;
-    cursor: pointer
+    cursor: pointer;
+    font-family: 'roboto', sans-serif;
   }
 
-  #hiddentextclicker:hover, #otherhiddentextclicker:hover {
+  #hiddentextclicker:hover, #otherhiddentextclicker:hover, #hiddenpasswordclicker:hover,
+  #hiddenpasswordsecondclicker:hover  {
     text-decoration: underline;
     color: rgb(255, 62, 62);
   }
 
  #otherhiddentextclicker {
-   left: 190px;
+   left: 180px;
    position: absolute;
+   font-family: 'roboto', sans-serif;
  }
 
  #lineDividerMyAccount {
    width: 530px;
    height: 1px;
-   background: rgba(0, 0, 0, 0.589);
+   background: rgba(0, 0, 0, 0.479);
    left: 35px;
-   top: 480px;
+   top: 450px;
    position: absolute;
+   font-family: 'roboto', sans-serif;
  }
 
  #updateprofileBtn {
@@ -3042,10 +3053,90 @@
    position: absolute;
    margin-left: 14px;
    top: 195px;
-   cursor: pointer
+   cursor: pointer;
+   transition: all 0.2s;
+   font-family: 'roboto', sans-serif;
  }
- #updateprofileBtn:hover {
-  background: #8a41ff;
+ #updateprofileBtn:hover, #updatepasswordBtn:hover {
+  background: #7e30fc;
+  font-family: 'roboto', sans-serif;
  }
 
+ .changepassword {
+   color: white;
+   position: absolute;
+   margin-left: 34px;
+   font-size: 20px;
+   margin-top: 8px;
+   font-family: 'roboto', sans-serif;
+ }
+ 
+
+ .sectionbelow {
+  background: #0000002c;
+  width: 530px;
+  height: 153px;
+  position: relative;
+  left: 35px;
+  top: 75px;
+  border-radius: 0.8em;
+  display: flex;
+  font-family: 'roboto', sans-serif;
+ }
+
+ .secondhidden {
+   margin-left: 35px;
+    color: white;
+    font-size: 22px;
+    top: 36px;
+    position: absolute;
+    font-family: 'roboto', sans-serif;
   
+ }
+ #updatepasswordBtn {
+ padding: 12px;
+ padding-left: 10px;;
+ padding-right: 9px;;
+ border: none;
+ background: #8e52ee;
+ color: white;
+ border-radius: 0.17em;
+ position: absolute;
+ margin-left: 34px;
+ top: 38px;
+ cursor: pointer;
+ transition: all 0.2s;
+ z-index: 9999;
+ font-family: 'roboto', sans-serif;
+}
+
+.passwordInstruction {
+  color: white;
+  padding: 35px;
+  top: 55px;
+  font-size: 16px;
+  position: relative;
+  font-family: 'roboto', sans-serif;
+}
+ 
+
+.deleteaccountBtn {
+  padding: 12px;
+   padding-left: 15px;;
+   padding-right: 15px;;
+   border: none;
+   background: #eF4444;
+   color: white;
+   border-radius: 0.17em;
+   position: absolute;
+   margin-left: 69px;
+   top: 645px;
+   cursor: pointer;
+   transition: all 0.2s;
+   font-weight: 450;
+   font-family: 'roboto', sans-serif;
+}
+
+.deleteaccountBtn:hover {
+  background: #DC2626
+}
