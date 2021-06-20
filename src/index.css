@@ -2912,3 +2912,140 @@
   .loginUniversal {
     top: -323px;
   }
+
+  .profilePositionOne {
+    position: relative;
+    padding-left: 15px;
+    font-size: 19px;
+    font-weight: 300;
+    color: rgb(185, 185, 185);
+    padding-bottom: 40px;
+    top: 10px;
+  }
+  .profilePositionTwo {
+    position: relative;
+    padding-left: 16px;
+    font-size: 16px;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.959);
+    padding-bottom: 40px;
+    top: -154px;
+  }
+  .makeAbsolute2 {
+    position: absolute;
+    left: 140px;
+    top: 159px;
+  }
+
+  .profileContainer {
+    position: absolute;
+    top: 30%;
+    height: 700px;
+    width: 600px;
+    min-width: 400px;
+    border-radius: 0.8em;
+    transform: translate(0, -30%);
+    background: rgba(0, 0, 0, 0.089);
+    justify-content: center;
+  }
+
+  #myaccountwrapper {
+    background: #0000002c;
+    width: 530px;
+    height: 400px;
+    position: relative;
+    left: 35px;
+    border-bottom-left-radius: 0.8em;
+    border-bottom-right-radius: 0.8em;
+  }
+  .titleMyAccount {
+  position: absolute;
+    left: 50%;
+    transform: translate(-261px, -57px);
+    white-space:nowrap;
+    top: 20px;
+    font-family: 'roboto', sans-serif;
+    font-weight: 449;
+    font-size: 27px;
+    color: white;
+  }
+
+  .completeprofilecontainer {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(0deg, rgb(126, 179, 249) 0%, rgba(36,66,201,1) 100%);
+  }
+  #bottomTopSection {
+    width: 490px;
+    height: 250px;
+    background: rgba(0, 0, 0, 0.192);
+    border-radius: 0.8em;
+    position: absolute;
+    left: 20px;
+    top: 130px;
+  }
+
+  #defaultLogo {
+    width: 120px;
+    height: 120px;
+    padding-top: 5px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0);
+    cursor: pointer
+  }
+
+  .hiddentext {
+    margin-left: 15px;
+    color: white;
+    font-size: 22px;
+    top: 160px;
+    position: absolute;
+  }
+
+  #hiddentextclicker, #otherhiddentextclicker {
+    margin-left: 100px;
+    color: rgb(255, 92, 92);
+    font-size: 16px;
+    top: 160px;
+    position: absolute;
+    cursor: pointer
+  }
+
+  #hiddentextclicker:hover, #otherhiddentextclicker:hover {
+    text-decoration: underline;
+    color: rgb(255, 62, 62);
+  }
+
+ #otherhiddentextclicker {
+   left: 190px;
+   position: absolute;
+ }
+
+ #lineDividerMyAccount {
+   width: 530px;
+   height: 1px;
+   background: rgba(0, 0, 0, 0.589);
+   left: 35px;
+   top: 480px;
+   position: absolute;
+ }
+
+ #updateprofileBtn {
+   padding: 12px;
+   padding-left: 15px;;
+   padding-right: 15px;;
+   border: none;
+   background: #8e52ee;
+   color: white;
+   border-radius: 0.17em;
+   position: absolute;
+   margin-left: 14px;
+   top: 195px;
+   cursor: pointer
+ }
+ #updateprofileBtn:hover {
+  background: #8a41ff;
+ }
+
+  

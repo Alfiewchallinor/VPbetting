@@ -17,7 +17,7 @@ const Loginicon = () => {
       $(".loggedIn").css("display", "none")
     }
   })
-
+ 
  
   return (
     
