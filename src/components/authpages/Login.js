@@ -1,23 +1,35 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Logotopleft from "../master/logotopleft.js/Logotopleft";
 
 export default function Login() {
     const emailRef = useRef();
     const passwordRef = useRef();
-    const { createAccount } = useAuth();
+    const { login } = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
+    const history = useHistory()
   
     async function handleSubmit(e) {
       e.preventDefault();
+      if(emailRef.current.value.length < 1 && passwordRef.current.value.length < 1) {
+        return setError("Looks like you forgot to fill out the form")
+      }
+
+      if(emailRef.current.value.includes("@") !== true) {
+        return setError("Please submit a valid email address")
+      }
+      if(passwordRef.current.value.length < 8) {
+        return setError("Please submit a valid password")
+      }
           try {
         setError("");
         setLoading(true);
-        await createAccount(emailRef.current.value, passwordRef.current.value);
+        await login(emailRef.current.value, passwordRef.current.value);
+        history.push("/")
       } catch {
-        setError("Failed to create an account");
+        setError("This account does not exist");
       }
       setLoading(false);
     }
@@ -34,9 +46,9 @@ export default function Login() {
                 <label id="thelabels">Email</label>
                 <input
                   className="theinput"
-                  type="email"
+                  
                   ref={emailRef}
-                  required
+                  
                 />
               </div>
               <div id="password">
@@ -45,7 +57,6 @@ export default function Login() {
                   className="theinput"
                   type="password"
                   ref={passwordRef}
-                  required
                 />
               </div>
               
@@ -60,7 +71,7 @@ export default function Login() {
                 {" "}
                 Create Account{" "}
               </Link>
-              {error && <div className="errormessage">{error}</div>}
+              {error && <div className="errormessageUniversal loginUniversal">{error}</div>}
             </div>
           </div>
         </div>

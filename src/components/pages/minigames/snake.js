@@ -1,4 +1,4 @@
-import React from "react";
+ import React from "react";
 import MinigamesHeader from "../../master/minigamesHeader";
 import { update as updateSnake, draw as drawSnake, SNAKE_SPEED,
 getSnakeHead, snakeIntersection } 

@@ -19,10 +19,10 @@ class Home extends React.Component {
         {/*-BUTTON CONTAINER-*/}
         <div className="button_container">
           {/*-DOUBLE BUTTONS UNDER TEXT-*/}
-          <Link to="/" className="join_here">
+          <Link to="/createAccount" className="join_here">
             JOIN HERE
           </Link>
-          <Link to="/" className="login_Below_Get">
+          <Link to="/login" className="login_Below_Get">
             LOGIN
           </Link>
           
@@ -79,7 +79,7 @@ class Home extends React.Component {
             data-aos-once="true"
             data-aos-anchor-placement="bottom"
           >
-            <Link to="/" id="SU_step">
+            <Link to="/createAccount" id="SU_step">
               SIGN UP
             </Link>
           </div>
@@ -151,18 +151,19 @@ class Home extends React.Component {
         </div>
         {/*- ////FOR MOBILE ONLY!!, FULL MOBILE INTERFACE-*/}
         <div className="mobile">
-          <Link to="/" id="as_mob">
+          <Link to="/createAccount" id="as_mob">
             JOIN HERE
           </Link>
-          <Link to="/" id="as_mob">
+          <Link to="/login" id="as_mob">
             LOGIN
           </Link>
           <div className="how_to_m">
+            
             <span id="signupspan">SIGN UP </span>
             <br /> <br />
             Create an account now to <br />
             join the fun by pressing{" "}
-            <Link id="hereLOL" to="/">
+            <Link id="hereLOL" to="/createAccount">
               {" "}
               HERE.{" "}
             </Link>

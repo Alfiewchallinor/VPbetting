@@ -9,7 +9,7 @@ import Privacypolicy from "./pages/legalpages/privacypolicy";
 
 import createAccount from "./authpages/createAccount";
 import Login from "./authpages/Login";
-import Profile from "./authpages/Profile";
+import MyAccount from "./authpages/MyAccount";
 import tictactoe from "./pages/minigames/tic-tac-toe";
 
 import TicTacToe4 from "./pages/minigames/tic-tac-toe4x4";
@@ -33,7 +33,7 @@ function App() {
       {/*Authentication */}
       <Route exact path="/createAccount" component={createAccount} />
       <Route exact path="/login" component={Login} />
-      <Route exact path="/profile" component={Profile} />
+      <Route exact path="/MyAccount" component={MyAccount} />
       {/*Minigames */}
       <Route exact path="/tic-tac-toe" component={tictactoe} />
       <Route exact path="/tic-tac-toe-4x4" component={TicTacToe4} />

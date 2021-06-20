@@ -2786,11 +2786,12 @@
   }
 
   .dontHaveAccountText {
-    top: 156px;
+    top: 148px;
   }
   .theinput:focus {
     outline: none;
     border-bottom: 2px solid #2563EB;
+    background-color: white;
   }
 
 
@@ -2885,7 +2886,6 @@
     background-position: center;
     background-size: 150%;
     z-index: 100;
-
   }
 
   .tosinstruction {
@@ -2907,4 +2907,8 @@
     top: -414px;
     position: relative;
     color: transparent
+  }
+
+  .loginUniversal {
+    top: -323px;
   }
