@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom'
 import LogotopleftWhite from '../master/logotopleft.js/LogotopleftWhite'
 import $ from "jquery"
 import firebase from 'firebase'
+import { auth } from '../../firebase'
 
 export default function MyAccount() {
     const [setLoading] = useState(false);
@@ -41,6 +42,17 @@ export default function MyAccount() {
     const hideIdFunction = ()=> {
         $("#hiddentextclicker, #hiddentext").css("display", "block")
         $(".makeAbsolute2, #otherhiddentextclicker").css("display", "none")
+    }
+
+    const iHaveDeletedAccount = () => {
+        const user = firebase.auth().currentUser;
+
+        user.delete().then(() => {
+            history.push("/")
+        }).catch((error)=> {
+            console.log("error occured")
+        })
+        
     }
 
     const { currentUser } = useAuth()
@@ -83,7 +95,7 @@ export default function MyAccount() {
                 </p>
                 <p className="deleteaccountextraInfo">
                 All your account infomation, progress and other infomation will be <span>permanently</span> deleted. (You cannot reverse this process) </p>
-                <button className="confirmDelete">YES, DELETE ACCOUNT</button>
+                <button className="confirmDelete" onClick={iHaveDeletedAccount}>YES, DELETE ACCOUNT</button>
                 <button className="confirmDont" onClick={doNotDeleteAccount}>DON'T DELETE ACCOUNT</button>
             </div>
             </div>
@@ -93,7 +105,7 @@ export default function MyAccount() {
         <div id="othercontainer"></div>
         
 
-        
+        <p></p>
         </div>
     )
 }

@@ -11,7 +11,7 @@ class Header extends React.Component {
   showSidebar = () => {
     const isOpen = this.state.isMenuOpen;
     this.setState({ isMenuOpen: !isOpen });
-    $("#container, #remover, #LOGIN, #nav, #Header").toggle();
+    $("#container, #remover, #LOGIN, MYACCOUNT, #nav, #Header").toggle();
     $("#esports-lightbox, #sports-lightbox, #minigames-lightbox").hide();
   };
   closeSidebar = () => {
@@ -26,7 +26,6 @@ class Header extends React.Component {
     return (
       <div>
         {/*-UNIVERSAL SIDE-MENU-*/}
-        
         <DefaultSideMenu />
         <Loginicon />
         <div

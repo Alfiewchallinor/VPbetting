@@ -8,24 +8,24 @@ const Loginicon = () => {
 
  
   
-  firebase.auth().onAuthStateChanged(function(user){
+  firebase.auth().onAuthStateChanged ((user) =>{
     if(user) {
-      $(".loggedOut").css("display", "none")
-      $(".loggedIn").css("display", "block")
+      $("#LOGIN").css("display", "none")
+      $("#MYACCOUNT").css("display", "block")
+      
     } else {
-      $(".loggedOut").css("display", "block")
-      $(".loggedIn").css("display", "none")
+      $("#LOGIN").css("display", "block")
+      $("#MYACCOUNT").css("display", "none")
     }
-  })
- 
- 
+  });
+
   return (
     
       <div>
-   <Link to="/MyAccount" id="LOGIN" className="loggedIn">
+   <Link to="/MyAccount" id="MYACCOUNT" >
     My Account
   </Link>
-<Link to="/login" id="LOGIN" className="loggedOut">
+<Link to="/login" id="LOGIN" >
     LOGIN
   </Link>
   </div>

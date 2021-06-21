@@ -36,7 +36,7 @@
     padding-bottom: 0;
   }
   /*underline effect part 1 */
-  #LOGIN::after, #esportsb::after, #sportsb::after, #minigamesb::after, #SU_step::after {
+  #LOGIN::after, #esportsb::after, #sportsb::after, #minigamesb::after, #SU_step::after, #MYACCOUNT::after {
     content: "";
     display: block;
     width: 100%;
@@ -48,7 +48,7 @@
     top: -2px 
   }
   /* part 2 */
-  #LOGIN:hover::after, #LOGINwhite:hover::after, #esportsb:hover::after, #sportsb:hover::after, #minigamesb:hover::after, #SU_step:hover::after {
+  #LOGIN:hover::after, #LOGINwhite:hover::after, #esportsb:hover::after, #sportsb:hover::after, #minigamesb:hover::after, #SU_step:hover::after, #MYACCOUNT:hover::after {
     visibility: visible;
     transform: scaleX(1);
   }
@@ -92,6 +92,21 @@
     margin: 0px;
   }
   #LOGIN {
+    position: fixed;
+    font-size: 20px;
+    top: 12px;
+    right: 46px;
+    color: #000000;
+    z-index: 9999;
+    animation: transititionOut 0.4s;
+    font-weight: 550;
+    letter-spacing: 0.02em;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  #MYACCOUNT {
     position: fixed;
     font-size: 20px;
     top: 12px;

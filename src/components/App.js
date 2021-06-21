@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { AuthProvider } from "./contexts/AuthContext";
 
 import PrivateRouteMyAccount from "../privateRoutes/PrivateRouteMyAccount";
+import PrivateRouteLoginAndCreateAccount from "../privateRoutes/PrivateRouteLogin&CreateAccount";
 
 import Home from "./pages/home";
 
@@ -33,8 +34,8 @@ function App() {
       <Route exact path="/termsOfService" component={Tos} />
       <Route exact path="/privacyPolicy" component={Privacypolicy} />
       {/*Authentication */}
-      <Route exact path="/createAccount" component={createAccount} />
-      <Route exact path="/login" component={Login} />
+      <PrivateRouteLoginAndCreateAccount exact path="/createAccount" component={createAccount} />
+      <PrivateRouteLoginAndCreateAccount exact path="/login" component={Login} />
       <PrivateRouteMyAccount exact path="/MyAccount" component={MyAccount} />
       {/*Minigames */}
       <Route exact path="/tic-tac-toe" component={tictactoe} />
