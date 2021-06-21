@@ -8,7 +8,6 @@ class Header extends React.Component {
   state = {
     isMenuOpen: false,
   };
-
   showSidebar = () => {
     const isOpen = this.state.isMenuOpen;
     this.setState({ isMenuOpen: !isOpen });
@@ -27,6 +26,7 @@ class Header extends React.Component {
     return (
       <div>
         {/*-UNIVERSAL SIDE-MENU-*/}
+        
         <DefaultSideMenu />
         <Loginicon />
         <div
