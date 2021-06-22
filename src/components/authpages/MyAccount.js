@@ -1,18 +1,23 @@
-import React, { useState }from 'react'
+import React, { useState, useRef }from 'react'
 import { useAuth } from '../contexts/AuthContext'
-import { Link, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import LogotopleftWhite from '../master/logotopleft.js/LogotopleftWhite'
 import $ from "jquery"
-import firebase from 'firebase'
-import { auth } from '../../firebase'
+import firebase from 'firebase';
+
 
 export default function MyAccount() {
-    const [setLoading] = useState(false);
+    const emailRef = useRef()
+    const usernameRef = useRef();
+    const { updateEmail } = useAuth()
     const history = useHistory()
 
+    const [error, setError] = useState("")
+
+
     const displayphotoURL = () => {
-    if(currentUser.phoneNumber === null) {
-        document.getElementById("hopethisworks").innerHTML = "You have not added a phone number yet."
+    if(currentUser.displayName === null) {
+        document.getElementById("currentuserPhone").innerHTML = "You can add a Username"
     }
     if(currentUser.photoUrl === null) {
         document.getElementById("defaultLogo").src = firebase.auth().currentUser.photoUrl
@@ -55,6 +60,47 @@ export default function MyAccount() {
         
     }
 
+    const updateinfo = () => {
+        $("#updateinfo").css("display", "block");
+        $(
+"#updateprofileBtn, #currentuserPhone, #currentUsersEmail, #toHideUserId, #toHideUsersRealid, #hiddentextclicker, #otherhiddentextclicker, #hiddentext, #defaultLogo"
+).css("display", "none")
+    }
+
+    const cancelUpdatesFunction = () => {
+        window.location.reload()
+            
+    }
+    
+    function handleSubmit(e)  {
+        e.preventDefault();
+        if(emailRef.current.value.length > 1) {
+            const promises = []
+            setError("")
+            if(emailRef.current.value !== currentUser.email) {
+            promises.push(updateEmail(emailRef.current.value))
+        }
+        
+        Promise.all(promises)
+        .then(() => {
+            window.location.reload()
+        })
+        .catch(() => {
+            setError("Failed to update account info")
+        })
+    }
+    if(usernameRef.current.value.length > 1) {
+    firebase.auth().currentUser.updateProfile({
+        displayName: document.getElementById("usernameInput").value
+    }).then(function (value) {
+        
+    })
+
+}
+    }
+
+    
+
     const { currentUser } = useAuth()
     return (
             <div onLoad={displayphotoURL}>
@@ -62,24 +108,23 @@ export default function MyAccount() {
             <div className="completeprofilecontainer" >
             <div id="formcontainer">
             <div className="profileContainer">
-                <section id="myaccountwrapper">
-                    
-            
-            <img   id="defaultLogo" />
+                <section id="myaccountwrapper">          
+            <img   id="defaultLogo" 
+             alt="logo"   />
                     <div id="bottomTopSection">
                        
            <ol><li> <h3 className="titleca profilePositionOne">EMAIL</h3></li>
-           <li> <h3 className="titleca profilePositionOne">PHONE NUMBER</h3></li>
-           <li> <h3 className="titleca profilePositionOne">USER ID</h3></li>
+           <li> <h3 className="titleca profilePositionOne">USERNAME</h3></li>
+           <li> <h3 className="titleca profilePositionOne" id="toHideUserId">USER ID</h3></li>
             </ol>
-            <ol><li> <h3 className="titleca profilePositionTwo">{currentUser.email}</h3></li>
-           <li> <h3 className="titleca profilePositionTwo" id="hopethisworks">{currentUser.phoneNumber}</h3></li>
-           <li> <h3 className="titleca profilePositionTwo makeAbsolute2" style={{"display": "none"}}>{currentUser.uid}</h3></li>
+            <ol><li> <h3 className="titleca profilePositionTwo" id="currentUsersEmail">{currentUser.email}</h3></li>
+           <li> <h3 className="titleca profilePositionTwo" id="currentuserPhone">{currentUser.displayName}</h3></li>
+           <li> <h3 className="titleca profilePositionTwo makeAbsolute2" id="toHideUsersRealid" style={{"display": "none"}}>{currentUser.uid}</h3></li>
             </ol>
             <p className="hiddentext" id="hiddentext">********* </p>
             <p className="hiddentext" id="hiddentextclicker" onClick={showIdFunction}>SHOW </p>
             <p className="hiddentext" id="otherhiddentextclicker" onClick={hideIdFunction} style={{"display": "none"}}>HIDE </p>
-           <Link to="/updateMyAccount"><button id="updateprofileBtn">UPDATE PROFILE</button></Link> 
+          <button id="updateprofileBtn" onClick={updateinfo}>UPDATE PROFILE</button>
             </div></section>
             <div id="lineDividerMyAccount"></div>
             <section id="sectionbelow" className="sectionbelow">
@@ -91,13 +136,24 @@ export default function MyAccount() {
             <button className="logoutaccountBtn" onClick={handleLogout}>LOGOUT</button>
             <div id="makescroll"></div>
             <div id="areyouSureContainer" style={{"display": "none"}}>
-                <p className="textsure">DELETE  MY ACCOUNT?<br />
+                <p className="textsure">DELETE MY ACCOUNT?<br />
                 </p>
                 <p className="deleteaccountextraInfo">
                 All your account infomation, progress and other infomation will be <span>permanently</span> deleted. (You cannot reverse this process) </p>
                 <button className="confirmDelete" onClick={iHaveDeletedAccount}>YES, DELETE ACCOUNT</button>
                 <button className="confirmDont" onClick={doNotDeleteAccount}>DON'T DELETE ACCOUNT</button>
             </div>
+            <div id="updateinfo" style={{"display": "none"}}>
+            <form onSubmit={handleSubmit}>
+                <input className="inputUpdate" ref={emailRef} placeholder={currentUser.email}/>
+                <input className="inputUpdate phoneUpdated" type="name" ref={usernameRef} placeholder="Update your username" id="usernameInput"/>
+                <button type="submit" className="confirmUpdates">CONFIRM UPDATES</button>
+                
+            </form>
+            <button className="confirmUpdates cancelUpdates" onClick={cancelUpdatesFunction}>CANCEL UPDATES</button>
+            <p className="importantMessageForRecentlySignIn">IMPORTANT: YOU MUST HAVE RECENTLY <u>RE-SIGNED</u> INTO YOUR ACCOUNT OTHERWISE AN ERROR WILL OCCOUR WHEN CONFIRMING YOUR CHANGES (we will fix this soon).</p>
+            </div>
+           {error && <div className="errorMessageOnUpdate" >{error}</div> }
             </div>
             </div>
 

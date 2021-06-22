@@ -2805,7 +2805,7 @@
   }
   .theinput:focus {
     outline: none;
-    border-bottom: 2px solid #2563EB;
+    border: 2px solid #2563EB;
     background-color: white;
   }
 
@@ -2954,7 +2954,7 @@
 
   .makeAbsolute2 {
     position: absolute;
-    left: 140px;
+    left: 133px;
     top: 159px;
   }
 
@@ -3048,6 +3048,9 @@
   #hiddenpasswordsecondclicker:hover  {
     text-decoration: underline;
     color: rgb(255, 62, 62);
+  }
+  #toHideUsersRealid {
+    text-align: center;
   }
 
  #otherhiddentextclicker {
@@ -3250,7 +3253,85 @@ transition: all 0.2s;
 font-weight: 450;
 font-family: 'roboto', sans-serif;
 border-radius: 0.1em;
-
 }
 
 
+.inputUpdate:focus {
+  outline: none;
+  border: 2px solid #34D399;
+}
+.inputUpdate {
+  background-color: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.712);
+  border-radius: 0.3em;
+  height: 30px;
+  position: absolute;
+  left: 70px;
+  top: 194px;
+  text-align: left;
+  padding-left: 6px;
+  font-size: 17px;
+}
+
+.phoneUpdated {
+  top: 256px;
+}
+
+.confirmUpdates {
+  padding: 12px;
+   padding-left: 11px;;
+   padding-right: 12px;;
+   border: none;
+   background: #34D399;
+   color: white;
+   border-radius: 0.2em;
+   position: absolute;
+   margin-left: 236px;
+   top: 355px;
+   cursor: pointer;
+   transition: all 0.2s;
+   font-weight: 450;
+   font-family: 'roboto', sans-serif;
+}
+
+.inputUpdate::placeholder {
+ text-align: left;
+ padding-left: 6px;
+ color: rgba(255, 255, 255, 0.35);
+ font-size: 17px;
+}
+
+.phoneUpdated[type=number] {
+  -moz-appearance: textfield;
+}
+.phoneUpdated::-webkit-outer-spin-button,
+.phoneUpdated::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.cancelUpdates {
+  left: 160px;
+  background-color: #5296ee;
+}
+
+.errorMessageOnUpdate {
+  color: red;
+  font-size: 19px;
+  font-weight: 399;
+  font-family: 'roboto', sans-serif;
+  top: 305px;
+  position: absolute;
+  padding-left: 70px;;
+}
+
+.importantMessageForRecentlySignIn {
+  color: red;
+  font-family: 'roboto', sans-serif;
+  font-weight: 410;
+  position: absolute;
+  top: 100px;
+  text-align: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  user-select: none;
+}
