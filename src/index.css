@@ -718,6 +718,22 @@
     #container {
         z-index: 900 !important;
    }
+
+   .profileContainer {
+     left: -50px !important;
+   }
+   .passwordInstruction {
+     display: none !important;
+   }
+   .passwordInstructionForMobile {
+     display: block !important; 
+     color: white;
+    padding: 35px;
+    top: 55px;
+    font-size: 16px;
+    position: relative;
+    font-family: 'roboto', sans-serif;
+   }
   }
   @media (max-width: 733px) {
     .join_ {
@@ -729,6 +745,13 @@
     .get_ {
         font-size: 10vw;
    }
+  }
+  @media (max-width: 1002px) {
+    .profileContainer {
+      left: 50px;
+      
+    }
+    
   }
   @media (max-width: 600px) {
     #column_L_img_id {
@@ -1108,7 +1131,7 @@
     line-height: 240px;
   }
   #filler1 {
-    height: 120px;
+    height: 300px;
   }
   #game-board {
     display: block;
@@ -2970,7 +2993,7 @@
   }
 
   #myaccountwrapper {
-    background: #0000002c;
+    background: rgb(39, 65, 158);
     width: 530px;
     height: 400px;
     position: relative;
@@ -3015,14 +3038,33 @@
   }
 
   #defaultLogo {
-    width: 120px;
-    height: 120px;
-    padding-top: 10px;
-    position: relative;
+    width: 100px;
+    height: 100px;
+    padding-top: 20px;
+    position: absolute;
     left: 50%;
     transform: translate(-50%, 0);
-    cursor: pointer;
+    
     font-family: 'roboto', sans-serif;
+  }
+  #defaultLogoicon {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 20px;
+    left: 210px;
+    font-family: 'roboto', sans-serif;
+    z-index: 1;
+  }
+  #circle {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    left: 50%;
+    position: relative;
+    transform: translate(-50%);
+    top: -40px;
+    border: 30px solid rgb(39, 65, 158);
   }
 
   .hiddentext {
@@ -3335,3 +3377,117 @@ border-radius: 0.1em;
   padding-right: 50px;
   user-select: none;
 }
+.chooseUsernameContainer {
+  display: grid;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -70%);
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  align-items: center
+}
+
+#chooseUsername {
+  left: 50%;
+  transform: translate(-50%);
+  position: absolute;
+  white-space: nowrap;
+  font-family: 'roboto', sans-serif;
+  font-size: 20px;
+}
+.chooseusernamerefit {
+  position: absolute;
+  top: 30px;
+  left: -0px;
+}
+
+.confirmYourUsername {
+  background: #34D399;
+  border: none;
+  color: white;
+  margin-top: 10px;
+  width: 360px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: 'roboto', sans-serif;
+  font-size: 20px;
+  font-weight: 450;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  position: absolute;
+  margin-top: 90px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  transition: all 0.2s
+}
+.confirmYourUsername:hover {
+  background: #30c28c;
+}
+.imFeelingLucky {
+  border: 2px solid #3B82F6;
+  color: black;
+  margin-top: 10px;;
+  width: 364px;
+  padding-top: 10px;;
+  padding-bottom: 10px;
+  font-weight: 450;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+  border-radius: 0.22em
+}
+.changeableTextFeelingLucky {
+  font-family: 'roboto', sans-serif;
+  font-size: 22px;
+}
+.imFeelingLucky:hover {
+  background: #3B82F6;
+  color: white;
+}
+
+.imFeelingLuckyOutput {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  margin-top: 10px;
+  font-size: 25px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 399;
+}
+.funfact {
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%);
+  font-family: 'roboto', sans-serif;
+  font-size: 20px;
+  white-space: nowrap;
+  top: 1vh;
+  font-weight: 450;
+}
+.changepicturebutton, .confirmpicturebutton {
+  background: #34D399;
+  color: white;
+  border: none;
+  border-radius: 0.17em;
+  padding: 12px;
+  padding-left: 16px;
+  padding-right: 126px;
+  margin-left: 34px;
+  top: 50px;
+  position: relative;
+  cursor: pointer;
+  z-index: 100;
+  display: block;
+  overflow: hidden;
+  width: 0px;
+  white-space: nowrap;
+  font-family: 'roboto', sans-serif;
+  font-size: 13px;  
+}
+
+input[type="file"] {
+  display: none
+}
+

@@ -14,11 +14,14 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   function createAccount(email, password) {
-    return auth.createUserWithEmailAndPassword(email, password);
+    auth.createUserWithEmailAndPassword(email, password)
+    
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password);
+    return auth.signInWithEmailAndPassword(email, password),
+    firebase.database.collection('users').doc(email,password.user.uid).set({
+      points: '0'})
   }
 
   useEffect(() => {
