@@ -1,6 +1,9 @@
 import { onSnake, expandSnake } from "./snakea";
 import { randomGridPosition } from "./grid";
 import $ from "jquery"
+import firebase from "firebase"
+import { auth } from "../../../../firebase";
+var firestore = firebase.firestore();
 
 let food = getRandomFoodPosition();
 let score = 0;
@@ -17,6 +20,22 @@ export function update() {
     bigScoreElB += 6;
     document.getElementById("bigScoreElB").innerHTML = bigScoreElB;
     console.log(bigScoreElB);
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        const docRef = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber")
+        docRef.update({
+          pointsNumber: firebase.firestore.FieldValue.increment(6)
+        }).then(function () {
+          console.log("worked")
+        }).catch(function(error){
+          console.log("error! end of the world incomming:", error)
+        })
+      } else {
+        
+      }
+    });
+
   }
 }
 

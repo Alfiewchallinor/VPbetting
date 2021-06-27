@@ -1,6 +1,9 @@
 import React from "react";
 import MinigamesHeader from "../../master/minigamesHeader";
 import { Link } from "react-router-dom";
+import firebase from "firebase"
+import { auth } from "../../../firebase";
+var firestore = firebase.firestore();
 
 class TicTacToe4 extends React.Component {
   game = () => {
@@ -71,6 +74,21 @@ class TicTacToe4 extends React.Component {
     }
 
     function endGame(draw) {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          const docref = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber")
+          
+          docref.update({
+            pointsNumber: firebase.firestore.FieldValue.increment(2)
+          }).then(function () {
+            
+            console.log("worked")
+          }).catch(function(error){
+            console.log("error! end of the world incomming:", error)
+          })
+        } else {
+          
+        }})
       if (draw) {
         winningMessageTextElement.innerText = "Draw";
       } else {
@@ -152,10 +170,10 @@ class TicTacToe4 extends React.Component {
               <div data-winning-message-text>
                 {" "}
                 X WINS,
-                <br /> GGs Only
+                <br /> GGs Only!
               </div>
-              <span>+</span>
-              <span id="bigScoreElB">14</span>
+              
+              <span id="bigScoreElB">+12</span>
             </h1>
             <p className="text-sm text-gray-700 mb-4">Coins </p>
             <div>

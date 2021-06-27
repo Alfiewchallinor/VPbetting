@@ -19,9 +19,8 @@ export function AuthProvider({ children }) {
   }
 
   function login(email, password) {
-    return auth.signInWithEmailAndPassword(email, password),
-    firebase.database.collection('users').doc(email,password.user.uid).set({
-      points: '0'})
+    return auth.signInWithEmailAndPassword(email, password)
+    
   }
 
   useEffect(() => {

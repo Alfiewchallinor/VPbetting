@@ -110,7 +110,7 @@
     position: fixed;
     font-size: 20px;
     top: 12px;
-    right: 46px;
+    right: 45px;
     color: #000000;
     z-index: 9999;
     animation: transititionOut 0.4s;
@@ -119,6 +119,49 @@
     border: none;
     background: transparent;
     cursor: pointer;
+  }
+  .pointsNumberDisplay {
+    position: fixed;
+    font-size: 23px;
+    top: 9px;
+    right: 210px;
+    color: rgb(0, 0, 0);
+    z-index: 9999;
+    animation: transititionOut 0.4s;
+    font-weight: 550;
+    letter-spacing: 0.02em;
+    border: none;
+    background: transparent; 
+  }
+  .minigamesNumberDisplay {
+    color: white;
+    font-size: 35px;;
+    top: -3px;
+    right: 50px;
+    user-select: none;
+  }
+  .coinicon, .coiniconForMinigames {
+    position: fixed;
+    right: 174px;
+    z-index: 9999;
+    width: 30px;
+    height: 30px;
+    top: 5px;
+  }
+  @media(max-width: 1000px) {
+    .pointsNumberDisplay {
+      right: 174px;
+    }
+    .coinicon {
+      display: none !important;
+    }
+  }
+  .coiniconForMinigames {
+    width: 40px;
+    height: 40px;
+    right: 10px;
+    position: fixed;
+    user-select: none;
   }
   .menu-btn {
     position: fixed;
@@ -394,7 +437,7 @@
         font-size: 16px !important;
    }
   }
-  @media only screen and (max-width: 700px) {
+  @media only screen and (max-width: 800px) {
     #LOGIN {
         display: none !important;
    }
@@ -1138,8 +1181,8 @@
     background-size: 100%;
     position:fixed;
     top: 130px;
-    width: 46vw;
-    height: 46vw;
+    width: 80vh;
+    height: 80vh;
     left: 27vw;
     display: grid;
     justify-content: center;
@@ -1741,6 +1784,13 @@
     #esports-lightbox {
         width: 140%;
         top: 50px;
+   }
+   #MYACCOUNT {
+    font-size: 18px !important;
+   }
+   .pointsNumberDisplay {
+    font-size: 20px !important;
+    right: 160px;
    }
   }
   .visit4 {

@@ -2,6 +2,9 @@ import React from "react";
 import MinigamesHeader from "../../master/minigamesHeader";
 import Levels from './levels'
 import { gsap } from "gsap";
+import firebase from "firebase";
+import { auth } from "../../../firebase";
+var firestore = firebase.firestore();
 
 class circleShooter extends React.Component {
 
@@ -216,6 +219,19 @@ function animate() {
                             //increase score 
                         score += 1
                         document.getElementById('scoreel').innerHTML = score
+                        firebase.auth().onAuthStateChanged((user) => {
+                            if (user) {
+                              const docref = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber")
+                              
+                              docref.update({
+                                pointsNumber: firebase.firestore.FieldValue.increment(1)
+                              }).then(function () {
+                              }).catch(function(error){
+                              })
+                            } else {
+                              
+                            }})
+                        
 
                             gsap.to(enemy, {
                                 radius: enemy.radius - 15
@@ -227,6 +243,19 @@ function animate() {
                         else {
                             score += 5/2
                         document.getElementById('scoreel').innerHTML = score
+                        
+                        firebase.auth().onAuthStateChanged((user) => {
+                            if (user) {
+                              const docref = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber")
+                              
+                              docref.update({
+                                pointsNumber: firebase.firestore.FieldValue.increment(2.5)
+                              }).then(function () {
+                              }).catch(function(error){
+                              })
+                            } else {
+                              
+                            }})
                         
                             setTimeout(() => {
                                 enemies.splice(index, 1)

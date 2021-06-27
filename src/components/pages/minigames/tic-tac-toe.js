@@ -1,9 +1,13 @@
 import React from "react";
 import MinigamesHeader from "../../master/minigamesHeader";
 import { Link } from "react-router-dom";
+import $ from "jquery"
+import firebase from "firebase"
+import { auth } from "../../../firebase";
+var firestore = firebase.firestore();
 
-class tictactoe extends React.Component {
-  gamefunction = () => {
+function tictactoe () {
+ const gamefunction = () => {
     const X_CLASS = "x";
     const CIRCLE_CLASS = "circle";
     const WINNING_COMBINATIONS = [
@@ -49,6 +53,22 @@ class tictactoe extends React.Component {
     }
 
     function endGame(draw) {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          const docref = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber")
+          
+          docref.update({
+            pointsNumber: firebase.firestore.FieldValue.increment(1.5)
+          }).then(function () {
+            
+            console.log("worked")
+          }).catch(function(error){
+            console.log("error! end of the world incomming:", error)
+          })
+        } else {
+          
+        }
+      });
       if (draw) {
         winningMessageTextElement.innerText = "Draw";
       } else {
@@ -90,13 +110,23 @@ class tictactoe extends React.Component {
       });
     }
   };
-  restartfunc = () => {
+ const  restartfunc = () => {
     window.location.reload();
   };
 
-  render() {
+  firebase.auth().onAuthStateChanged((user) => {
+    if(user) {
+      $("#notLoggedInScore").css("display", "none")
+      $("#coinswhenLoggedIn").css("display", "block")
+      $("#bigScoreELb").css("display", "block")
+    }else {
+      $("#notLoggedInScore").css("display", "block")
+      $("#coinswhenLoggedIn").css("display", "none")
+      $("#bigScoreELb").css("display", "none")
+    }
+  })
     return (
-      <div onLoad={this.gamefunction}>
+      <div onLoad={gamefunction}>
         <MinigamesHeader />
         <div className="ttt_board" id="ttt_board">
           <div className="cell" data-cell></div>
@@ -119,18 +149,18 @@ class tictactoe extends React.Component {
               <div data-winning-message-text>
                 {" "}
                 X WINS,
-                <br /> GGs Only
+                <br /> GGs Only,
               </div>
-              <span>+</span>
-              <span id="bigScoreElB">10</span>
+              <span id="bigScoreELb">+9</span>
+              <span id="notLoggedInScore"><Link to="/login"><span style={{"color": "#3B82F6"}}><em>Log in</em></span></Link> to earn coins</span>
             </h1>
-            <p className="text-sm text-gray-700 mb-4">Coins </p>
+            <p className="text-sm text-gray-700 mb-4" id="coinswhenLoggedIn">Coins </p>
             <div>
               <div
                 className="bg-blue-500 text-white w-full
      py-3 rounded-full select-none cursor-pointer"
                 id="restartButton"
-                onClick={this.restartfunc}
+                onClick={restartfunc}
               >
                 RESTART
               </div>
@@ -143,6 +173,6 @@ class tictactoe extends React.Component {
       </div>
     );
   }
-}
+
 
 export default tictactoe;

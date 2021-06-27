@@ -1,96 +1,44 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
+import firebase from "firebase"
+import { auth } from "../../firebase";
+import Slider from "./minigamesHeaderfunctions/Slider"
+import backwardfunction from "./minigamesHeaderfunctions/backwardfunction"
+import slidera from "./minigamesHeaderfunctions/slidera"
+import backwardfunctiona from "./minigamesHeaderfunctions/backwardfunctiona"
+import onminiload from "./minigamesHeaderfunctions/onminiload"
+var firestore = firebase.firestore();
 
-class MinigamesHeader extends React.Component {
-  slider = () => {
-    $(".toprcloser, .middleer").animate({ left: "-182px" }, 450);
-    $(
-      ".lineuua, .lineuub, .accountyou, .topperfixer, .lineuu, .lineuul, .logobar,  .reposya, .feedbackj, controller"
-    ).animate({ left: "-265px" }, 450);
-    $(".sectionwithscrol, .sidebarl, .topsecg, #bottomsec").animate(
-      { left: "-266px" },
-      450
-    );
-    $(
-      ".seperatork:nth-child(2), .seperatorka:nth-child(2), .seperatorka, .seperatork"
-    ).hide();
-    $("#fullui").animate({ left: "-175px" }, 450);
-    $(".shortenbtn").animate({ left: "175px" }, 450);
-    $("#leftbox").animate({ left: "-5px" }, 450);
-    $(".homeredbtn").hide();
-    $("#middlebox").animate({ left: "-182px" }, 450);
-    $("#rightbox").animate({ left: "-99px" }, 450);
-    $("#accountyouhiden, .bringbackbtn, .feedbackhiden").show(449);
-  };
-  backwardfunction = () => {
-    $(".toprcloser, .middleer").animate({ left: "83px" }, 450);
-    $(
-      ".lineuua, .lineuub, .accountyou, .topperfixer,.lineuu, .lineuul, .logobar,  .reposya, .feedbackj, controller"
-    ).animate({ left: "0px" }, 450);
-    $(".sectionwithscrol, .sidebarl, .topsecg, #bottomsec").animate(
-      { left: "-1px" },
-      450
-    );
-    $(
-      ".seperatork:nth-child(2), .seperatorka:nth-child(2), .seperatorka, .seperatork"
-    ).show(448);
-    $("#fullui").animate({ left: "0px" }, 450);
-    $(".shortenbtn").animate({ left: "175px" }, 450);
-    $("#leftbox").animate({ left: "0px" }, 450);
-    $(".homeredbtn").show(440);
-    $("#middlebox").animate({ left: "83px" }, 450);
-    $("#rightbox").animate({ left: "166px" }, 450);
-    $("#accountyouhiden, .bringbackbtn, .feedbackhiden").hide();
-  };
-  slidera = () => {
-    $(".toprclosera, .middleera").animate({ left: "-182px" }, 450);
-    $(
-      ".lineuuaa, .lineuuba, .accountyoua, .topperfixera, .lineuuab, .lineuula, .logobara,  .reposyaa, .feedbackja, controllera"
-    ).animate({ left: "-265px" }, 450);
-    $(".sectionwithscrola, .sidebarla, .topsecga, #bottomseca").animate(
-      { left: "-266px" },
-      450
-    );
-    $(
-      ".seperatorkab:nth-child(2), .seperatorkaa:nth-child(2), .seperatorkaa, .seperatorkab"
-    ).hide();
-    $("#fulluia").animate({ left: "-175px" }, 450);
-    $(".shortenbtna").animate({ left: "175px" }, 450);
-    $("#leftboxa").animate({ left: "-5px" }, 450);
-    $(".homeredbtna").hide();
-    $("#middleboxa").animate({ left: "-182px" }, 450);
-    $("#rightboxa").animate({ left: "-99px" }, 450);
-    $("#accountyouhidena, .bringbackbtna, .feedbackhidena").show(449);
-  };
-  backwardfunctiona = () => {
-    $(".toprclosera, .middleera").animate({ left: "83px" }, 450);
-    $(
-      ".lineuuaa, .lineuuba, .accountyoua, .topperfixera,.lineuuab, .lineuula, .logobara,  .reposyaa, .feedbackja, controllera"
-    ).animate({ left: "0px" }, 450);
-    $(".sectionwithscrola, .sidebarla, .topsecga, #bottomseca").animate(
-      { left: "-1px" },
-      450
-    );
-    $(
-      ".seperatorkab:nth-child(2), .seperatorkaa:nth-child(2), .seperatorkaa, .seperatorkab"
-    ).show(448);
-    $("#fulluia").animate({ left: "0px" }, 450);
-    $(".shortenbtna").animate({ left: "175px" }, 450);
-    $("#leftboxa").animate({ left: "0px" }, 450);
-    $(".homeredbtna").show(440);
-    $("#middleboxa").animate({ left: "83px" }, 450);
-    $("#rightboxa").animate({ left: "166px" }, 450);
-    $("#accountyouhidena, .bringbackbtna, .feedbackhidena").hide();
-  };
-
-  onminiload = () => {
-    $(
-      ".shortenbtna, .seperatorkab:nth-child(2), .seperatorkaa:nth-child(2), .seperatorkaa, .seperatorkab"
-    ).hide();
-  };
-
-  render() {
+function MinigamesHeader() {
+  
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      $(".pointsNumberDisplay, .minigamesNumberDisplay").css("display", "block");
+      $(".coiniconForMinigames").css("display", "block");
+      const docRef = firestore.doc(
+        "users/" + auth.currentUser.uid + "pointsNumber"
+      );
+      docRef
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            document.getElementById("minigamesNumberGet").innerHTML = JSON.stringify(
+              doc.data().pointsNumber
+            );
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        })
+        .catch((error) => {
+          console.log("Error getting document:", error);
+        });
+    } else {
+      $(".pointsNumberDisplay, .minigamesNumberDisplay").css("display", "none");
+      $(".coiniconForMinigames").css("display", "none");
+    }
+  });
     return (
       <div>
         <style>{"body { background-color: #18242c; }"}</style>
@@ -121,7 +69,7 @@ class MinigamesHeader extends React.Component {
                 <div
                   className="toprcloser"
                   id="toprcloser"
-                  onClick={this.slider}
+                  onClick={Slider}
                 >
                   {" "}
                   <button type="button" className="shortenbtn homeredbtn">
@@ -129,7 +77,7 @@ class MinigamesHeader extends React.Component {
                   </button>
                 </div>
               </div>
-              <Link to="/">
+              <Link to="/myAccount">
                 {" "}
                 <div id="youra">
                   <p className=" reposya">YOUR ACCOUNT</p>
@@ -308,7 +256,7 @@ class MinigamesHeader extends React.Component {
           >
             <ion-icon
               name="chevron-forward-outline"
-              onClick={this.backwardfunction}
+              onClick={backwardfunction}
             />
           </div>
         </div>
@@ -316,7 +264,7 @@ class MinigamesHeader extends React.Component {
         <div
           className="sectionhidden"
           style={{ display: "none" }}
-          onLoad={this.onminiload}
+          onLoad={onminiload}
         >
           <img id="fulluia" src="../images/newsb.jpg" alt="background" />
           <div id="sidebarla" className="sidebarla">
@@ -340,7 +288,7 @@ class MinigamesHeader extends React.Component {
                 <div
                   className="toprclosera"
                   id="toprclosera"
-                  onClick={this.slidera}
+                  onClick={slidera}
                 >
                   {" "}
                   <button type="button" className="shortenbtna homeredbtna">
@@ -515,12 +463,14 @@ class MinigamesHeader extends React.Component {
           <div className="bringbackbtna" id="bringbackbtna">
             <ion-icon
               name="chevron-forward-outline"
-              onClick={this.backwardfunctiona}
+              onClick={backwardfunctiona}
             />
           </div>
         </div>
+        <div className="pointsNumberDisplay minigamesNumberDisplay" id="minigamesNumberGet"></div>
+        <img src="../images/coin.png" className="coiniconForMinigames"/>
       </div>
     );
   }
-}
+
 export default MinigamesHeader;

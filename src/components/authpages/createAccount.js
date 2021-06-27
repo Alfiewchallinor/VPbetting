@@ -3,6 +3,9 @@ import { Link, useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 import Logotopleft from "../master/logotopleft.js/Logotopleft";
 import $ from "jquery";
+import firebase from "firebase";
+import { auth } from "../../firebase";
+var firestore = firebase.firestore();
 
 export default function CreateAccount() {
   const emailRef = useRef();
@@ -66,12 +69,26 @@ export default function CreateAccount() {
       setError("");
       setLoading(true);
       await createAccount(emailRef.current.value, passwordRef.current.value);
-      history.push("/myAccount");
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          const docRef = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber")
+          docRef.set({
+            pointsNumber: 25
+          }).then(function () {
+            history.push("/usernameSelect")
+          }).catch(function(error){
+            console.log("error! end of the world incomming:", error)
+          })
+        } 
+      })
+        
     } catch {
       setError("Email has already been taken");
     }
+    
     setLoading(false);
   }
+  
   return (
     <div className="bodydiv" onContextMenu={(e) => e.preventDefault()}>
       <Logotopleft />
