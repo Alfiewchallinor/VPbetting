@@ -21,6 +21,8 @@ import circleShooter from "./pages/minigames/circleShooter";
 import CircleShooterEasy from "./pages/minigames/circleShooterEasy";
 import CircleShooterHard from "./pages/minigames/circleShooterHard";
 import snake from "./pages/minigames/snake";
+import Fortnite from "./pages/sports/fortnite"
+import FetchRandomUser from "../test123";
 
 
 
@@ -47,6 +49,9 @@ function App() {
       <Route exact path="/CircleShooterEasy" component={CircleShooterEasy} />
       <Route exact path="/CircleShooterHard" component={CircleShooterHard} />
       <Route exact path="/snake" component={snake} />
+      {/*Sports */}
+      <Route exact path="/fortnite" component={Fortnite} />
+      <Route exact path="/test123" component={FetchRandomUser} />
       
     </div>
     </AuthProvider>

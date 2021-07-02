@@ -2,9 +2,14 @@ import React from "react";
 import MinigamesHeader from "../../master/minigamesHeader";
 import Levels from "./levels";
 import { gsap } from "gsap";
+import firebase from "firebase";
+import { auth } from "../../../firebase";
+import { Link } from "react-router-dom"
+import $ from "jquery"
+var firestore = firebase.firestore();
 
-class circleShooterHard extends React.Component {
-  gameMedium = () => {
+function circleShooterHard () {
+ const  gameMedium = () => {
     const canvas = document.querySelector("canvas");
     const c = canvas.getContext("2d");
 
@@ -14,7 +19,6 @@ class circleShooterHard extends React.Component {
     const startGameBtn = document.querySelector("#startGameBtn");
     const startGameBtnA = document.querySelector("#startGameBtnA");
     const modalEl = document.querySelector("#modalEl");
-    const bigScoreElA = document.querySelector("#bigScoreElA");
     const modalR = document.querySelector("#modalR");
 
     class Player {
@@ -177,8 +181,13 @@ class circleShooterHard extends React.Component {
         if (dist - enemy.radius - player.radius < 1) {
           cancelAnimationFrame(animationId);
           modalR.style.display = "flex";
-          bigScoreElA.innerHTML = score;
-        }
+          firebase.auth().onAuthStateChanged((user) => {
+            if(user) {
+                const bigScoreElA = document.querySelector('#bigScoreElA')
+            bigScoreElA.innerHTML = score}
+            else {}
+        
+            })};
 
         projectiles.forEach((projectile, projectileIndex) => {
           const dist = Math.hypot(
@@ -205,8 +214,20 @@ class circleShooterHard extends React.Component {
 
             if (enemy.radius - 10 > 9) {
               //increase score
-              score += 1;
+              score += 4;
               document.getElementById("scoreel").innerHTML = score;
+              firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                  const docref = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber")
+                  
+                  docref.update({
+                    pointsNumber: firebase.firestore.FieldValue.increment(4)
+                  }).then(function () {
+                  }).catch(function(error){
+                  })
+                } else {
+                  
+                }})
 
               gsap.to(enemy, {
                 radius: enemy.radius - 15,
@@ -215,8 +236,20 @@ class circleShooterHard extends React.Component {
                 projectiles.splice(projectileIndex, 1);
               }, 0);
             } else {
-              score += 5 / 2;
+              score += 7;
               document.getElementById("scoreel").innerHTML = score;
+              firebase.auth().onAuthStateChanged((user) => {
+                if (user) {
+                  const docref = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber")
+                  
+                  docref.update({
+                    pointsNumber: firebase.firestore.FieldValue.increment(7)
+                  }).then(function () {
+                  }).catch(function(error){
+                  })
+                } else {
+                  
+                }})
 
               setTimeout(() => {
                 enemies.splice(index, 1);
@@ -259,7 +292,16 @@ class circleShooterHard extends React.Component {
     });
   };
 
-  render() {
+  firebase.auth().onAuthStateChanged((user) => {
+    if(user) {
+      $("#forwhenloggedin, #bigScoreElA").css("display", "block")
+      $("#mustbeloggedin").css("display", "none")
+      
+    }else {
+      $("#forwhenloggedin, #bigScoreElA").css("display", "none")
+      $("#mustbeloggedin").css("display", "block")
+    }
+  })
     return (
       <div>
         <MinigamesHeader />
@@ -285,7 +327,7 @@ class circleShooterHard extends React.Component {
                 className="bg-blue-500 text-white w-full cursor-pointer
      py-3 rounded-full"
                 id="startGameBtn"
-                onClick={this.gameMedium}
+                onClick={gameMedium}
               >
                 {" "}
                 DOUBLE CLICK TO START GAME
@@ -300,15 +342,18 @@ class circleShooterHard extends React.Component {
         >
           <div className="bg-white max-w-md w-full p-6 text-center">
             <h1 className="text-4xl font-bold leading-none">
-              <span>+</span>
+              
               <span id="bigScoreElA">0</span>
+        <span id="mustbeloggedin" style={{ "position": "relative", "top": "-10px" }}><Link to="/login"><span style={{"color": "#3B82F6"}}><em>Log in</em></span></Link> to earn coins</span> 
+
             </h1>
-            <p className="text-sm text-gray-700 mb-4">Coins </p>
+            <p className="text-sm text-gray-700 mb-4" id="forwhenloggedin">Coins </p>
             <div>
               <div
                 className="bg-blue-500 text-white w-full
      py-3 rounded-full"
                 id="startGameBtnA"
+                style={{ "cursor": "pointer" }}
               >
                 RESTART
               </div>
@@ -320,6 +365,6 @@ class circleShooterHard extends React.Component {
       </div>
     );
   }
-}
+
 
 export default circleShooterHard;

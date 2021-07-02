@@ -15,6 +15,19 @@
     box-sizing: border-box;
     padding-bottom: 0;
   }
+  ::-webkit-scrollbar {
+    width: 10px;  
+  }
+  ::-webkit-scrollbar-track {
+    background: #bce4ff;   
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(168, 168, 168);
+    border-radius: 3em
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(192, 192, 192);
+  }
   .bodydiv {
     display: grid;
     background-color: #ffffff;
@@ -120,7 +133,7 @@
     background: transparent;
     cursor: pointer;
   }
-  .pointsNumberDisplay {
+  .pointsNumberDisplay, .minigamesNumberDisplay {
     position: fixed;
     font-size: 23px;
     top: 9px;
@@ -1183,7 +1196,8 @@
     top: 130px;
     width: 80vh;
     height: 80vh;
-    left: 27vw;
+    left: 50%;
+    transform: translate(-50%);
     display: grid;
     justify-content: center;
     justify-self: center;
@@ -1238,10 +1252,9 @@
     color: #ffffff;
     position: relative;
     text-align: center;
-    justify-self: center;
-    justify-content: center;
     top: 70px;
-    left: 7.8vw;
+    left: 50%;
+    transform: translate(-50%);
   }
   .TOS_text_container {
     display: flex;
@@ -2090,6 +2103,12 @@
     background: white;
   }
   #fullui {
+    position: fixed;
+    width: 254px;
+    height: 100%;
+    z-index: 7000;
+  }
+  #fulluiForSports {
     position: fixed;
     width: 254px;
     height: 100%;
@@ -3396,11 +3415,6 @@ border-radius: 0.1em;
 .phoneUpdated[type=number] {
   -moz-appearance: textfield;
 }
-.phoneUpdated::-webkit-outer-spin-button,
-.phoneUpdated::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
 .cancelUpdates {
   left: 160px;
   background-color: #5296ee;
@@ -3536,8 +3550,419 @@ border-radius: 0.1em;
   font-family: 'roboto', sans-serif;
   font-size: 13px;  
 }
-
 input[type="file"] {
   display: none
 }
+.upcommingtounramentssection {
+  width: calc(100vw - 255px);
+  position: relative;
+  justify-content: center;
+  margin-left: 255px;
+  margin-top: 44px;
+}
+.upcommingtounramentdiv {
+  position: relative;
+    justify-content: center;
+    justify-self: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-gap: 1rem;
+    grid-auto-flow: dense;
+    padding-left: 44px;
+    padding-right: 44px;
+}
+.upcommingTournament {
+    height: 300px;
+    border: none;
+    position: relative;
+    background-size: cover;
+    background: white;
+    border-radius: 5px;
+}
 
+@media (max-width: 1510px) {
+  .upcommingtounramentdiv {
+      grid-template-columns: repeat(auto-fit, minmax(379px, 1fr));
+      grid-gap: 1rem;
+      grid-auto-flow: dense;
+  }
+}
+@media (max-width: 1116px) {
+  .upcommingtounramentdiv {
+    position: relative;
+    justify-content: center;
+    justify-self: center;
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-gap: 1rem;
+    grid-auto-flow: dense;
+  }
+}
+.findaPlayer {
+  width: calc(100vw - 642px);
+  position: relative;
+  margin-left: 299px;
+  height: 100px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  align-items: center;
+}
+.formforsearch {
+  top: 50px;
+  position: relative;
+}
+.searchbutton {
+  left: 50%;
+  transform: translate(-50%);
+  background: red;
+  height: 0px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  cursor:default
+  
+}
+.searchforPlayer {
+  position: relative;
+  top: 50%;
+  transform: translate(0, -50%);
+  width: 70%;
+  height: 50px;
+  border-radius: 3em;
+  background-color: transparent;
+  border: 3px solid rgb(255, 255, 255);
+  color: white;
+  font-size: 24px;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}
+.searchforPlayer::placeholder {
+  color: white;
+  font-size: 18px;
+  position: relative;
+  top: -1px;
+}
+.searchforPlayer:focus {
+  outline: none;
+  border: 3px solid rgb(191, 230, 255);
+  background-color: rgba(191, 230, 255, 0.01);
+  
+}
+.searchforPlayerLabel { 
+  position: relative;
+  top: 50%;
+  transform: translate(0, -50%);
+  font-family: 'roboto', sans-serif;
+  color: white;
+  font-size: 2em;
+  padding: 10px;
+  white-space: nowrap;
+  text-align: left;
+  cursor: pointer;
+} 
+.searchforPlayerLabel:hover {
+  color: rgb(191, 230, 255);
+}
+.searchforPlayerLabel:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(191, 230, 255);
+  visibility: hidden;
+  transition: all 0.3s ease-in-out;
+  top: 50px;
+}
+ 
+.searchforPlayerLabel:hover:after {
+/* part 2 */
+  visibility: visible;
+  width: 100%;
+}
+.rightside {
+  width: 30%;
+  float: right;
+  height: 100%
+}
+.completebottomLeftSection {
+  width: calc(100vw - 642px);
+  height: 300px;
+  background-color: RED;
+  margin-left: 299px;
+  position: relative;
+}
+.toprankingplayers {
+  width: 299px;
+  background-color: #ffffff13;
+
+  float: right;
+  margin-top: 45px;
+  border-top-left-radius: 5px; 
+  color: white;
+  font-family: 'roboto', sans-serif;
+  display: grid;
+}
+.toprankingtitle {
+  justify-self: center;
+  font-size: 22px;
+  margin-top: 8px;
+  font-family: 'roboto', sans-serif;
+  height: 10px;
+}
+.toprankingcontainer {
+  height: 10px;
+  justify-self: center;
+}
+.numberonside {
+  margin-right: 20px; 
+  padding-left: 10px;
+  font-size: 40px;
+  top: 0px;
+  position: relative;
+  padding-left: "26px"
+}
+.rankingorderd {
+  position: relative;
+  display: flex;
+  top: 0px;
+  font-family: 'roboto', sans-serif;
+  font-size: 20px;
+  height: 67px;
+  width: 100%;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.219);
+  align-items: center;
+  height: 75px;
+}
+.rankingorderd:nth-child(1) {
+  margin-top: 0px;
+}
+.regionbuttons {
+  width: 50%;
+  padding: 10px;
+  top: 40px;
+  position: relative;
+  border-top: 2px solid rgba(255, 255, 255, 0.55);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.55);
+  border-radius: 0;
+  transition: all 0.15s
+}
+.regionbuttons:hover {
+  background-color: rgba(255, 255, 255, 0.158);
+}
+.NaButton {
+  left: 50%;
+  position: relative;
+  top: -8px;
+  border-left: 2px solid rgba(255, 255, 255, 0.55)
+}
+.stats {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999
+}
+
+
+.outsideBorder {
+  border: 5px solid rgba(255, 255, 255, 0.322);
+  height: 580px;
+}
+.overallbox {
+  height: 540px;
+  width: 400px;
+  margin: 20px;
+  background: #00000065;
+  box-shadow: 2px 6px 1rem rgba(0, 0, 0, 0.582);
+}
+.toptitlecontainer {
+  width: 100%;
+  height: 50px;
+  background-color: rgba(64, 212, 64, 0.959);
+  justify-content: center;
+  display: flex;
+}
+
+
+.overallheaderh1 {
+  color: white;
+  font-family:cursive;
+  font-size: 33px;
+  font-weight: 500
+}
+
+.accountName {
+  color: white;
+  font-family: 'roboto', sans-serif;
+  justify-content: center;
+  display: flex;
+  margin-top: 60px;
+  font-size: 39px;
+  font-weight: 500;
+}
+
+.winswinpercentkdkpmcontainer {
+  width: 100%;
+  height: 100px;
+  margin-top: 40px;
+  display: flex
+}
+.winswinpercentkdkpmcontainersecond {
+  width: 100%;
+  height: 100px;
+  top: -100px;
+  position: relative;
+  display: flex
+}
+.winswinpercentkdkpmcontainerthird {
+  width: 100%;
+  height: 100px;
+  top: -100px;
+  position: relative;
+  display: flex;
+}
+.winswinpercentkdkpmcontainerfourth {
+  width: 100%;
+  height: 100px;
+  top: -100px;
+  position: relative;
+  display: flex;
+}
+.sectionLeftLeft, .sectionLeftRight, .sectionRightLeft, .sectionRightRight{
+  width: 25%;
+  top: 50%;
+  position: relative;
+  height: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  color: rgb(15, 255, 7);
+  font-family: cursive;
+  font-weight: 500;
+  font-size: 26px;
+  white-space: nowrap;
+}
+.sectionLeftRight {
+  left: 3%
+}
+.sectionRightLeft {
+  left: 4%
+}
+.sectionLeftLeftUpper, .sectionLeftRightUpper, .sectionRightLeftUpper, .sectionRightRightUpper{
+  width: 25%;
+  position: relative;
+  height: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  color: white;
+  font-size: 25px;;
+}
+
+.threecolumnsizing {
+  width: 33.333333333333333333333333333%;
+  margin-top: 50px;
+}
+.middlePositionchanger {
+  left: 4px;
+}
+.sectionLeftLeftBelow, .sectionLeftRightBelow, .sectionRightLeftBelow {
+  width: 33%;
+  top: 10%;
+  position: relative;
+  height: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  color: rgb(15, 255, 7);
+  font-family: cursive;
+  font-weight: 500;
+  font-size: 26px;
+}
+.deathsPositioner {
+  left: 2%;
+}
+.secondarymiddlerchanger{
+  left: 2.9%
+}
+.matchespositioner {
+  left: 2%;
+}
+.overallRightSection {
+  width: 580px;
+  height: 540px;
+  margin: 20px;
+  margin-left: 0px;
+}
+
+.sectionForGameMode {
+  height: 29.94%;
+  margin-bottom: 5%;
+  width: 100%;
+  background: #00000065;
+  box-shadow: 2px 6px 1rem rgba(0, 0, 0, 0.582);
+}
+.soloblue {
+  background-color: hsla(187, 86%, 65%, 0.959);
+}
+.duoorange {
+  background-color: hsla(41, 87%, 65%, 0.959);
+}
+.squadpurple {
+  background-color: hsla(288, 87%, 65%, 0.959);
+}
+.sectionforstatvalues, .sectionforstattitles {
+  width: 20%;
+  top: 50%;
+  position: relative;
+  height: 50%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  color: rgb(255, 255, 255);
+  font-family: 'roboto', sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  white-space: nowrap;
+  margin-top: 20px;
+}
+.sectionforstattitles {
+  margin-top: 5px;
+  font-family: cursive;
+}
+.bluecolor {
+  color: hsla(187, 86%, 65%, 0.959);
+}
+.orangecolor {
+color: hsla(41, 87%, 65%, 0.959);
+}
+.purplecolor {
+  color: hsla(288, 87%, 65%, 0.959);
+}
+
+.kdpositioner {
+  left: 13px;
+}
+.deathpositioner {
+  left: 15px;
+}
+.removestat {
+  position: fixed;
+  height: 100vh;
+  z-index: 9999;
+  width: 100vw;
+  top: 0;
+}
+.playerstatssection, .outsideBorder {
+  width: 1000px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%); 
+  display: flex;
+  z-index: 9999;
+  background-size:contain; 
+}

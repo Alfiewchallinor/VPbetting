@@ -8,6 +8,8 @@ import backwardfunction from "./minigamesHeaderfunctions/backwardfunction"
 import slidera from "./minigamesHeaderfunctions/slidera"
 import backwardfunctiona from "./minigamesHeaderfunctions/backwardfunctiona"
 import onminiload from "./minigamesHeaderfunctions/onminiload"
+import instantSlideRight from "./minigamesHeaderfunctions/instantSlideRight"
+import instantSlideLeft from "./minigamesHeaderfunctions/instantSlideLeft"
 var firestore = firebase.firestore();
 
 function MinigamesHeader() {
@@ -23,24 +25,85 @@ function MinigamesHeader() {
         .get()
         .then((doc) => {
           if (doc.exists) {
+           
             document.getElementById("minigamesNumberGet").innerHTML = JSON.stringify(
               doc.data().pointsNumber
+              
             );
+              if (doc.exists) {
+                $("#toprcloser, #toprclosera").click(function () {
+                  const docref = firestore.doc(
+                    "users/" + auth.currentUser.uid + "pointsNumber"
+                  );
+                  docref
+                    .update({
+                      menuOpen: 2,
+                      pointsNumber: doc.data().pointsNumber
+                    })
+                    .then(function () {})
+                    .catch(function (error) {});
+                });
+                $("#bringbackbtna, #bringbackbtn").click(function () {
+                  const docref = firestore.doc(
+                    "users/" + auth.currentUser.uid + "pointsNumber"
+                  );
+                  docref
+                    .update({
+                      menuOpen: 1,
+                      pointsNumber: doc.data().pointsNumber
+                    })
+                    .then(function () {})
+                    .catch(function (error) {});
+                });
+                
+              }
+            
           } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
           }
         })
         .catch((error) => {
-          console.log("Error getting document:", error);
-        });
+        }); 
     } else {
       $(".pointsNumberDisplay, .minigamesNumberDisplay").css("display", "none");
       $(".coiniconForMinigames").css("display", "none");
     }
   });
+  
+  const mediaQuery = window.matchMedia('(max-width: 1040px)')
+  function shouldMenuBeOpen () {
+    
+    
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      const docRef = firestore.doc(
+        "users/" + auth.currentUser.uid + "pointsNumber"
+      );
+      docRef
+  .get().then((doc)=> {
+      if(doc.data().menuOpen == "1"){
+        if(mediaQuery.matches) {
+          instantSlideLeft()
+        } else {
+          return;
+        }
+
+      }
+      if(doc.data().menuOpen == "2") {
+        console.log("menuwouldbeCLOSED")
+        if(mediaQuery.matches) {
+          return;
+        } else {
+          instantSlideRight()
+        }
+        
+      }
+    })}else {
+      
+    }
+  })
+}
     return (
-      <div>
+      <div onLoad={shouldMenuBeOpen}>
         <style>{"body { background-color: #18242c; }"}</style>
         <link
           href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"

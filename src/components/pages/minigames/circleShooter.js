@@ -4,11 +4,13 @@ import Levels from './levels'
 import { gsap } from "gsap";
 import firebase from "firebase";
 import { auth } from "../../../firebase";
+import $ from "jquery";
+import { Link } from "react-router-dom"
 var firestore = firebase.firestore();
 
-class circleShooter extends React.Component {
+function circleShooter () {
 
-    gameMedium = () => {
+  const gameMedium = () => {
     
 const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d')
@@ -20,7 +22,7 @@ canvas.height = window.innerHeight
 const startGameBtn = document.querySelector('#startGameBtn')
 const startGameBtnA = document.querySelector('#startGameBtnA')
 const modalEl = document.querySelector('#modalEl')
-const bigScoreElA = document.querySelector('#bigScoreElA')
+
 const modalR = document.querySelector('#modalR')
 
 
@@ -197,8 +199,14 @@ function animate() {
                 if(dist - enemy.radius - player.radius< 1) {
                     cancelAnimationFrame(animationId)
                     modalR.style.display = 'flex'
-                    bigScoreElA.innerHTML = score
-                }
+                    firebase.auth().onAuthStateChanged((user) => {
+                        if(user) {
+                            const bigScoreElA = document.querySelector('#bigScoreElA')
+                        bigScoreElA.innerHTML = score}
+                        else {}
+                    
+                        })};
+                        
 
             projectiles.forEach((projectile, projectileIndex) => {
              const dist = Math.hypot(projectile.x - enemy.x,
@@ -217,14 +225,14 @@ function animate() {
                         if(enemy.radius -10 > 9) {
 
                             //increase score 
-                        score += 1
+                        score += 2
                         document.getElementById('scoreel').innerHTML = score
                         firebase.auth().onAuthStateChanged((user) => {
                             if (user) {
                               const docref = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber")
                               
                               docref.update({
-                                pointsNumber: firebase.firestore.FieldValue.increment(1)
+                                pointsNumber: firebase.firestore.FieldValue.increment(2)
                               }).then(function () {
                               }).catch(function(error){
                               })
@@ -241,7 +249,7 @@ function animate() {
                                 }, 0)
                         }
                         else {
-                            score += 5/2
+                            score += 4
                         document.getElementById('scoreel').innerHTML = score
                         
                         firebase.auth().onAuthStateChanged((user) => {
@@ -249,7 +257,7 @@ function animate() {
                               const docref = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber")
                               
                               docref.update({
-                                pointsNumber: firebase.firestore.FieldValue.increment(2.5)
+                                pointsNumber: firebase.firestore.FieldValue.increment(4)
                               }).then(function () {
                               }).catch(function(error){
                               })
@@ -295,33 +303,39 @@ startGameBtnA.addEventListener('click', () => {
     window.location.reload()
 })
     }
-    
-    render() {
-        return(<div>
-            <MinigamesHeader />
-            
-            
-
-            
+        firebase.auth().onAuthStateChanged((user) => {
+            if(user) {
+              $("#forwhenloggedin, #bigScoreElA").css("display", "block")
+              $("#mustbeloggedin").css("display", "none")
+              
+            }else {
+              $("#forwhenloggedin, #bigScoreElA").css("display", "none")
+              $("#mustbeloggedin").css("display", "block")
+            }
+          })
+        return(
+        <div>
+            <MinigamesHeader />    
   <div className="scorecs"><span>COINS: </span><span id="scoreel">0</span></div>
   <div className="fixed inset-0 flex items-center justify-center" id="modalEl">
     <div className="bg-white max-w-md w-full p-6 text-center">
       <h1 className="text-4xl font-bold leading-none">
-        <span /><span id="bigScoreEl" /> 
+        
       </h1> 
       <p className="text-sm text-gray-900 mb-4">CIRCLE SHOOTER, LEVEL =  MEDIUM</p>
       <div>
         <div className="bg-blue-500 text-white w-full cursor-pointer
-     py-3 rounded-full" id="startGameBtn" onClick= {this.gameMedium}> DOUBLE CLICK TO START GAME</div>
+     py-3 rounded-full" id="startGameBtn" onClick= {gameMedium}> DOUBLE CLICK TO START GAME</div>
       </div>
     </div>
   </div>
   <div className="fixed inset-0 flex items-center justify-center" id="modalR" style={{display: 'none'}}>
     <div className="bg-white max-w-md w-full p-6 text-center">
       <h1 className="text-4xl font-bold leading-none">
-        <span>+</span><span id="bigScoreElA">0</span> 
+        <span id="bigScoreElA">0</span> 
+        <span id="mustbeloggedin" style={{ "position": "relative", "top": "-10px" }}><Link to="/login"><span style={{"color": "#3B82F6"}}><em>Log in</em></span></Link> to earn coins</span> 
       </h1> 
-      <p className="text-sm text-gray-700 mb-4">Coins </p>
+      <p className="text-sm text-gray-700 mb-4" id="forwhenloggedin">Coins </p>
       <div>
         <div className="bg-blue-500 text-white w-full
      py-3 rounded-full cursor-pointer" id="startGameBtnA">RESTART</div>
@@ -335,6 +349,6 @@ startGameBtnA.addEventListener('click', () => {
         )
     }
 
-}
+
 
 export default circleShooter;

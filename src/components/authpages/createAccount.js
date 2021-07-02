@@ -73,7 +73,8 @@ export default function CreateAccount() {
         if (user) {
           const docRef = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber")
           docRef.set({
-            pointsNumber: 25
+            pointsNumber: 25,
+            menuOpen: 1
           }).then(function () {
             history.push("/usernameSelect")
           }).catch(function(error){

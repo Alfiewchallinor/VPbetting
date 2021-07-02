@@ -13,16 +13,13 @@ const Loginicon = () => {
       const docRef = firestore.doc(
         "users/" + auth.currentUser.uid + "pointsNumber"
       );
-      docRef
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            console.log("Document data:", doc.data());
-            document.getElementById("numberPointsId").innerHTML = JSON.stringify(
-              doc.data().pointsNumber
-            );
-            var elements = document.getElementsByClassName("pointsNumberDisplay");
-          }})
+      docRef.get().then((doc) => {
+        if (doc.exists) {
+          document.getElementById("numberPointsId").innerHTML = JSON.stringify(
+            doc.data().pointsNumber
+          );
+        }
+      });
     } else {
       $("#LOGIN").css("display", "block");
       $("#MYACCOUNT, .pointsNumberDisplay, .coinicon").css("display", "none");
@@ -38,7 +35,7 @@ const Loginicon = () => {
         LOGIN
       </Link>
       <div className="pointsNumberDisplay" id="numberPointsId"></div>
-      <img src="images/coin.png" alt="coinicon" className="coinicon"/>
+      <img src="images/coin.png" alt="coinicon" className="coinicon" />
     </div>
   );
 };
