@@ -47,7 +47,7 @@ return snakeBody.some((segment, index) => {
 }
 
 export function getSnakeHead() {
-return snakeBody [0]
+return snakeBody[0]
 
 }
 

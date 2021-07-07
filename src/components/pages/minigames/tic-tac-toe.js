@@ -1,5 +1,5 @@
 import React from "react";
-import MinigamesHeader from "../../master/minigamesHeader";
+
 import { Link } from "react-router-dom";
 import $ from "jquery"
 import firebase from "firebase"
@@ -8,6 +8,7 @@ var firestore = firebase.firestore();
 
 function tictactoe () {
  const gamefunction = () => {
+   $(".userMustClickHeader").css("display", "none")
     const X_CLASS = "x";
     const CIRCLE_CLASS = "circle";
     const WINNING_COMBINATIONS = [
@@ -47,7 +48,7 @@ function tictactoe () {
       } else if (isDraw()) {
         endGame(true);
       } else {
-        swapTurns();
+      swapTurns();
         setBoardHoverClass();
       }
     }
@@ -58,7 +59,7 @@ function tictactoe () {
           const docref = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber")
           
           docref.update({
-            pointsNumber: firebase.firestore.FieldValue.increment(1.5)
+            pointsNumber: firebase.firestore.FieldValue.increment(9)
           }).then(function () {
             
             console.log("worked")
@@ -126,8 +127,8 @@ function tictactoe () {
     }
   })
     return (
-      <div onLoad={gamefunction}>
-        <MinigamesHeader />
+      <div onDoubleClick={gamefunction}>
+        
         <div className="ttt_board" id="ttt_board">
           <div className="cell" data-cell></div>
           <div className="cell" data-cell></div>
@@ -170,6 +171,7 @@ function tictactoe () {
         <Link to="/tic-tac-toe-4x4">
           <div className="visit4">4X4 GRID</div>
         </Link>
+        <h1 className="userMustClickHeader">DOUBLE CLICK ON BOARD TO START GAME</h1>
       </div>
     );
   }

@@ -5,7 +5,6 @@ import Header from "../master/Header";
 import Footer from "../master/Footer";
 import Changingheader from "../master/changingheader/changingheader";
 import Navigation from "../master/navigation/navigation";
-import firebase from "firebase";
 
 
 export function Home() {

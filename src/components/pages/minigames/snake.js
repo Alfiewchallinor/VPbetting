@@ -1,5 +1,4 @@
-import React from "react";
-import MinigamesHeader from "../../master/minigamesHeader";
+import React, { useState } from "react";
 import {
   update as updateSnake,
   draw as drawSnake,
@@ -10,13 +9,18 @@ import {
 import { outsideGrid } from "./snake/grid";
 import { update as updateFood, draw as drawFood } from "./snake/food";
 import $ from "jquery";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import firebase from "firebase";
-import { useHistory } from "react-router-dom"
 
-function snake () {
-  
-  const game = () => {
+
+
+export default class Snake extends React.Component {
+  state = {
+    reload: false
+  };
+      
+   game = () => {
+    
     $("#clicker").hide();
     let lastRenderTime = 0;
     let gameOver = false;
@@ -52,32 +56,30 @@ function snake () {
     }
     
   };
-  
-  function restartGame() {
-    window.location.reload()
-    
-  };
 
-  const linkchanger = () => {
+  linkchanger = () => {
     $("#game-board").css("background-image", "url('../images/image0.jpg')");
   };
-  const leo = () => {
+  leo = () => {
     $("#game-board").css("background-image", "url('../images/leoard.png')");
   };
-
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      $("#notLoggedInScore").css("display", "none");
-      $("#bigScoreElB").css("display", "block");
-    } else {
-      $("#notLoggedInScore").css("display", "block");
-      $("#bigScoreElB").css("display", "none");
-    }
-  });
+  componentRefresh = () => {
+    window.location.reload(false);
+    this.forceUpdate();
+  }
+  render () {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        $("#notLoggedInScore").css("display", "none");
+        $("#bigScoreElB").css("display", "block");
+      } else {
+        $("#notLoggedInScore").css("display", "block");
+        $("#bigScoreElB").css("display", "none");
+      }
+    });
   return (
     <div className="bodydivblack">
-      <MinigamesHeader />
-      <div id="score">0 </div>
+      <div id="score">0</div>
       <div
         id="game-board"
         style={{
@@ -88,10 +90,10 @@ function snake () {
       >
         {" "}
       </div>
-      <div onClick={linkchanger} className="snakered">
+      <div onClick={this.linkchanger} className="snakered">
         FREDBOAT BACKGROUND
       </div>
-      <div onClick={leo} className="snakered tyy">
+      <div onClick={this.leo} className="snakered tyy">
         LEOARDLADD BACKGROUND
       </div>
       <div
@@ -109,7 +111,7 @@ function snake () {
               className="bg-blue-500 text-white w-full cursor-pointer
      py-3 rounded-full"
               id="startGameBtn"
-              onClick={game}
+              onClick={this.game}
             >
               CLICK TO START GAME
             </div>
@@ -136,19 +138,17 @@ function snake () {
           </h1>
           <p className="text-sm text-gray-700 mb-4">Coins </p>
           <div>
-            <div
+           <div
               className="bg-blue-500 text-white w-full
      py-3 rounded-full cursor-pointer"
               id="startGameBtnB"
-              onClick={restartGame}
+              onClick={this.componentRefresh}
             >
               RESTART
-            </div>
+            </div> 
           </div>
         </div>
       </div>
     </div>
   );
-};
-
-export default snake;
+}};

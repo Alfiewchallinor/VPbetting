@@ -1,5 +1,4 @@
 import React from "react";
-import MinigamesHeader from "../../master/minigamesHeader";
 import Levels from './levels'
 import { gsap } from "gsap";
 import firebase from "firebase";
@@ -313,7 +312,7 @@ startGameBtnA.addEventListener('click', () => {
       })
  
         return(<div>
-            <MinigamesHeader />
+            
              
   <div className="scorecs"><span>COINS: </span><span id="scoreel">0</span></div>
   <div className="fixed inset-0 flex items-center justify-center" id="modalEl">

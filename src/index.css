@@ -1862,6 +1862,18 @@
     justify-items: center;
     align-items: center;
   }
+  .userMustClickHeader {
+    color: white;
+    position:absolute;
+    left: 50%;
+    transform: translate(-50%);
+    font-size: 1.9vw;
+    margin-top: 15px;
+    top: 0;
+    font-family: "roboto", sans-serif;
+    font-weight: 500;
+    white-space: nowrap;
+  }
   .cell {
     width: var(--cell-size);
     height: var(--cell-size);
@@ -3330,7 +3342,7 @@
  user-select: none;
 }
 .confirmDelete {
-padding: 12px;
+  padding: 12px;
    padding-left: 16px;;
    padding-right: 15px;;
    border: none;
@@ -3338,7 +3350,7 @@ padding: 12px;
    border-radius: 0;
    color: white;
    position: absolute;
-   left: 50%;
+   left: 40%;
    transform: translate(-105%, 0);
    top: 63px;
    cursor: pointer;
@@ -3356,7 +3368,7 @@ background: #3B82F6;
 border-radius: 0;
 color: white;
 position: absolute;
-left: 50%;
+left: 58%;
 transform: translate(5%, 0);
 top: 63px;
 cursor: pointer;
@@ -3566,42 +3578,56 @@ input[type="file"] {
     justify-self: center;
     align-items: center;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
     grid-gap: 1rem;
     grid-auto-flow: dense;
     padding-left: 44px;
     padding-right: 44px;
 }
 .upcommingTournament {
-    height: 300px;
+    height: 432px;
     border: none;
     position: relative;
     background-size: cover;
-    background: white;
     border-radius: 5px;
+    z-index: 10;
+    transition: all 0.2s;
+    cursor: pointer
+}
+.upcommingTournament:hover {
+  filter: brightness(120%);
+  z-index: 20
 }
 
-@media (max-width: 1510px) {
+@media (max-width: 1590px) {
   .upcommingtounramentdiv {
-      grid-template-columns: repeat(auto-fit, minmax(379px, 1fr));
-      grid-gap: 1rem;
-      grid-auto-flow: dense;
+      padding-left: 10px;
+      padding-right: 10px;
+      
   }
 }
-@media (max-width: 1116px) {
+@media (max-width: 1522px) {
   .upcommingtounramentdiv {
-    position: relative;
-    justify-content: center;
-    justify-self: center;
-    align-items: center;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    grid-gap: 1rem;
-    grid-auto-flow: dense;
-  }
+    padding-left: 170px;
+    padding-right: 170px;
+    
 }
+}
+@media (max-width: 1210px) {
+  .upcommingtounramentdiv {
+    padding-left: 44px;
+    padding-right: 44px;   
+}}
+@media (max-width: 958px) {
+  .upcommingtounramentdiv {
+    padding-left: 10px;
+    padding-right: 10px;   
+}
+}
+
+
 .findaPlayer {
-  width: calc(100vw - 642px);
+  width: calc(100vw - 321px);
   position: relative;
   margin-left: 299px;
   height: 100px;
@@ -3629,24 +3655,27 @@ input[type="file"] {
   transform: translate(0, -50%);
   width: 70%;
   height: 50px;
-  border-radius: 3em;
-  background-color: transparent;
-  border: 3px solid rgb(255, 255, 255);
-  color: white;
+  border-radius: 0.2em;
+  border: 2px solid white;
+  color: rgba(0, 0, 0, 0.897);
   font-size: 24px;
   font-family: "Roboto", sans-serif;
   font-weight: 300;
+  background-color: white;
+  text-align: left;
+  padding-left: 10px;
 }
 .searchforPlayer::placeholder {
-  color: white;
+  color: rgba(0, 0, 0, 0.61);
   font-size: 18px;
   position: relative;
   top: -1px;
+  
 }
 .searchforPlayer:focus {
   outline: none;
-  border: 3px solid rgb(191, 230, 255);
-  background-color: rgba(191, 230, 255, 0.01);
+  border: 2px solid #3B82F6;
+  background-color: rgb(255, 255, 255);
   
 }
 .searchforPlayerLabel { 
@@ -3687,13 +3716,7 @@ input[type="file"] {
   float: right;
   height: 100%
 }
-.completebottomLeftSection {
-  width: calc(100vw - 642px);
-  height: 300px;
-  background-color: RED;
-  margin-left: 299px;
-  position: relative;
-}
+
 .toprankingplayers {
   width: 299px;
   background-color: #ffffff13;
@@ -3956,13 +3979,137 @@ color: hsla(41, 87%, 65%, 0.959);
   width: 100vw;
   top: 0;
 }
+
 .playerstatssection, .outsideBorder {
   width: 1000px;
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%); 
   display: flex;
   z-index: 9999;
   background-size:contain; 
+}
+#firsttournamentposter {
+  position: absolute;
+}
+.tournamentposterClass {
+  display: none;
+}
+.tournamenttitle {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  left: 50%;
+  font-family: 'Teko', sans-serif;
+  top: 43%;
+  transform: translate(-50%, 0);
+  font-size: 55px;
+  text-align: center;
+  letter-spacing: 0.03em;
+  white-space: nowrap;  
+}
+.scheduletitle {
+  color: rgb(255, 255, 255);
+  position: absolute;
+  left: 50%;
+  font-family: 'Teko', sans-serif;
+  top: 88%;
+  transform: translate(-50%, 0);
+  font-size: 30px;
+  text-align: center;
+  letter-spacing: 0.03em;
+  white-space: nowrap;  
+}
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@700&display=swap');
+.secondlineposition {
+  top: 54%;
+}
+.completebottomLeftSection {
+  width: calc(100vw - 340px);
+  height: 700px;
+  margin-left: 299px;
+  position: relative;
+  margin-bottom: 90px;
+  border-radius: 0.1em;
+}
+.selectTournament {
+  font-family: 'roboto', sans-serif;
+  font-size: 3vw;
+  font-weight: 500;
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  color: rgb(0, 0, 0);
+  opacity: 1;
+  z-index: 50;
+  user-select: none;
+}
+
+.imagebackgroundFortniteContainer {
+  height: 700px;
+  background-size: 82.2vw;
+  background-repeat: repeat-x;
+  background-position:top left;
+  width: 100%;
+  z-index: -1;
+}
+
+.clickedTournamentSectionTitle {
+  padding: 8px;
+  font-size: 23px;
+  font-family: "Roboto", sans-serif;
+  padding-left: 20px;
+  position: absolute;
+  font-weight: 500
+}
+.clickedTournamentSectionDescription {
+  padding: 8px;
+  font-size: 1.15vw;
+  font-family: "Roboto", sans-serif;
+  padding: 20px;
+  margin-top: 60px;
+  position: absolute;
+  padding-top: 12px;
+
+}
+
+.fortniteOnclickLeftSection {
+  width: 50%;
+  height: 300px;
+  position: absolute;
+}
+.rightborderFortniteOnclick {
+  width: 2px;
+  background: rgba(0, 0, 0, 0.199);
+  height: 80%;
+  top: 80%;
+  position: relative;
+  transform: translate(0, -95%);
+  float: right;
+}
+.fortniteOnClickTopRightSection {
+  position: absolute;
+  left: 50%;
+  width: 50%;
+  height: 300px;
+}
+
+.fortniteOnClickTopRightHeader {
+  padding: 8px;
+  font-size: 25px;
+  font-family: "Roboto", sans-serif;
+  position: absolute;
+  padding-top: 12px;
+  font-weight: 500;
+  font-size: 22px;
+}
+.fortniteOnClickTopRightPara {
+  padding: 8px;
+  font-size: 25px;
+  font-family: "Roboto", sans-serif;
+  position: absolute;
+  padding-top: 72px;
+  font-size: 1.15vw
 }

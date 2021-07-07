@@ -254,7 +254,7 @@ function SportsHeader() {
           </div>
         </div>
         <div className="minigamesNumberDisplay" id="minigamesNumberGet"></div>
-        <img src="../images/coin.png" className="coiniconForMinigames"/>
+        <img src="../images/coin.png" className="coiniconForMinigames" alt="coinsicon"/>
       </div>
     );
   }

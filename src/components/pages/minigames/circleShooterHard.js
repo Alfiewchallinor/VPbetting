@@ -1,5 +1,4 @@
 import React from "react";
-import MinigamesHeader from "../../master/minigamesHeader";
 import Levels from "./levels";
 import { gsap } from "gsap";
 import firebase from "firebase";
@@ -304,7 +303,6 @@ function circleShooterHard () {
   })
     return (
       <div>
-        <MinigamesHeader />
 
         <div className="scorecs">
           <span>COINS: </span>

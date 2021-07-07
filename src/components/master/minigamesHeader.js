@@ -1,22 +1,123 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import firebase from "firebase"
 import { auth } from "../../firebase";
-import Slider from "./minigamesHeaderfunctions/Slider"
-import backwardfunction from "./minigamesHeaderfunctions/backwardfunction"
-import slidera from "./minigamesHeaderfunctions/slidera"
-import backwardfunctiona from "./minigamesHeaderfunctions/backwardfunctiona"
 import onminiload from "./minigamesHeaderfunctions/onminiload"
 import instantSlideRight from "./minigamesHeaderfunctions/instantSlideRight"
-import instantSlideLeft from "./minigamesHeaderfunctions/instantSlideLeft"
 var firestore = firebase.firestore();
 
 function MinigamesHeader() {
   
+
+  const [count, setCount] = useState(1000);
+  // bigger screen that 1040px closer
+  console.log(count)
+  const Slider = () => {
+    $(".toprcloser, .middleer").animate({ left: "-182px" }, 450);
+    $(
+      ".lineuua, .lineuub, .accountyou, .topperfixer, .lineuu, .lineuul, .logobar,  .reposya, .feedbackj, controller"
+    ).animate({ left: "-265px" }, 450);
+    $(".sectionwithscrol, .sidebarl, .topsecg, #bottomsec").animate(
+      { left: "-266px" },
+      450
+    );
+    $(
+      ".seperatork:nth-child(2), .seperatorka:nth-child(2), .seperatorka, .seperatork"
+    ).hide();
+    $("#fullui").animate({ left: "-175px" }, 450);
+    $(".shortenbtn").animate({ left: "175px" }, 450);
+    $("#leftbox").animate({ left: "-5px" }, 450);
+    $(".homeredbtn").hide();
+    $("#middlebox").animate({ left: "-182px" }, 450);
+    $("#rightbox").animate({ left: "-99px" }, 450);
+    $("#accountyouhiden, .bringbackbtn, .feedbackhiden").show(449);
+
+    return setCount(count + 1)
+  };
+  //bigger than 1040px opener
+  
+  const backwardfunction = () => {
+    $(".toprcloser, .middleer").animate({ left: "83px" }, 450);
+    $(
+      ".lineuua, .lineuub, .accountyou, .topperfixer,.lineuu, .lineuul, .logobar,  .reposya, .feedbackj, controller"
+    ).animate({ left: "0px" }, 450);
+    $(".sectionwithscrol, .sidebarl, .topsecg, #bottomsec").animate(
+      { left: "-1px" },
+      450
+    );
+    $(
+      ".seperatork:nth-child(2), .seperatorka:nth-child(2), .seperatorka, .seperatork"
+    ).show(448);
+    $("#fullui").animate({ left: "0px" }, 450);
+    $(".shortenbtn").animate({ left: "175px" }, 450);
+    $("#leftbox").animate({ left: "0px" }, 450);
+    $(".homeredbtn").show(440);
+    $("#middlebox").animate({ left: "83px" }, 450);
+    $("#rightbox").animate({ left: "166px" }, 450);
+    $("#accountyouhiden, .bringbackbtn, .feedbackhiden").hide();
+    return setCount(count -1)
+  };
+  //smaller than 1040px closer
+  const  slidera = () => {
+    $(".toprclosera, .middleera").animate({ left: "-182px" }, 450);
+    $(
+      ".lineuuaa, .lineuuba, .accountyoua, .topperfixera, .lineuuab, .lineuula, .logobara,  .reposyaa, .feedbackja, controllera"
+    ).animate({ left: "-265px" }, 450);
+    $(".sectionwithscrola, .sidebarla, .topsecga, #bottomseca").animate(
+      { left: "-266px" },
+      450
+    );
+    $(
+      ".seperatorkab:nth-child(2), .seperatorkaa:nth-child(2), .seperatorkaa, .seperatorkab"
+    ).hide();
+    $("#fulluia").animate({ left: "-175px" }, 450);
+    $(".shortenbtna").animate({ left: "175px" }, 450);
+    $("#leftboxa").animate({ left: "-5px" }, 450);
+    $(".homeredbtna").hide();
+    $("#middleboxa").animate({ left: "-182px" }, 450);
+    $("#rightboxa").animate({ left: "-99px" }, 450);
+    $("#accountyouhidena, .bringbackbtna, .feedbackhidena").show(449);
+    
+  };
+  //smaller than 1040px opener
+  const  backwardfunctiona = () => {
+    $(".toprclosera, .middleera").animate({ left: "83px" }, 450);
+    $(
+      ".lineuuaa, .lineuuba, .accountyoua, .topperfixera,.lineuuab, .lineuula, .logobara,  .reposyaa, .feedbackja, controllera"
+    ).animate({ left: "0px" }, 450);
+    $(".sectionwithscrola, .sidebarla, .topsecga, #bottomseca").animate(
+      { left: "-1px" },
+      450
+    );
+    $(
+      ".seperatorkab:nth-child(2), .seperatorkaa:nth-child(2), .seperatorkaa, .seperatorkab"
+    ).show(448);
+    $("#fulluia").animate({ left: "0px" }, 450);
+    $(".shortenbtna").animate({ left: "175px" }, 450);
+    $("#leftboxa").animate({ left: "0px" }, 450);
+    $(".homeredbtna").show(440);
+    $("#middleboxa").animate({ left: "83px" }, 450);
+    $("#rightboxa").animate({ left: "166px" }, 450);
+    $("#accountyouhidena, .bringbackbtna, .feedbackhidena").hide();
+    
+  };
+  if(count % 2 ) {
+    instantSlideRight()
+  } else {
+   
+  }
+  useEffect(() => {
+    setCount(JSON.parse(window.localStorage.getItem('count')));
+  }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem('count', count);
+  }, [count]);
+  
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
-      $(".pointsNumberDisplay, .minigamesNumberDisplay").css("display", "block");
+      $(".pointsNumberDisplay, .minigamesNumberDisplay, #minigamesNumberGet").css("display", "block");
       $(".coiniconForMinigames").css("display", "block");
       const docRef = firestore.doc(
         "users/" + auth.currentUser.uid + "pointsNumber"
@@ -24,86 +125,17 @@ function MinigamesHeader() {
       docRef
         .get()
         .then((doc) => {
-          if (doc.exists) {
-           
             document.getElementById("minigamesNumberGet").innerHTML = JSON.stringify(
               doc.data().pointsNumber
-              
             );
-              if (doc.exists) {
-                $("#toprcloser, #toprclosera").click(function () {
-                  const docref = firestore.doc(
-                    "users/" + auth.currentUser.uid + "pointsNumber"
-                  );
-                  docref
-                    .update({
-                      menuOpen: 2,
-                      pointsNumber: doc.data().pointsNumber
-                    })
-                    .then(function () {})
-                    .catch(function (error) {});
-                });
-                $("#bringbackbtna, #bringbackbtn").click(function () {
-                  const docref = firestore.doc(
-                    "users/" + auth.currentUser.uid + "pointsNumber"
-                  );
-                  docref
-                    .update({
-                      menuOpen: 1,
-                      pointsNumber: doc.data().pointsNumber
-                    })
-                    .then(function () {})
-                    .catch(function (error) {});
-                });
-                
-              }
-            
-          } else {
-          }
-        })
-        .catch((error) => {
-        }); 
+        }) 
     } else {
-      $(".pointsNumberDisplay, .minigamesNumberDisplay").css("display", "none");
+      $(".pointsNumberDisplay, .minigamesNumberDisplay, #minigamesNumberGet").css("display", "none");
       $(".coiniconForMinigames").css("display", "none");
     }
   });
-  
-  const mediaQuery = window.matchMedia('(max-width: 1040px)')
-  function shouldMenuBeOpen () {
-    
-    
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      const docRef = firestore.doc(
-        "users/" + auth.currentUser.uid + "pointsNumber"
-      );
-      docRef
-  .get().then((doc)=> {
-      if(doc.data().menuOpen == "1"){
-        if(mediaQuery.matches) {
-          instantSlideLeft()
-        } else {
-          return;
-        }
-
-      }
-      if(doc.data().menuOpen == "2") {
-        console.log("menuwouldbeCLOSED")
-        if(mediaQuery.matches) {
-          return;
-        } else {
-          instantSlideRight()
-        }
-        
-      }
-    })}else {
-      
-    }
-  })
-}
     return (
-      <div onLoad={shouldMenuBeOpen}>
+      <div>
         <style>{"body { background-color: #18242c; }"}</style>
         <link
           href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
@@ -327,7 +359,7 @@ function MinigamesHeader() {
         <div
           className="sectionhidden"
           style={{ display: "none" }}
-          onLoad={onminiload}
+           onLoad={onminiload}
         >
           <img id="fulluia" src="../images/newsb.jpg" alt="background" />
           <div id="sidebarla" className="sidebarla">
@@ -531,7 +563,7 @@ function MinigamesHeader() {
           </div>
         </div>
         <div className="pointsNumberDisplay minigamesNumberDisplay" id="minigamesNumberGet"></div>
-        <img src="../images/coin.png" className="coiniconForMinigames"/>
+        <img src="../images/coin.png" className="coiniconForMinigames" alt="coinicon"/>
       </div>
     );
   }

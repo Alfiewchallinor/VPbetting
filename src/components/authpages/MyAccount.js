@@ -11,15 +11,21 @@ export default function MyAccount() {
   const usernameRef = useRef();
   const { updateEmail } = useAuth();
   const history = useHistory();
-  const user = firebase.auth().currentUser;
-  const defaultLogo = document.getElementById("defaultLogo");
   const [error, setError] = useState("");
 
   const displayphotoURL = () => {
-    const photoURL = user.photoURL;
     if (currentUser.displayName === null) {
       document.getElementById("currentuserPhone").innerHTML =
         "You can add a Username";
+    }
+    firebase.storage().ref("users/" + currentUser.uid + "/profile.jpg").getDownloadURL().then(onResolve, onReject);
+      function onResolve(imgUrl) {
+        const defaultLogo = document.getElementById("defaultLogo");
+      defaultLogo.src = imgUrl;
+    }
+    
+    function onReject() { 
+      console.log("DON'T WORRY! This error is on our side not yours")
     }
   };
 
@@ -51,24 +57,42 @@ export default function MyAccount() {
 
     user
       .delete()
+      .then(function () {
+        firebase
+          .storage()
+          .ref("users/" + auth.currentUser.uid + "/profile.jpg")
+          .delete();
+      })
       .then(() => {
         history.push("/");
       })
       .catch((error) => {
-        console.log("error occured");
+        console.log(error);
       });
   };
 
   const updateinfo = () => {
     $("#updateinfo").css("display", "block");
     $(
-      "#updateprofileBtn, #currentuserPhone, #currentUsersEmail, #toHideUserId, #toHideUsersRealid, #hiddentextclicker, #otherhiddentextclicker, #hiddentext, #defaultLogo"
+      "#updateprofileBtn, #defaultLogoicon, #circle, #file.changepicturebutton, #currentuserPhone, #currentUsersEmail, #toHideUserId, #toHideUsersRealid, #hiddentextclicker, #otherhiddentextclicker, #hiddentext, #defaultLogo"
     ).css("display", "none");
   };
 
   const cancelUpdatesFunction = () => {
     window.location.reload();
   };
+  function resetpasswordEmail () {
+
+    firebase.auth().sendPasswordResetEmail(currentUser.email)
+    .then(()=> {
+      console.log("sent successfully")
+    }).catch((error)=> {
+      var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorCode)
+    console.log(errorMessage)
+    })
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -97,7 +121,6 @@ export default function MyAccount() {
           window.location.reload();
         });
     }
-    const defaultLogo = document.getElementById("defaultLogo");
   }
   let file = {};
 
@@ -117,22 +140,9 @@ export default function MyAccount() {
         })
       });
   }
-
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user)
-      firebase
-        .storage()
-        .ref("users/" + currentUser.uid + "/profile.jpg")
-        .getDownloadURL()
-        .then((imgUrl) => {
-          const defaultLogo = document.getElementById("defaultLogo");
-          defaultLogo.src = imgUrl;
-        })
-  });
-
   const { currentUser } = useAuth();
   return (
-    <div onLoad={displayphotoURL}>
+    <div onLoad={displayphotoURL()}>
       <LogotopleftWhite />
       <div className="completeprofilecontainer">
         <div id="formcontainer">
@@ -240,7 +250,9 @@ export default function MyAccount() {
             <div id="lineDividerMyAccount"></div>
             <section id="sectionbelow" className="sectionbelow">
               <p className="changepassword">Password</p>
-              <button id="updatepasswordBtn">RESET PASSWORD</button>
+              <button id="updatepasswordBtn"
+               onClick={resetpasswordEmail}
+              >RESET PASSWORD</button>
               <p className="passwordInstruction">
                 Upon resetting your Password you will recieve an email which
                 will have further instructions given.
@@ -262,13 +274,13 @@ export default function MyAccount() {
             <div id="makescroll"></div>
             <div id="areyouSureContainer" style={{ display: "none" }}>
               <p className="textsure">
-                DELETE MY ACCOUNT?
+                DELETE MY ACCOUNT
                 <br />
               </p>
               <p className="deleteaccountextraInfo">
-                All your account infomation, progress and other infomation will
-                be <span>permanently</span> deleted. (You cannot reverse this
-                process){" "}
+               You must have recently re-logged into your account. All your account infomation, progress and other infomation will
+                be <span>permanently</span> deleted.(You cannot reverse this
+                process).{" "}
               </p>
               <button className="confirmDelete" onClick={iHaveDeletedAccount}>
                 YES, DELETE ACCOUNT

@@ -1,12 +1,13 @@
 import React from "react";
-import MinigamesHeader from "../../master/minigamesHeader";
 import { Link } from "react-router-dom";
 import firebase from "firebase"
 import { auth } from "../../../firebase";
+import $ from "jquery"
 var firestore = firebase.firestore();
 
 class TicTacToe4 extends React.Component {
   game = () => {
+    $(".userMustClickHeader").css("display", "none")
     const X_CLASS = "x";
     const CIRCLE_CLASS = "circle";
     const WINNING_COMBINATIONS = [
@@ -140,8 +141,7 @@ class TicTacToe4 extends React.Component {
   };
   render() {
     return (
-      <div onLoad={this.game}>
-        <MinigamesHeader />
+      <div onDoubleClick={this.game}>
         <div className="ttt_boarda" id="ttt_boarda">
           <div className="cella" data-cell />
           <div className="cella" data-cell />
@@ -191,6 +191,8 @@ class TicTacToe4 extends React.Component {
         <Link to="/tic-tac-toe">
           <div className="visit4">3x3 GRID</div>
         </Link>
+        <h1 className="userMustClickHeader">DOUBLE CLICK ON BOARD TO START GAME</h1>
+
       </div>
     );
   }
