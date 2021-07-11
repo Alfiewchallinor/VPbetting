@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   update as updateSnake,
   draw as drawSnake,
@@ -9,9 +9,8 @@ import {
 import { outsideGrid } from "./snake/grid";
 import { update as updateFood, draw as drawFood } from "./snake/food";
 import $ from "jquery";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import firebase from "firebase";
-
 
 
 export default class Snake extends React.Component {

@@ -22,7 +22,7 @@ const DefaultSideMenu = () => {
               </li>
               <li className="nav-item">
                 <Link
-                  to="/"
+                  to="/fortnite"
                   className="nav-link"
                 >
                   FORTNITE
@@ -94,7 +94,7 @@ const DefaultSideMenu = () => {
               </li>
               <li className="nav-item">
                 <Link
-                  to="/tic-tac-toe"
+                  to="/tictactoe"
                   className="nav-link"
                 >
                   TIC-TAC-TOE
@@ -102,7 +102,7 @@ const DefaultSideMenu = () => {
               </li>
               <li className="nav-item">
                 <Link
-                  to="/circleShooter"
+                  to="/circleshooter"
                   className="nav-link"
                 >
                   CIRCLE SHOOTER

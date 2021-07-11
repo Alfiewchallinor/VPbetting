@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import Header from "../master/Header";
-import Footer from "../master/Footer";
 import Changingheader from "../master/changingheader/changingheader";
 import Navigation from "../master/navigation/navigation";
 
@@ -507,7 +506,6 @@ export function Home() {
       </div>
       {/*-BOTTOM 'FILLER' DIV TO CLEARLY DISPLAY FOOTER-*/}
       <div id="filler" />
-      <Footer />
     </div>
   );
 }

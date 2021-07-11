@@ -1,13 +1,10 @@
 import React from 'react'
-import Header from '../../master/Header'
-import Footer from '../../master/Footer'
 import ChangingHeaderInstant from '../../master/changingheader/changingheaderinstant'
 
 const Privacypolicy = () => {
     return (
         <div className="bodydiv">
             <ChangingHeaderInstant />
-            <Header />
             <div className="TOS_text_container"> <p>
     <span className="bold_text_hdr">PRIVACY POLICY</span>
     <br />
@@ -307,7 +304,6 @@ const Privacypolicy = () => {
     <br /><br /><br /><br />
   </p>
 </div>
-            <Footer />
         </div>
     )
 }

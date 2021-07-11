@@ -241,7 +241,6 @@ export default function UsernameSelect() {
   ];
   var pickUsername =
     pickUsername[Math.floor(Math.random() * pickUsername.length)];
-
   return (
     <div>
       <div className="chooseUsernameContainer">

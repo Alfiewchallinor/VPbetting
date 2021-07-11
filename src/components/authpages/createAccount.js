@@ -75,7 +75,7 @@ export default function CreateAccount() {
           docRef.set({
             pointsNumber: 25
           }).then(function () {
-            history.push("/usernameSelect")
+            window.location.href = "/usernameselect";
           }).catch(function(error){
             console.log("error! end of the world incomming:", error)
           })
@@ -128,14 +128,14 @@ export default function CreateAccount() {
               By creating a VPbetting account, I understand
               <br /> and agree to the{" "}
               <em>
-                <Link to="/termsOfService" style={{ color: "#3B82F6" }}>
+                <Link to="/termsofservice" style={{ color: "#3B82F6" }}>
                   {" "}
                   Terms of Use
                 </Link>{" "}
               </em>
               and{" "}
               <em>
-                <Link to="/Privacypolicy" style={{ color: "#3B82F6" }}>
+                <Link to="/privacypolicy" style={{ color: "#3B82F6" }}>
                   {" "}
                   Privacy Policy<span style={{ color: "black" }}>.</span>{" "}
                 </Link>

@@ -168,7 +168,7 @@ function tictactoe () {
             </div>
           </div>
         </div>
-        <Link to="/tic-tac-toe-4x4">
+        <Link to="/tictactoe4x4">
           <div className="visit4">4X4 GRID</div>
         </Link>
         <h1 className="userMustClickHeader">DOUBLE CLICK ON BOARD TO START GAME</h1>

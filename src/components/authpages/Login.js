@@ -67,7 +67,7 @@ export default function Login() {
   
             <div className="alreadyaccount dontHaveAccountText">
               Need an account?
-              <Link to="/createAccount" style={{ color: "#2563EB" }}>
+              <Link to="/createaccount" style={{ color: "#2563EB" }}>
                 {" "}
                 Create Account{" "}
               </Link>

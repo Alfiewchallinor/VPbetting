@@ -71,7 +71,7 @@ function SportsHeader() {
                   </button>
                 </div>
               </div>
-              <Link to="/myAccount">
+              <Link to="/myaccount">
                 {" "}
                 <div id="youra">
                   <p className=" reposya">YOUR ACCOUNT</p>
@@ -88,7 +88,7 @@ function SportsHeader() {
                 </div>
                 <p id="minigtitle">MINIGAMES</p>
                 <li>
-                  <Link to="/circleShooter">
+                  <Link to="/circleshooter">
                     <div className="contfors">
                       <p className="miniilinks">CIRCLE SHOOTER</p>
                     </div>{" "}
@@ -98,12 +98,12 @@ function SportsHeader() {
                       <p className="miniilinks">SNAKE</p>
                     </div>{" "}
                   </Link>
-                  <Link to="/tic-tac-toe">
+                  <Link to="/tictactoe">
                     <div className="contforssecond">
                       <p className="miniilinks">TIC-TAC-TOE</p>
                     </div>
                   </Link>
-                  <Link to="/tic-tac-toe-4x4">
+                  <Link to="/tictactoe4x4">
                     <div className="contforssecond">
                       <p className="miniilinks">TIC-TAC-TOE 4X4</p>
                     </div>
@@ -121,7 +121,7 @@ function SportsHeader() {
                 </div>
                 <p id="minigtitle">ESPORTS</p>
                 <li>
-                  <Link to="../minigames/circle-shooter-medium.html">
+                  <Link to="/circleshooter">
                     <div className="contfors">
                       <p className="miniilinks">FORTNITE EU</p>
                     </div>{" "}
@@ -152,7 +152,7 @@ function SportsHeader() {
                 </div>
                 <p id="minigtitle">SPORTS</p>
                 <li>
-                  <Link to="../minigames/circle-shooter-medium.html">
+                  <Link to="/circleshooter">
                     <div className="contfors">
                       <p className="miniilinks">CRICKET</p>
                     </div>{" "}

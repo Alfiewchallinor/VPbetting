@@ -6,7 +6,7 @@ const  Changingheader = () => {
     const headerfunc = () => {
         const header = document.querySelector(".header");
         window.onscroll = function () {
-          if (window.scrollY >= 494) {
+          if (window.scrollY >= -1) {
             header.classList.add("active");
           } else {
             header.classList.remove("active");
@@ -14,7 +14,7 @@ const  Changingheader = () => {
         };
       };
     return (
-        <header id="Header" className="header" onLoad={headerfunc}>
+        <header id="Header" className="header active" onLoad={headerfunc}>
           <Logotopleft />
 
         </header>

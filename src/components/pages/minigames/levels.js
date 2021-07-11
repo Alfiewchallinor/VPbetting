@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 function Levels() {
   return (
     <div>
-      <Link to="/circleShooterEasy">
+      <Link to="/circleshootereasy">
         <div className="visit4 ">EASY</div>
       </Link>
-      <Link to="/circleShooter">
+      <Link to="/circleshooter">
         <div className="visit4 posl">MEDIUM</div>
       </Link>
-      <Link to="/CircleShooterHard">
+      <Link to="/circleshooterhard">
         <div className="visit4 posm">HARD</div>
       </Link>
     </div>

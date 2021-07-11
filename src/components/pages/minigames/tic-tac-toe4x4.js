@@ -188,7 +188,7 @@ class TicTacToe4 extends React.Component {
             </div>
           </div>
         </div>
-        <Link to="/tic-tac-toe">
+        <Link to="/tictactoe">
           <div className="visit4">3x3 GRID</div>
         </Link>
         <h1 className="userMustClickHeader">DOUBLE CLICK ON BOARD TO START GAME</h1>

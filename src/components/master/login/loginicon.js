@@ -28,7 +28,7 @@ const Loginicon = () => {
 
   return (
     <div>
-      <Link to="/MyAccount" id="MYACCOUNT">
+      <Link to="/myaccount" id="MYACCOUNT">
         My Account
       </Link>
       <Link to="/login" id="LOGIN">

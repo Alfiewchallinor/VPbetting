@@ -131,7 +131,7 @@ class Header extends React.Component {
           </div>
           <div id="sizingf">
             {" "}
-            <Link to="tic-tac-toe">
+            <Link to="tictactoe">
               <img
                 src="images/categories/c_tic-tac-toe_t.jpg"
                 id="the-lb"
@@ -141,7 +141,7 @@ class Header extends React.Component {
           </div>
           <div id="sizingf">
             {" "}
-            <Link to="/circleShooter">
+            <Link to="/circleshooter">
               {" "}
               <img
                 src="images/categories/c_circle_t.jpg"
