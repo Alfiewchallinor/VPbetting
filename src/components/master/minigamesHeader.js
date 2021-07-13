@@ -222,17 +222,17 @@ function MinigamesHeader() {
                 </div>
                 <p id="minigtitle">ESPORTS</p>
                 <li>
-                  <Link to="/circleshooter">
+                  <Link to="/fortnite">
                     <div className="contfors">
                       <p className="miniilinks">FORTNITE EU</p>
                     </div>{" "}
                   </Link>
-                  <Link to="/">
+                  <Link to="/fortnite">
                     <div className="contforssecond">
                       <p className="miniilinks">FORTNITE NA</p>
                     </div>{" "}
                   </Link>
-                  <Link to="/">
+                  <Link to="/valorant">
                     <div className="contforssecond">
                       <p className="miniilinks">VALORANT</p>
                     </div>{" "}

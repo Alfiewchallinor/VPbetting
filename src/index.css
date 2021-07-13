@@ -2225,11 +2225,12 @@
   }
   .toprcloser {
     position: fixed;
-    left: 166px;
-    width: 83px;
+    left: 168px;
+    width: 82px;
     height: 74px;
     top: 0px;
     z-index: 9998;
+    background-color: #3b82f6;
   }
   .toprcloser:hover, .homeredbtn:hover {
     cursor: pointer;
@@ -4079,12 +4080,23 @@ color: hsla(41, 87%, 65%, 0.959);
     border-right: solid 1px rgb(100, 148, 202);
     border-left: solid 1px rgb(100, 148, 202);
 }
+
 .rightsectionFortniteBr {
   width: 33.333333333333333333333%;
   
   position: relative;
   margin-top: 15px;
   border-left: solid 1px rgb(100, 148, 202);
+}
+.leftsectionValorant {
+  border-right: solid 1px #fa4454
+}
+.middlesectionValorant {
+  border-right: solid 1px #fa4454;
+  border-left: solid 1px #fa4453;
+}
+.rightsectionValorant {
+  border-left: solid 1px #fa4453
 }
 
 .sectionFortniteBrTitle {
@@ -4101,7 +4113,7 @@ color: hsla(41, 87%, 65%, 0.959);
   font-weight: 400; 
   padding: 5px;
 }
-.stepdividerFortniteBr {
+.stepdividerFortniteBr, .stepdividerValorant {
   width: 98%;
   justify-self: center;
   display: flex;
@@ -4111,6 +4123,10 @@ color: hsla(41, 87%, 65%, 0.959);
   left: 50%;
   margin-top: 12px;
   transform: translate(-50%, 0)
+}
+.stepdividerValorant {
+  background: #fa4453;
+  margin-bottom: 30px
 }
 .fortniteimportantMessage {
   margin-left: 1%;
@@ -4136,6 +4152,9 @@ color: hsla(41, 87%, 65%, 0.959);
   border-radius: 5px;
   transition: all 0.15s;
   margin-bottom: 50px;
+}
+.valorantReDContFxer {
+  border: solid 1px #fa4453;
 }
 
 
@@ -4180,16 +4199,17 @@ color: hsla(41, 87%, 65%, 0.959);
 .inputForFortnieBRBettingSection {
   width: calc(50% - 15px);
   background: transparent;
-  border: solid 1px rgb(0, 0, 0);
+  border: solid 2px rgb(0, 0, 0);
   border-radius: 8px;
   position: relative;
   top: 0;
   margin-left: 10px;
   margin-bottom: 6px;
-  font-size: 19px
+  font-size: 19px;
+  transition: all 0.2s
 }
 .inputForFortnieBRBettingSection:focus {
-  border: solid 1px #2563EB;
+  border: solid 2px #2563EB;
   outline: none;
 }
 .tooutrightwinTOURNAMENTNAME {
@@ -4236,6 +4256,98 @@ color: hsla(41, 87%, 65%, 0.959);
 .fourOfourdiv {
   width: 100vw;
   height: 100vh;
-  
   z-index: 999999999 !important;
 }
+
+.valorantupcommingtounramentssection {
+  width: calc(100vw - 255px);
+  position: relative;
+  justify-content: center;
+  margin-left: 255px;
+  margin-top: 44px;
+}
+
+.eventMatchValorant {
+  width: 49.5%;
+  background: #fa4454;
+  position: relative;
+  margin-top: 1%;
+  border-radius: 0.08em;
+  cursor: pointer;
+  transition: all 0.15s
+}
+.eventMatchValorant:hover {
+  filter: brightness(120%);
+  transform: scale(1.025)
+}
+.upcommingeventsWrapper {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+.bottomsectionContainer {
+  width: calc(100vw - 255px);
+  position: relative;
+  justify-content: center;
+  margin-left: 255px;
+  margin-top: 50px;
+}
+.valorantBettingSection {
+  width: 100%;
+  
+}
+.imagebackgroundValorantContainer {
+  height: 500px;
+  background-size: 82.2vw;
+  background-repeat: repeat-x;
+  background-position:top left;
+  width: 100%;
+  z-index: -1;
+}
+.valorantMatchDescShort {
+  color: white;
+  font-family: 'roboto', sans-serif;
+  text-align: center;
+  font-size: 20px;
+  padding: 1px;
+  position: relative;
+  font-weight: 400;
+  line-height: 26px
+}
+.valorantMatchTeams {
+  color: white;
+  font-family: 'roboto', sans-serif;
+  text-align: center;
+  font-size: 20px;
+  padding: 1px;
+  position: relative;
+  font-weight: 450;
+  line-height: 26px
+}
+.valorantBettingSectionAfter {
+  background: white;
+}
+.valorantBettingSectionTournamentTitle {
+  text-align: center;
+  font-family: 'roboto', sans-serif;
+  font-size: 27px;
+}
+
+.valorantStepsRedColour {
+  color: #fa4454;
+}
+.valorantbettingSectionInput {
+  border: 2px solid black; 
+
+}
+
+.valorantbettingSectionInput:focus {
+  border: solid 2px #fa4454;
+  outline: none;
+}
+
+.rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly {
+  color: transparent !important;
+  position: absolute !important;
+  z-index: -9999 !important;
+}
+

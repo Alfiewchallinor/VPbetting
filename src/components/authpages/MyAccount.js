@@ -85,12 +85,11 @@ export default function MyAccount() {
 
     firebase.auth().sendPasswordResetEmail(currentUser.email)
     .then(()=> {
-      console.log("sent successfully")
+      
     }).catch((error)=> {
       var errorCode = error.code;
     var errorMessage = error.message;
-    console.log(errorCode)
-    console.log(errorMessage)
+    
     })
   }
 

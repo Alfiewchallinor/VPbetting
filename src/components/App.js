@@ -15,7 +15,8 @@ import NotFoundPage from "../NotFoundPage";
 
 //Master
 import Footer from "./master/Footer"
-import MinigamesHeader from "./master/minigamesHeader"
+import MinigamesHeader from "./master/minigamesHeader";
+import SportsHeader from "./master//sportsheader"
 
 //PAGES START HERE AND BELOW
 //Default pages
@@ -40,6 +41,7 @@ import TicTacToe4 from "./pages/minigames/tic-tac-toe4x4";
 
 //Esports
 import Fortnite from "./pages/sports/fortnite";
+import Valorant from "./pages/sports/Valorant"
 
 const App = ({location}) => {
   const minigamesheaderexclusion = [
@@ -50,8 +52,39 @@ const App = ({location}) => {
     "/login",
     "/myaccount",
     "/usernameselect",
-    "/fortnite"
+    "/fortnite",
+    "/valorant"
 ]
+ const sportsheaderexclusion = [
+  '/',
+  "/privacypolicy",
+  "/createaccount",
+  "/termsofservice",
+  "/login",
+  "/myaccount",
+  "/usernameselect",
+  "/tictactoe",
+  "/tictactoe4x4",
+  "/circleshooter",
+  "/circleshootereasy",
+  "/circleshooterhard",
+  "/snake"
+ ]
+ const footerexclusion = [
+  "/createaccount",
+  "/login",
+  "/myaccount",
+  "/usernameselect",
+  "/tictactoe",
+  "/tictactoe4x4",
+  "/circleshooter",
+  "/circleshootereasy",
+  "/circleshooterhard",
+  "/snake",
+  "/fortnite",
+  "/valorant"
+ ]
+
 
   Adduserbets()
   return (
@@ -59,6 +92,7 @@ const App = ({location}) => {
     <div className="App">
       {/*MinigamesHeader addition*/}
     {minigamesheaderexclusion.indexOf(location.pathname) < 0 && <MinigamesHeader/>}
+    {sportsheaderexclusion.indexOf(location.pathname) < 0 && <SportsHeader />}
       <Switch>
       {/*Index */}
       <Route exact path="/" component={Home} />
@@ -81,14 +115,13 @@ const App = ({location}) => {
 
       {/*Sports */}
       <Route exact path="/fortnite" component={Fortnite} />
+      <Route exact path="/valorant" component={Valorant} />
       {/*404 ERROR PAGE */}
       <Route component={NotFoundPage} />
       
       {/*REDIRECT */}
       </Switch>
-      {location.pathname === '/' && <Footer />}
-      {location.pathname === '/termsofservice' && <Footer />}
-      {location.pathname === '/privacypolicy' && <Footer />}
+      {footerexclusion.indexOf(location.pathname) < 0 && <Footer />}
     </div>
     </AuthProvider>
   );

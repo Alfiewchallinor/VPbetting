@@ -1,6 +1,5 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import SportsHeader from "../../master/sportsheader";
 import firebase from "firebase";
 import { auth } from "../../../firebase";
 import $ from "jquery";
@@ -17,16 +16,6 @@ export default function Fortnite() {
       $(".selectTournament").css("color", "red");
     }
   });
-  fetch("https://fortniteapi.io/v1/events/window?windowId=S17_FNCS_SoloFinals_EU_Event1", {
-    method: "GET",
-    headers: {
-      Authorization: process.env.REACT_APP_UPCOMMING_TOURNAMENT_KEY,
-    },
-  }).then((res) => res.json())
-  .then(function(response){
-    console.log(JSON.stringify(response))
-  })
-  
 
   //fetch tournament data (upcomming 4)
   fetch("https://fortniteapi.io/v1/events/list?lang=en&region=EU", {
@@ -1000,7 +989,6 @@ export default function Fortnite() {
   }
   return (
     <div>
-      <SportsHeader />
       <div className="stats" id="stats"></div>
       <section className="upcommingtounramentssection">
         <div className="upcommingtounramentdiv">

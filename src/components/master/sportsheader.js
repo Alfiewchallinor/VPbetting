@@ -21,8 +21,7 @@ function SportsHeader() {
           if (doc.exists) {
             document.getElementById("minigamesNumberGet").innerHTML = JSON.stringify(
               doc.data().pointsNumber
-            );
-            
+            );            
           } else {
           }
         })
@@ -32,8 +31,6 @@ function SportsHeader() {
     }
   });
   
-
- 
     return (
       <div className="sportsPagesNoMediaQuery">
         <style>{"body { background-color: #18242c; }"}</style>
@@ -121,17 +118,17 @@ function SportsHeader() {
                 </div>
                 <p id="minigtitle">ESPORTS</p>
                 <li>
-                  <Link to="/circleshooter">
+                  <Link to="/fortnite">
                     <div className="contfors">
                       <p className="miniilinks">FORTNITE EU</p>
                     </div>{" "}
                   </Link>
-                  <Link to="/">
+                  <Link to="/fortnite">
                     <div className="contforssecond">
                       <p className="miniilinks">FORTNITE NA</p>
                     </div>{" "}
                   </Link>
-                  <Link to="/">
+                  <Link to="/valorant">
                     <div className="contforssecond">
                       <p className="miniilinks">VALORANT</p>
                     </div>{" "}
