@@ -10,17 +10,15 @@ export default function Valorant() {
   const [teamTwo, setTeamTwo] = useState("");
   
 
-
-  fetch("https://api.pandascore.co/valorant/tournaments/upcoming?token=PmaEjpFPkBScWgYPkHnHzNF5hg98itu6h1OcooMZv7gxlWjEknM", {
+  fetch("https://api.pandascore.co/valorant/tournaments/past?page[size1]=1&token=" + process.env.REACT_APP_PANDA_SCORE_KEY, {
     method: "GET",
+    
     
   })
     .then((res) => res.json())
     .then(function (response) {
-        //  console.log(JSON.stringify(response))
       const matchesEndpoint = response[0].matches
       const matchesLength = response[0].matches.length
-      console.log(matchesLength)
     if(matchesLength < 10) {
         $("#matchTen").css("display","none")
     }
@@ -72,7 +70,8 @@ export default function Valorant() {
               const teamTwo = lineBottomer.split("vs")[1]
               $(".valorantBettingSectionTournamentTitle").html(teamOne + " VS " + teamTwo)
               const matchId = matchesEndpoint[0].id
-              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)               
+              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)
+              sectionLoadValorantBetting()               
               })
             } else{
               return;
@@ -104,7 +103,8 @@ export default function Valorant() {
               const teamTwo = lineBottomer.split("vs")[1]
               $(".valorantBettingSectionTournamentTitle").html(teamOne + " VS " + teamTwo)
               const matchId = matchesEndpoint[1].id
-              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)            
+              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)
+              sectionLoadValorantBetting()            
             })
           } else{
             return;
@@ -137,6 +137,7 @@ export default function Valorant() {
               $(".valorantBettingSectionTournamentTitle").html(teamOne + " VS " + teamTwo);
               const matchId = matchesEndpoint[2].id
               $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)
+              sectionLoadValorantBetting()
             })
             
           } else{
@@ -169,7 +170,8 @@ export default function Valorant() {
               const teamTwo = lineBottomer.split("vs")[1]
               $(".valorantBettingSectionTournamentTitle").html(teamOne + " VS " + teamTwo)
               const matchId = matchesEndpoint[3].id
-              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)              
+              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)
+              sectionLoadValorantBetting()              
             })
           } else{
             return;
@@ -201,7 +203,8 @@ export default function Valorant() {
               const teamTwo = lineBottomer.split("vs")[1]
               $(".valorantBettingSectionTournamentTitle").html(teamOne + " VS " + teamTwo)
               const matchId = matchesEndpoint[4].id
-              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)           
+              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)
+              sectionLoadValorantBetting()           
             })
           } else{
             return;
@@ -233,7 +236,8 @@ export default function Valorant() {
               const teamTwo = lineBottomer.split("vs")[1]
               $(".valorantBettingSectionTournamentTitle").html(teamOne + " VS " + teamTwo)
               const matchId = matchesEndpoint[5].id
-              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)             
+              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)
+              sectionLoadValorantBetting()             
           })
         } else{
           return;
@@ -264,7 +268,8 @@ export default function Valorant() {
               const teamTwo = lineBottomer.split("vs")[1]
               $(".valorantBettingSectionTournamentTitle").html(teamOne + " VS " + teamTwo)
               const matchId = matchesEndpoint[6].id
-              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)             
+              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)
+              sectionLoadValorantBetting()             
             })
           } else{
             return;
@@ -296,7 +301,8 @@ export default function Valorant() {
               const teamTwo = lineBottomer.split("vs")[1]
               $(".valorantBettingSectionTournamentTitle").html(teamOne + " VS " + teamTwo)
               const matchId = matchesEndpoint[7].id
-              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)              
+              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)
+              sectionLoadValorantBetting()              
             })
           } else{
             return;
@@ -328,7 +334,8 @@ export default function Valorant() {
               const teamTwo = lineBottomer.split("vs")[1]
               $(".valorantBettingSectionTournamentTitle").html(teamOne + " VS " + teamTwo)
               const matchId = matchesEndpoint[8].id
-              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)              
+              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId);
+              sectionLoadValorantBetting()              
             })
           } else{
             return;
@@ -360,7 +367,8 @@ export default function Valorant() {
               const teamTwo = lineBottomer.split("vs")[1]
               $(".valorantBettingSectionTournamentTitle").html(teamOne + "VS" + teamTwo)
               const matchId = matchesEndpoint[9].id
-              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)        
+              $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)
+              sectionLoadValorantBetting();        
             })
           } else{
             return;
@@ -379,8 +387,6 @@ export default function Valorant() {
     }
   });
 
- 
-
   const outrightwinNameRef = useRef();
   const outrightwinCoinRef = useRef()
   function handleOutrightSubmit(e) {
@@ -393,8 +399,6 @@ export default function Valorant() {
     const firstTeam = matchTitle.split("  VS ")[0]
     const secondTeam = matchTitle.split(" VS  ")[1]
     const errorMessage = document.querySelector("#toourightwinErrorCont")
-
-    console.log(matchId)
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const pointOfficialNumber = firestore.doc(
@@ -417,15 +421,25 @@ export default function Valorant() {
             return errorMessage.innerHTML = "YOU MUST BET FOR EITHER '" +firstTeam +"' or '" + secondTeam + "' (capital letters included)"
           } 
           else {
+            fetch("https://api.pandascore.co/valorant/teams?search[name]=" + teamName, {
+    method: "GET",
+    headers: {
+      Authorization: process.env.REACT_APP_PANDA_SCORE_KEY
+    }
+    
+  })
+    .then((res) => res.json())
+    .then(function (response) {
+      const toWinId = response[0].id
             const valorantFirestoreDoc = firestore.doc("users/" +
             auth.currentUser.uid +
             "pointsNumber/ValorantBets/" +
             matchId +
             "OutrightWin");
-            
             valorantFirestoreDoc.set({
               TeamNames: matchTitle,
               ToWin: teamName,
+              ToWinId: toWinId,
               MatchId: matchId,
               coinAmount: coinAmount,
               betplaced: true,
@@ -437,11 +451,10 @@ export default function Valorant() {
               }).then(function(){
                 errorMessage.innerHTML = ""
                 alreadyOutrightWinFunction();
-                console.log("should of gone through")
               })
             })
             
-          }
+           })}
         });
       } else{}
     });
@@ -450,11 +463,12 @@ function sectionLoadValorantBetting() {
   const matchId = document.querySelector(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").innerHTML;
   const outrightCupBetCheckerValorant = firestore.doc("users/" +
   auth.currentUser.uid +
-  "pointsNumber/Valorantbets/" +
+  "pointsNumber/ValorantBets/" +
   matchId +
   "OutrightWin")
-
+ 
   outrightCupBetCheckerValorant.get().then((doc)=> {
+    
     if(doc.exists){
       if(doc.data().betplaced == true) {
         alreadyOutrightWinFunction();
@@ -469,8 +483,6 @@ function sectionLoadValorantBetting() {
     }
   })
 }
-
-
 function alreadyOutrightWinFunction() {
   const matchId = document.querySelector(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").innerHTML;
 
@@ -492,12 +504,17 @@ function alreadyOutrightWinFunction() {
       const errorMessage = document.querySelector("#toourightwinErrorCont")
 
       const TeamNames = JSON.stringify(doc.data().TeamNames);
-      const toWin = JSON.stringify(doc.data().toWin);
+      const ToWin = JSON.stringify(doc.data().ToWin);
       const coinAmount = JSON.stringify(doc.data().coinAmount);
       errorMessage.innerHTML = ""
       $("#fortnitemessageSuccessContainereal").html(
         "BET SUCCESSFUL: " +
-        toWin
+        ToWin +
+        " to win in " +
+        TeamNames +
+        " with " +
+        coinAmount +
+        " coins "
       )
     }
   })

@@ -81,11 +81,6 @@ class TicTacToe4 extends React.Component {
           
           docref.update({
             pointsNumber: firebase.firestore.FieldValue.increment(2)
-          }).then(function () {
-            
-            console.log("worked")
-          }).catch(function(error){
-            console.log("error! end of the world incomming:", error)
           })
         } else {
           

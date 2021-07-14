@@ -86,14 +86,16 @@ const App = ({location}) => {
  ]
 
 
-  Adduserbets()
+  
   return (
     <AuthProvider>
+      <Adduserbets />
     <div className="App">
       {/*MinigamesHeader addition*/}
     {minigamesheaderexclusion.indexOf(location.pathname) < 0 && <MinigamesHeader/>}
     {sportsheaderexclusion.indexOf(location.pathname) < 0 && <SportsHeader />}
       <Switch>
+        
       {/*Index */}
       <Route exact path="/" component={Home} />
       {/*Legal */}
@@ -118,7 +120,7 @@ const App = ({location}) => {
       <Route exact path="/valorant" component={Valorant} />
       {/*404 ERROR PAGE */}
       <Route component={NotFoundPage} />
-      
+     
       {/*REDIRECT */}
       </Switch>
       {footerexclusion.indexOf(location.pathname) < 0 && <Footer />}

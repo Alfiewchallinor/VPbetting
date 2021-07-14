@@ -76,8 +76,6 @@ export default function CreateAccount() {
             pointsNumber: 25
           }).then(function () {
             window.location.href = "/usernameselect";
-          }).catch(function(error){
-            console.log("error! end of the world incomming: PLEASE STEP AWAY FROM PC BEFORE IT EXPLODES")
           })
         } 
       })

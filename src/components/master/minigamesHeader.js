@@ -12,7 +12,6 @@ function MinigamesHeader() {
 
   const [count, setCount] = useState(1000);
   // bigger screen that 1040px closer
-  console.log(count)
   const Slider = () => {
     $(".toprcloser, .middleer").animate({ left: "-182px" }, 450);
     $(

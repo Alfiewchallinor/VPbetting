@@ -17,7 +17,7 @@ export default function Fortnite() {
     }
   });
 
-  //fetch tournament data (upcomming 4)
+  function loadFetch() {
   fetch("https://fortniteapi.io/v1/events/list?lang=en&region=EU", {
     method: "GET",
     headers: {
@@ -235,7 +235,6 @@ export default function Fortnite() {
             $(".clickedTournamentSectionTitle").html(
               box1linetop + " " + box1linetwo
             );
-            console.log("hello123445");
             sectionLoadFortniteBetting();
             sectionLoadFortniteBettingTopHundred();
             sectionLoadFortniteBettingCustomPlacement();
@@ -247,7 +246,6 @@ export default function Fortnite() {
       upcommingtournamentsecond.addEventListener("click", (e) => {
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
-            console.log("clicked left-Right");
             $(".selectTournament, .imagebackgroundFortniteContainer").css(
               "display",
               "none"
@@ -268,7 +266,6 @@ export default function Fortnite() {
       upcommingtournamentthird.addEventListener("click", (e) => {
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
-            console.log("clicked left-Right");
             $(".selectTournament, .imagebackgroundFortniteContainer").css(
               "display",
               "none"
@@ -288,7 +285,6 @@ export default function Fortnite() {
       upcommingtournamentfourth.addEventListener("click", (e) => {
         firebase.auth().onAuthStateChanged((user) => {
           if (user) {
-            console.log("clicked left-Right");
             $(".selectTournament, .imagebackgroundFortniteContainer").css(
               "display",
               "none"
@@ -306,6 +302,7 @@ export default function Fortnite() {
         });
       });
     });
+  }
   const usernameRef = useRef();
   //search player stats function
   function clickedsearch(e) {
@@ -474,7 +471,6 @@ export default function Fortnite() {
   }
 
   //fortnitebettingsectionOURIGHT WIN
-  const [error, setError] = useState();
   const outrightwinCoinRef = useRef();
   const outrightwinNameRef = useRef();
 
@@ -492,18 +488,19 @@ export default function Fortnite() {
         );
         pointOfficialNumber.get().then((doc) => {
           if (doc.data().pointsNumber < coinAmount) {
-            return setError(
-              "ERROR: YOU DO NOT HAVE ENOUGH COINS, TRY PLAYING MINIGAMES"
-            );
+            return $("#toourightwinErrorCont").html("ERROR: YOU DO NOT HAVE ENOUGH COINS, TRY PLAYING MINIGAMES")
+            
           }
           if (coinAmount.length < 1 || epicName.length < 1) {
-            return setError("ERROR: FILL IN ALL FIELDS");
+            return $("#toourightwinErrorCont").html("ERROR: FILL IN ALL FIELDS")
+            
           }
           if (coinAmount.includes("-") === true) {
-            return setError("ERROR: COIN AMOUNT MUST NOT HAVE - OR +");
+            return $("#toourightwinErrorCont").html("ERROR: COIN AMOUNT MUST NOT HAVE - OR +")
           }
           if (coinAmount === "0") {
-            return setError("YOU CAN'T BET 0 COINS?!?!?");
+            return $("#toourightwinErrorCont").html("YOU CAN'T BET 0 COINS?!?!?")
+            
           } else {
             //find the users UID
             fetch(process.env.REACT_APP_FORTNITE_UID_URL + epicName, {
@@ -516,7 +513,7 @@ export default function Fortnite() {
               .then(function (response) {
                 //more errors
                 if (response.account_id === undefined) {
-                  setError("ERROR: INVALID EPIC ACCOUNT NAME");
+                  return $("#toourightwinErrorCont").html("ERROR: INVALID EPIC ACCOUNT NAME")
                 } else {
                   const cupname = document.querySelector(
                     ".clickedTournamentSectionTitle"
@@ -554,11 +551,6 @@ export default function Fortnite() {
                     .then(function () {
                       alreadybetfunction();
                     })
-                    .catch((error) => {
-                      setError(
-                        "An error occurred on our end, please try again."
-                      );
-                    });
                 }
               });
           }
@@ -649,27 +641,22 @@ export default function Fortnite() {
     const nameTopOneHundred = topOneHundredNameRef.current.value;
 
     //error section
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
+    
         const pointOfficialNumber = firestore.doc(
           "users/" + auth.currentUser.uid + "pointsNumber"
         );
         pointOfficialNumber.get().then((doc) => {
           if (doc.data().pointsNumber < coinTopHundredAmount) {
-            return settoponehundrederror(
-              "ERROR: YOU DO NOT HAVE ENOUGH COINS, TRY PLAYING MINIGAMES"
-            );
+           return $("#toponehundrederrorHTML").html("ERROR: YOU DO NOT HAVE ENOUGH COINS, TRY PLAYING MINIGAMES")
           }
           if (coinTopHundredAmount.length < 1 || nameTopOneHundred.length < 1) {
-            return settoponehundrederror("ERROR: FILL IN ALL FIELDS");
+            return $("#toponehundrederrorHTML").html("ERROR: FILL IN ALL FIELDS")
           }
           if (coinTopHundredAmount.includes("-") === true) {
-            return settoponehundrederror(
-              "ERROR: COIN AMOUNT MUST NOT HAVE - OR +"
-            );
+            return $("#toponehundrederrorHTML").html("ERROR: COIN AMOUNT MUST NOT HAVE - OR +")
           }
           if (coinTopHundredAmount === "0") {
-            return settoponehundrederror("YOU CANT BET 0 COINS ?!?!?");
+            return $("#toponehundrederrorHTML").html("YOU CANT BET 0 COINS ?!?!?")
           } else {
             //find the users UID
             fetch(process.env.REACT_APP_FORTNITE_UID_URL + nameTopOneHundred, {
@@ -682,7 +669,7 @@ export default function Fortnite() {
               .then(function (response) {
                 //more errors
                 if (response.account_id === undefined) {
-                  settoponehundrederror("ERROR: INVALID EPIC ACCOUNT NAME");
+                  return $("#toponehundrederrorHTML").html("INVALID EPIC ACCOUNT")
                 } else {
                   const cupname = document.querySelector(
                     ".clickedTournamentSectionTitle"
@@ -719,20 +706,12 @@ export default function Fortnite() {
                     .then(function () {
                       alreadybetfunctionTopHundred();
                     })
-                    .catch((error) => {
-                      settoponehundrederror(
-                        "An error occurred on our end, please try again."
-                      );
-                    });
+                    
                 }
               });
           }
         });
-      } else {
-        //Nothing will happen
       }
-    });
-  }
   function sectionLoadFortniteBettingTopHundred() {
     const cupname = document.querySelector(
       ".clickedTournamentSectionTitle"
@@ -808,7 +787,7 @@ export default function Fortnite() {
   //CUSTOM BET PLACEMENT
   //CUSTOM BET PLACEMENT
   //CUSTOM BET PLACEMENT
-  const [customplaceError, setcustomplaceError] = useState();
+  
   const customPlaceNameRef = useRef();
   const customPlaceAmountRef = useRef();
   const customPlacePositionRef = useRef();
@@ -827,34 +806,33 @@ export default function Fortnite() {
         );
         pointOfficialNumber.get().then((doc) => {
           if (doc.data().pointsNumber < coinCustomAmount) {
-            return setcustomplaceError(
-              "ERROR: YOU DO NOT HAVE ENOUGH COINS, TRY PLAYING MINIGAMES"
-            );
+            
+            return $("#customplacementErrorHTML").html(
+              "ERROR: YOU DO NOT HAVE ENOUGH COINS, TRY PLAYING MINIGAMES")
           }
           if (
             coinCustomAmount.length < 1 ||
             nameCustom.length < 1 ||
             placementCustom.length < 1
           ) {
-            return setcustomplaceError("ERROR: FILL IN ALL FIELDS.");
+            return $("#customplacementErrorHTML").html(
+              "ERROR: FILL IN ALL FIELDS")
           }
           if (coinCustomAmount.includes("-") === true) {
-            return setcustomplaceError(
-              "ERROR: COIN AMOUNT MUST NOT HAVE - OR +"
-            );
+            return $("#customplacementErrorHTML").html(
+              "ERROR: COIN AMOUNT MUST NOT HAVE - OR +")
           }
           if (coinCustomAmount === "0") {
-            return setcustomplaceError("YOU CANT BET 0 COINS ?!?!?");
+            return $("#customplacementErrorHTML").html(
+              "YOU CAN'T BET 0 COINS ?!?!?")
           }
           if (placementCustom === "1") {
-            return setcustomplaceError(
-              "USE 'TO OUTRIGHT WIN' TO BET FOR FIRST PLACE."
-            );
+            return $("#customplacementErrorHTML").html(
+              "ERROR: USE OUTRIGHT WIN TO BET FOR FIRST PLACE")
           }
           if (placementCustom > 100) {
-            return setcustomplaceError(
-              "YOU CAN ONLY BET FOR A TOP 100 PLACEMENT"
-            );
+            return $("#customplacementErrorHTML").html(
+              "ERROR: YOU CAN ONLY BET FOR A TOP 100 PLACEMENT")
           } else {
             //find the users UID
             fetch(process.env.REACT_APP_FORTNITE_UID_URL + nameCustom, {
@@ -867,7 +845,8 @@ export default function Fortnite() {
               .then(function (response) {
                 //more errors
                 if (response.account_id === undefined) {
-                  setcustomplaceError("ERROR: INVALID EPIC ACCOUNT NAME");
+                  return $("#customplacementErrorHTML").html(
+                    "ERROR: INVALID EPIC ACCOUNT NAME")
                 } else {
                   const cupname = document.querySelector(
                     ".clickedTournamentSectionTitle"
@@ -905,11 +884,7 @@ export default function Fortnite() {
                     .then(function () {
                       alreadybetfunctionCustomPlacement();
                     })
-                    .catch((error) => {
-                      setcustomplaceError(
-                        "An error occurred on our end, please try again."
-                      );
-                    });
+                    
                 }
               });
           }
@@ -988,7 +963,7 @@ export default function Fortnite() {
     });
   }
   return (
-    <div>
+    <div onLoad={loadFetch()}>
       <div className="stats" id="stats"></div>
       <section className="upcommingtounramentssection">
         <div className="upcommingtounramentdiv">
@@ -1183,14 +1158,11 @@ export default function Fortnite() {
                 Confirm to outright win (irreversible)
               </button>
             </form>
-            {error && (
               <div
                 className="fortniteBrContainerErrorContainer"
                 id="toourightwinErrorCont"
               >
-                {error}
               </div>
-            )}
             <div
               className="fortniteBrContainerErrorContainer fortniteSuccessMessage"
               id="fortnitemessageSuccessContainereal"
@@ -1248,14 +1220,14 @@ export default function Fortnite() {
                 Confirm to place top 100 (irreversible)
               </button>
             </form>
-            {toponehundrederror && (
+            
               <div
                 className="fortniteBrContainerErrorContainer"
                 id="toponehundrederrorHTML"
               >
-                {toponehundrederror}
+                
               </div>
-            )}
+            
             <div
               className="fortniteBrContainerErrorContainer fortniteSuccessMessage"
               id="successMessageTopOneHundred"
@@ -1324,14 +1296,11 @@ export default function Fortnite() {
                 Confirm custom placement
               </button>
             </form>
-            {customplaceError && (
               <div
                 className="fortniteBrContainerErrorContainer"
                 id="customplacementErrorHTML"
               >
-                {customplaceError}
               </div>
-            )}
             <div
               className="fortniteBrContainerErrorContainer fortniteSuccessMessage"
               id="successMessageCustom"

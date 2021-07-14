@@ -66,9 +66,6 @@ export default function MyAccount() {
       .then(() => {
         history.push("/");
       })
-      .catch((error) => {
-        console.log(error);
-      });
   };
 
   const updateinfo = () => {

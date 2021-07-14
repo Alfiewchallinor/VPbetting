@@ -60,11 +60,6 @@ function tictactoe () {
           
           docref.update({
             pointsNumber: firebase.firestore.FieldValue.increment(9)
-          }).then(function () {
-            
-            console.log("worked")
-          }).catch(function(error){
-            console.log("error! end of the world incomming:", error)
           })
         } else {
           
