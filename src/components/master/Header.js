@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import DefaultSideMenu from "./DefaultSideMenu";
 import $ from "jquery";
 import Loginicon from "./login/loginicon";
+import {
+  EsportsFunction,
+  SportsFunction,
+  MinigamesFunction,
+} from "./navigation/NavigationFunctions";
 
 class Header extends React.Component {
   state = {
@@ -25,8 +30,30 @@ class Header extends React.Component {
     const isOpen = this.state.isMenuOpen;
     return (
       <div>
-        {/*-UNIVERSAL SIDE-MENU-*/}
-        <DefaultSideMenu />
+        <header id="Header" className="header active">
+          <Link to="/">
+            <img src="images/Logodesign2.png" id="logo" alt="topleftlogo" />
+          </Link>
+          <div id="nav">
+      <ul>
+        <li>
+          <button id="esportsb" onClick={EsportsFunction}>
+            ESPORTS{" "}
+          </button>
+        </li>
+        <li>
+          <button id="sportsb" onClick={SportsFunction}>
+            SPORTS{" "}
+          </button>
+        </li>
+        <li>
+          <button id="minigamesb" onClick={MinigamesFunction}>
+            MINIGAMES{" "}
+          </button>
+        </li>
+      </ul>
+    </div>
+        
         <Loginicon />
         <div
           id="remover"
@@ -152,6 +179,9 @@ class Header extends React.Component {
           </div>
         </div>
         {/* BURGER BUTTON TO ACTIVATE SIDEBAR */}
+        
+        
+        </header>
         <button
           id="menubtnl"
           className={isOpen ? "menu-btn open" : "menu-btn"}
@@ -159,7 +189,8 @@ class Header extends React.Component {
         >
           <div id="menu-btn_burger"></div>
         </button>
-      </div>
+        <DefaultSideMenu />
+        </div>
     );
   }
 }

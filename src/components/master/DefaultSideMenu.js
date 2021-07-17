@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom'
 
 const DefaultSideMenu = () => {
     return (
-        <div style={{ display: "none" }} id="container">
+        <div style={{ display: "none" }} id="container"
+        >
           <nav className="navbar">
             <ul className="nav-list">
               <li className="nav-item">

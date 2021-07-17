@@ -1,11 +1,13 @@
 import React from 'react'
-import ChangingHeaderInstant from '../../master/changingheader/changingheaderinstant'
+import { Link } from "react-router-dom"
 
 
 function Tos() {
     return (
         <div className="bodydiv">
-            <ChangingHeaderInstant />
+            <Link to="/">
+            <img src="images/Logodesign2.png" id="logo" alt="topleftlogo" style={{"position": "fixed"}}/>
+          </Link>
         <div className="TOS_text_container"> <p>
     <span className="bold_text_hdr">TERMS OF USE </span>
     <br />

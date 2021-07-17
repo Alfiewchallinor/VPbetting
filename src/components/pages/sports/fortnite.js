@@ -5,7 +5,7 @@ import { auth } from "../../../firebase";
 import $ from "jquery";
 var firestore = firebase.firestore();
 
-//Start of functipn page
+//Start of functin page
 export default function Fortnite() {
   //Logged in or out betting section
   firebase.auth().onAuthStateChanged((user) => {
@@ -27,6 +27,7 @@ export default function Fortnite() {
     .then((res) => res.json())
     .then(function (response) {
       $(".tournamentposterClass").css("display", "block");
+      console.log(JSON.stringify(response))
       //Get the values of the last events in the
       // array (format backwards, e.g "fourth" should be the leftest box)
       const finalarray = response.events.length - 1;
@@ -235,9 +236,10 @@ export default function Fortnite() {
             $(".clickedTournamentSectionTitle").html(
               box1linetop + " " + box1linetwo
             );
-            sectionLoadFortniteBetting();
-            sectionLoadFortniteBettingTopHundred();
-            sectionLoadFortniteBettingCustomPlacement();
+            resetSuccessMessage()
+            resetSuccessMessageTop100()
+            resetSuccessMessageCustom()
+
           } else {
           }
         });
@@ -255,9 +257,9 @@ export default function Fortnite() {
             $(".clickedTournamentSectionTitle").html(
               box2linetop + " " + box2linetwo
             );
-            sectionLoadFortniteBetting();
-            sectionLoadFortniteBettingTopHundred();
-            sectionLoadFortniteBettingCustomPlacement();
+            resetSuccessMessage()
+            resetSuccessMessageTop100()
+            resetSuccessMessageCustom()
           } else {
           }
         });
@@ -275,9 +277,9 @@ export default function Fortnite() {
             $(".clickedTournamentSectionTitle").html(
               box3linetop + " " + box3linetwo
             );
-            sectionLoadFortniteBetting();
-            sectionLoadFortniteBettingTopHundred();
-            sectionLoadFortniteBettingCustomPlacement();
+            resetSuccessMessage()
+            resetSuccessMessageTop100()
+            resetSuccessMessageCustom()
           } else {
           }
         });
@@ -294,9 +296,9 @@ export default function Fortnite() {
             $(".clickedTournamentSectionTitle").html(
               box4linetop + " " + box4linetwo
             );
-            sectionLoadFortniteBetting();
-            sectionLoadFortniteBettingTopHundred();
-            sectionLoadFortniteBettingCustomPlacement();
+            resetSuccessMessage()
+            resetSuccessMessageTop100()
+            resetSuccessMessageCustom()
           } else {
           }
         });
@@ -487,6 +489,23 @@ export default function Fortnite() {
           "users/" + auth.currentUser.uid + "pointsNumber"
         );
         pointOfficialNumber.get().then((doc) => {
+
+          const cupname = document.querySelector(
+            ".clickedTournamentSectionTitle"
+          ).innerHTML;
+          const outrightCupBetChecker = firestore.doc(
+            "users/" +
+              auth.currentUser.uid +
+              "pointsNumber/bets/" +
+              cupname +
+              "OutrightWin"
+            );      
+          outrightCupBetChecker.get().then((docsecondary) => {
+            if(docsecondary.exists) {
+              $("#toourightwinErrorCont").html("ERROR: YOU HAVE BET ON THIS CUP ALREADY: " + cupname)
+              return alreadybetfunction()
+           }
+          
           if (doc.data().pointsNumber < coinAmount) {
             return $("#toourightwinErrorCont").html("ERROR: YOU DO NOT HAVE ENOUGH COINS, TRY PLAYING MINIGAMES")
             
@@ -501,7 +520,8 @@ export default function Fortnite() {
           if (coinAmount === "0") {
             return $("#toourightwinErrorCont").html("YOU CAN'T BET 0 COINS?!?!?")
             
-          } else {
+          }
+           else {
             //find the users UID
             fetch(process.env.REACT_APP_FORTNITE_UID_URL + epicName, {
               method: "GET",
@@ -555,42 +575,30 @@ export default function Fortnite() {
               });
           }
         });
+      })
       } else {
         //Nothing will happen
       }
     });
   }
 
-  function sectionLoadFortniteBetting() {
-    const cupname = document.querySelector(
-      ".clickedTournamentSectionTitle"
-    ).innerHTML;
-    const outrightCupBetChecker = firestore.doc(
-      "users/" +
-        auth.currentUser.uid +
-        "pointsNumber/bets/" +
-        cupname +
-        "OutrightWin"
-    );
+  function  resetSuccessMessage () {
+    $(
+      "#ifYourBetIsSUCCESSFULOutright, #playerNameLableFortniteOutright, #tooutrightwinTOURNAMENTNAMEOutright, #coinamountOutright"
+    ).css("display", "block");
+    $(
+      "#inputForFortnieBRBettingSectionOutright, #inputForFortnieBRBettingSectionOutrightSecond"
+    ).show();
+    $("#toourightwinErrorCont").html("");
 
-    outrightCupBetChecker.get().then((doc) => {
-      if (doc.exists) {
-        if (doc.data().betplaced == true) {
-          alreadybetfunction();
-          $(".toourightwinErrorCont").html("");
-        }
-      } else {
-        $(
-          "#ifYourBetIsSUCCESSFULOutright, #playerNameLableFortniteOutright, #tooutrightwinTOURNAMENTNAMEOutright, #coinamountOutright"
-        ).css("display", "block");
-        $(
-          "#inputForFortnieBRBettingSectionOutright, #inputForFortnieBRBettingSectionOutrightSecond"
-        ).show();
-      }
-    });
+    const fortnitemessageSuccessContainereal = document.querySelector(
+      "#fortnitemessageSuccessContainereal"
+    );
+    fortnitemessageSuccessContainereal.innerHTML = ""
   }
   //success already bet message
   function alreadybetfunction() {
+    
     const cupname = document.querySelector(
       ".clickedTournamentSectionTitle"
     ).innerHTML;
@@ -617,7 +625,7 @@ export default function Fortnite() {
           "#fortnitemessageSuccessContainereal"
         );
         fortnitemessageSuccessContainereal.innerHTML =
-          "BET SUCCESSFULL: " +
+          "YOUR CURRENT BET: " +
           playerName +
           " to win " +
           cupname +
@@ -631,7 +639,6 @@ export default function Fortnite() {
   //TOP 100 SECTION
   //TOP 100 SECTION
   //TOP 100 SECTION
-  const [toponehundrederror, settoponehundrederror] = useState();
   const topOneHundredNameRef = useRef();
   const topOneHundredCoinRef = useRef();
 
@@ -646,6 +653,22 @@ export default function Fortnite() {
           "users/" + auth.currentUser.uid + "pointsNumber"
         );
         pointOfficialNumber.get().then((doc) => {
+          const cupname = document.querySelector(
+            ".clickedTournamentSectionTitle"
+          ).innerHTML;
+          const outrightCupBetChecker = firestore.doc(
+            "users/" +
+              auth.currentUser.uid +
+              "pointsNumber/bets/" +
+              cupname +
+              "PlaceTop100"
+            );      
+          outrightCupBetChecker.get().then((docsecondary) => {
+            if(docsecondary.exists) {
+              $("#toponehundrederrorHTML").html("ERROR: YOU HAVE BET ON THIS CUP ALREADY: " + cupname)
+              return alreadybetfunctionTopHundred();
+           }
+
           if (doc.data().pointsNumber < coinTopHundredAmount) {
            return $("#toponehundrederrorHTML").html("ERROR: YOU DO NOT HAVE ENOUGH COINS, TRY PLAYING MINIGAMES")
           }
@@ -705,41 +728,25 @@ export default function Fortnite() {
                     // call the success message function
                     .then(function () {
                       alreadybetfunctionTopHundred();
-                    })
-                    
+                    })  
                 }
               });
           }
         });
+      })
       }
-  function sectionLoadFortniteBettingTopHundred() {
-    const cupname = document.querySelector(
-      ".clickedTournamentSectionTitle"
-    ).innerHTML;
-    const outrightCupBetChecker = firestore.doc(
-      "users/" +
-        auth.currentUser.uid +
-        "pointsNumber/bets/" +
-        cupname +
-        "PlaceTop100"
-    );
-
-    outrightCupBetChecker.get().then((doc) => {
-      if (doc.exists) {
-        if (doc.data().betplaced == true) {
-          alreadybetfunctionTopHundred();
-          $("#toponehundrederrorHTML").html("");
-        }
-      } else {
+      function resetSuccessMessageTop100 () {
         $(
           "#playerNameLableFortniteTopHundred, #coinamountTopHundred, #tooplaceTopHundred, #ifYourBetIsSUCCESSFULTopHundred"
         ).css("display", "block");
         $(
           "#inputForFortnieBRBettingSectionHundred, #inputForFortnieBRBettingSectionHundredSecond"
         ).show();
+        const fortnitemessageSuccessContainereal = document.querySelector(
+          "#successMessageTopOneHundred"
+        );
+        fortnitemessageSuccessContainereal.innerHTML ="";
       }
-    });
-  }
   function alreadybetfunctionTopHundred() {
     const cupname = document.querySelector(
       ".clickedTournamentSectionTitle"
@@ -772,7 +779,7 @@ export default function Fortnite() {
             fortnitemessageSuccessContainereal.innerHTML =
               "BET SUCCESSFULL: " +
               playerName +
-              " to place top 100 in" +
+              " to place top 100 in " +
               cupname +
               " with " +
               coinData +
@@ -805,16 +812,29 @@ export default function Fortnite() {
           "users/" + auth.currentUser.uid + "pointsNumber"
         );
         pointOfficialNumber.get().then((doc) => {
+          const cupname = document.querySelector(
+            ".clickedTournamentSectionTitle"
+          ).innerHTML;
+          const outrightCupBetChecker = firestore.doc(
+            "users/" +
+              auth.currentUser.uid +
+              "pointsNumber/bets/" +
+              cupname +
+              "CustomPlacement"
+            );      
+          outrightCupBetChecker.get().then((docsecondary) => {
+            if(docsecondary.exists) {
+              $("#customplacementErrorHTML").html("ERROR: YOU HAVE BET ON THIS CUP ALREADY: " + cupname)
+              return alreadybetfunctionCustomPlacement();
+           }
           if (doc.data().pointsNumber < coinCustomAmount) {
             
             return $("#customplacementErrorHTML").html(
               "ERROR: YOU DO NOT HAVE ENOUGH COINS, TRY PLAYING MINIGAMES")
           }
-          if (
-            coinCustomAmount.length < 1 ||
+          if ( coinCustomAmount.length < 1 ||
             nameCustom.length < 1 ||
-            placementCustom.length < 1
-          ) {
+             placementCustom.length < 1 ) {
             return $("#customplacementErrorHTML").html(
               "ERROR: FILL IN ALL FIELDS")
           }
@@ -884,44 +904,29 @@ export default function Fortnite() {
                     .then(function () {
                       alreadybetfunctionCustomPlacement();
                     })
-                    
-                }
-              });
-          }
-        });
-      } else {
-        //Nothing will happen
-      }
-    });
-  }
-  function sectionLoadFortniteBettingCustomPlacement() {
-    const cupname = document.querySelector(
-      ".clickedTournamentSectionTitle"
-    ).innerHTML;
-    const outrightCupBetChecker = firestore.doc(
-      "users/" +
-        auth.currentUser.uid +
-        "pointsNumber/bets/" +
-        cupname +
-        "CustomPlacement"
-    );
-
-    outrightCupBetChecker.get().then((doc) => {
-      if (doc.exists) {
-        if (doc.data().betplaced == true) {
-          alreadybetfunctionCustomPlacement();
-          $("#customplacementErrorHTML").html("");
+                  }
+                });
+            }
+          });
+        })
+        } else {
+          //Nothing will happen
         }
-      } else {
-        $(
-          "#playerNameLableFortniteCustom, #coinamountCustom, #customplacementsubmitbtn, #ifYourBetIsSUCCESSFULCustom, .placementaddition"
-        ).css("display", "block");
-        $(
-          "#inputForFortnieBRBettingSectionCustom, #inputForFortnieBRBettingSectionCustomSecond, #inputForFortnieBRBettingSectionCustomThird"
-        ).show();
-      }
-    });
-  }
+      });
+    }
+  
+  function resetSuccessMessageCustom () {
+  $(
+    "#playerNameLableFortniteCustom, #coinamountCustom, #customplacementsubmitbtn, #ifYourBetIsSUCCESSFULCustom, .placementaddition"
+  ).css("display", "block");
+  $(
+    "#inputForFortnieBRBettingSectionCustom, #inputForFortnieBRBettingSectionCustomSecond, #inputForFortnieBRBettingSectionCustomThird"
+  ).show();
+  const fortnitemessageSuccessContainereal = document.querySelector(
+    "#successMessageCustom"
+  );
+  fortnitemessageSuccessContainereal.innerHTML = ""
+}
   function alreadybetfunctionCustomPlacement() {
     const cupname = document.querySelector(
       ".clickedTournamentSectionTitle"

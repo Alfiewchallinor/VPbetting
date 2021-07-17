@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import $ from "jquery";
 import Header from "../master/Header";
-import Changingheader from "../master/changingheader/changingheader";
-import Navigation from "../master/navigation/navigation";
 
 
 export function Home() {
@@ -12,9 +10,8 @@ export function Home() {
 };
   return (
     <div className="bodydiv">
-      <Changingheader />
-      <Navigation />
       <Header />
+      
       {/*-BUTTON CONTAINER-*/}
       <div className="button_container">
         {/*-DOUBLE BUTTONS UNDER TEXT-*/}

@@ -15,10 +15,13 @@ export default function Adduserbets(props) {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const ValorantBetsSectionRef = firestore.doc(
-          "users/" + auth.currentUser.uid + "pointsNumber/"
+          "users/" + auth.currentUser.uid + "pointsNumber/ValorantBets/Bets"
         );
+        
         ValorantBetsSectionRef.get().then((doc) => {
           if (doc.exists) {
+            console.log("indeed, the doc does exist")
+
             fetch("ValorantPublicData.json", {
               headers: {
                 "Content-Type": "application/json",
@@ -35,7 +38,7 @@ export default function Adduserbets(props) {
                   const usersMatchData = firestore.doc(
                     "users/" +
                       auth.currentUser.uid +
-                      "pointsNumber/ValorantBets/" +
+                      "pointsNumber/ValorantBets/Bets/betfound/" +
                       matchDataId +
                       "OutrightWin"
                   );
@@ -60,7 +63,7 @@ export default function Adduserbets(props) {
                   const usersMatchData = firestore.doc(
                     "users/" +
                       auth.currentUser.uid +
-                      "pointsNumber/ValorantBets/" +
+                      "pointsNumber/ValorantBets/Bets/betfound/" +
                       matchDataId +
                       "OutrightWin"
                   );
@@ -86,7 +89,7 @@ export default function Adduserbets(props) {
                   const usersMatchData = firestore.doc(
                     "users/" +
                       auth.currentUser.uid +
-                      "pointsNumber/ValorantBets/" +
+                      "pointsNumber/ValorantBets/Bets/betfound/" +
                       matchDataId +
                       "OutrightWin"
                   );
@@ -111,7 +114,7 @@ export default function Adduserbets(props) {
                   const usersMatchData = firestore.doc(
                     "users/" +
                       auth.currentUser.uid +
-                      "pointsNumber/ValorantBets/" +
+                      "pointsNumber/ValorantBets/Bets/betfound/" +
                       matchDataId +
                       "OutrightWin"
                   );
@@ -136,7 +139,7 @@ export default function Adduserbets(props) {
                   const usersMatchData = firestore.doc(
                     "users/" +
                       auth.currentUser.uid +
-                      "pointsNumber/ValorantBets/" +
+                      "pointsNumber/ValorantBets/Bets/betfound/" +
                       matchDataId +
                       "OutrightWin"
                   );
@@ -161,7 +164,7 @@ export default function Adduserbets(props) {
                   const usersMatchData = firestore.doc(
                     "users/" +
                       auth.currentUser.uid +
-                      "pointsNumber/ValorantBets/" +
+                      "pointsNumber/ValorantBets/Bets/betfound/" +
                       matchDataId +
                       "OutrightWin"
                   );
@@ -186,7 +189,7 @@ export default function Adduserbets(props) {
                   const usersMatchData = firestore.doc(
                     "users/" +
                       auth.currentUser.uid +
-                      "pointsNumber/ValorantBets/" +
+                      "pointsNumber/ValorantBets/Bets/betfound/" +
                       matchDataId +
                       "OutrightWin"
                   );
@@ -211,7 +214,7 @@ export default function Adduserbets(props) {
                   const usersMatchData = firestore.doc(
                     "users/" +
                       auth.currentUser.uid +
-                      "pointsNumber/ValorantBets/" +
+                      "pointsNumber/ValorantBets/Bets/betfound/" +
                       matchDataId +
                       "OutrightWin"
                   );
@@ -236,7 +239,7 @@ export default function Adduserbets(props) {
                   const usersMatchData = firestore.doc(
                     "users/" +
                       auth.currentUser.uid +
-                      "pointsNumber/ValorantBets/" +
+                      "pointsNumber/ValorantBets/Bets/betfound/" +
                       matchDataId +
                       "OutrightWin"
                   );
@@ -261,7 +264,7 @@ export default function Adduserbets(props) {
                   const usersMatchData = firestore.doc(
                     "users/" +
                       auth.currentUser.uid +
-                      "pointsNumber/ValorantBets/" +
+                      "pointsNumber/ValorantBets/Bets/betfound/" +
                       matchDataId +
                       "OutrightWin"
                   );
@@ -285,6 +288,7 @@ export default function Adduserbets(props) {
           }
         });
       } else {
+        return
       }
     });
   }, []);
