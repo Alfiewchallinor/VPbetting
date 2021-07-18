@@ -27,7 +27,6 @@ export default function Fortnite() {
     .then((res) => res.json())
     .then(function (response) {
       $(".tournamentposterClass").css("display", "block");
-      console.log(JSON.stringify(response))
       //Get the values of the last events in the
       // array (format backwards, e.g "fourth" should be the leftest box)
       const finalarray = response.events.length - 1;

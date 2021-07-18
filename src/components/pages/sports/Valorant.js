@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import firebase from "firebase";
 import { auth } from "../../../firebase";
 import $ from "jquery";
-var firestore = firebase.firestore();
-const axios = require('axios').default;
+
+
+
 
 export default class Test extends Component {
   constructor(props) {
@@ -19,27 +20,28 @@ export default class Test extends Component {
           MatchId: '',
           OutrightErrorMessage: '',
           OutrightsuccessMessage: '',
-
       };
-  
+
       this.handleoutrightCoinChange = this.handleoutrightCoinChange.bind(this);
       this.handleoutrightNameChange = this.handleoutrightNameChange.bind(this);
       this.handleOutrightSubmit = this.handleOutrightSubmit.bind(this);
       this.sectionLoadValorantBetting = this.sectionLoadValorantBetting.bind(this);
       this.resetSuccessMessage = this.resetSuccessMessage.bind(this);
-      this.successMessageShown = this.successMessageShown.bind(this)
+      this.successMessageShown = this.successMessageShown.bind(this);
     }
-
-    async componentDidMount() {
-      const headers = {
-        Authorization: process.env.REACT_APP_PANDA_SCORE_KEY
-    };
-
-     const response = await axios.get('https://api.pandascore.co/valorant/tournaments/upcoming', { headers })
-        this.setState({
-           tournamentData: response.data,
-           tournamentLoaded: true
-        })
+    
+    componentDidMount() {
+      fetch("http://localhost:3000/", {
+        method: "GET", 
+        
+      }).then(res => res.json())
+      .then(json => {
+        console.log(json)
+        // this.setState({
+        //     tournamentData: json,
+        //     tournamentLoaded: true
+        // })
+      });
     }
     loaded = () => {
         if(this.state.tournamentLoaded === false) {
@@ -549,6 +551,7 @@ export default class Test extends Component {
             $(".selectTournament").css("color", "red");
           }
         });
+
       return (
           <div onLoad={this.loaded()}>
           <section className="valorantupcommingtounramentssection">

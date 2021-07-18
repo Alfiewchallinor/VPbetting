@@ -4207,7 +4207,7 @@ color: hsla(41, 87%, 65%, 0.959);
   transition: all 0.2s
 }
 .whitefn {
-  color: black
+  color: bl
 }
 .inputForFortnieBRBettingSection:focus {
   border: solid 2px #2563EB;
@@ -4223,7 +4223,7 @@ color: hsla(41, 87%, 65%, 0.959);
   padding-top: 5px;
   padding-bottom: 5px;
   color: white;
-  transition: all 0.15s
+  transition: all 0.15s;
 }
 
 .tooutrightwinTOURNAMENTNAME:hover {

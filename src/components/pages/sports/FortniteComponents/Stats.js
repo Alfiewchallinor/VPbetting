@@ -87,7 +87,8 @@ export default class Stats extends Component {
           </section>
           )
       } if(this.state.FetchedAccountData === true) {
-    const AccountInfo = this.state.AccountInfo.data
+    const AccountInfo = this.state.AccountInfo.data;
+    const stats = AccountInfo.stats
     return (
         <div>
       <section className="findaPlayer">
@@ -126,13 +127,13 @@ export default class Stats extends Component {
             {AccountInfo.account.name}
           </h1>
           <section className="winswinpercentkdkpmcontainer">
-            <div className="sectionLeftLeftUpper" id="overallwins"></div>
+            <div className="sectionLeftLeftUpper" id="overallwins">{stats.all.overall.wins}</div>
             <div
               className="sectionLeftRightUpper"
               id="overallwinpercentage"
-            ></div>
-            <div className="sectionRightLeftUpper" id="overallkd"></div>
-            <div className="sectionRightRightUpper" id="overallkpm"></div>
+            >{stats.all.overall.winRate}</div>
+            <div className="sectionRightLeftUpper" id="overallkd">{stats.all.overall.kd}</div>
+            <div className="sectionRightRightUpper" id="overallkpm">{stats.all.overall.killsPerMin}</div>
           </section>
           <section className="winswinpercentkdkpmcontainersecond">
             <div className="sectionLeftLeft">WINS</div>
@@ -144,15 +145,15 @@ export default class Stats extends Component {
             <div
               className="sectionLeftLeftUpper threecolumnsizing"
               id="overallmatchnumber"
-            ></div>
+            >{AccountInfo.stats.all.overall.matches}</div>
             <div
               className="sectionLeftRightUpper threecolumnsizing middlePositionchanger"
               id="overallkillnumber"
-            ></div>
+            >{stats.all.overall.kills}</div>
             <div
               className="sectionRightLeftUpper threecolumnsizing"
               id="overalldeathnumber"
-            ></div>
+            >{stats.all.overall.deaths}</div>
           </section>
           <section className="winswinpercentkdkpmcontainerfourth">
             <div className="sectionLeftLeftBelow matchespositioner">
@@ -170,14 +171,14 @@ export default class Stats extends Component {
               <h1 className="overallheaderh1">SOLOS</h1>
             </section>
             <section className="titlestats" style={{ display: "flex" }}>
-              <div className="sectionforstatvalues" id="soloWinAmount"></div>
+              <div className="sectionforstatvalues" id="soloWinAmount">{stats.all.solo.wins}</div>
               <div
                 className="sectionforstatvalues"
                 id="soloWinPercentage"
-              ></div>
-              <div className="sectionforstatvalues" id="soloKillAmount"></div>
-              <div className="sectionforstatvalues" id="soloDeathAmount"></div>
-              <div className="sectionforstatvalues" id="soloRatio"></div>
+              >{stats.all.solo.winRate}</div>
+              <div className="sectionforstatvalues" id="soloKillAmount">{stats.all.solo.kills}</div>
+              <div className="sectionforstatvalues" id="soloDeathAmount">{stats.all.solo.deaths}</div>
+              <div className="sectionforstatvalues" id="soloRatio">{stats.all.solo.kd}</div>
             </section>
 
             <section className="titlestats" style={{ display: "flex" }}>
@@ -204,11 +205,11 @@ export default class Stats extends Component {
               <h1 className="overallheaderh1">DUOS</h1>
             </section>
             <section className="titlestats" style={{ display: "flex" }}>
-              <div className="sectionforstatvalues" id="duoWinAmount"></div>
-              <div className="sectionforstatvalues" id="duoWinPercentage"></div>
-              <div className="sectionforstatvalues" id="duoKillAmount"></div>
-              <div className="sectionforstatvalues" id="duoDeathAmount"></div>
-              <div className="sectionforstatvalues" id="duoRatio"></div>
+              <div className="sectionforstatvalues" id="duoWinAmount">{stats.all.duo.wins}</div>
+              <div className="sectionforstatvalues" id="duoWinPercentage">{stats.all.duo.winRate}</div>
+              <div className="sectionforstatvalues" id="duoKillAmount">{stats.all.duo.kills}</div>
+              <div className="sectionforstatvalues" id="duoDeathAmount">{stats.all.duo.deaths}</div>
+              <div className="sectionforstatvalues" id="duoRatio">{stats.all.duo.kd}</div>
             </section>
 
             <section className="titlestats" style={{ display: "flex" }}>
@@ -235,14 +236,14 @@ export default class Stats extends Component {
               <h1 className="overallheaderh1">SQUADS</h1>
             </section>
             <section className="titlestats" style={{ display: "flex" }}>
-              <div className="sectionforstatvalues" id="squadWinAmount"></div>
+              <div className="sectionforstatvalues" id="squadWinAmount">{stats.all.squad.wins}</div>
               <div
                 className="sectionforstatvalues"
                 id="squadWinPercentage"
-              ></div>
-              <div className="sectionforstatvalues" id="squadKillAmount"></div>
-              <div className="sectionforstatvalues" id="squadDeathAmount"></div>
-              <div className="sectionforstatvalues" id="squadRatio"></div>
+              >{stats.all.squad.winRate}</div>
+              <div className="sectionforstatvalues" id="squadKillAmount">{stats.all.squad.kills}</div>
+              <div className="sectionforstatvalues" id="squadDeathAmount">{stats.all.squad.deaths}</div>
+              <div className="sectionforstatvalues" id="squadRatio">{stats.all.squad.kd}</div>
             </section>
 
             <section className="titlestats" style={{ display: "flex" }}>
