@@ -8,28 +8,7 @@ var firestore = firebase.firestore();
 
 function SportsHeader() {
   
-  firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-      $(".pointsNumberDisplay, .minigamesNumberDisplay").css("display", "block");
-      $(".coiniconForMinigames").css("display", "block");
-      const docRef = firestore.doc(
-        "users/" + auth.currentUser.uid + "pointsNumber"
-      );
-      docRef
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            document.getElementById("minigamesNumberGet").innerHTML = JSON.stringify(
-              doc.data().pointsNumber
-            );            
-          } else {
-          }
-        })
-    } else {
-      $(".pointsNumberDisplay, .minigamesNumberDisplay").css("display", "none");
-      $(".coiniconForMinigames").css("display", "none");
-    }
-  });
+
   
     return (
       <div className="sportsPagesNoMediaQuery">
@@ -123,7 +102,7 @@ function SportsHeader() {
                       <p className="miniilinks">FORTNITE EU</p>
                     </div>{" "}
                   </Link>
-                  <Link to="/fortnite">
+                  <Link to="/fortnitena">
                     <div className="contforssecond">
                       <p className="miniilinks">FORTNITE NA</p>
                     </div>{" "}
@@ -250,7 +229,6 @@ function SportsHeader() {
             />
           </div>
         </div>
-        <div className="minigamesNumberDisplay" id="minigamesNumberGet"></div>
         <img src="../images/coin.png" className="coiniconForMinigames" alt="coinsicon"/>
       </div>
     );

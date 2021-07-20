@@ -226,7 +226,7 @@ function MinigamesHeader() {
                       <p className="miniilinks">FORTNITE EU</p>
                     </div>{" "}
                   </Link>
-                  <Link to="/fortnite">
+                  <Link to="/fortnitena">
                     <div className="contforssecond">
                       <p className="miniilinks">FORTNITE NA</p>
                     </div>{" "}

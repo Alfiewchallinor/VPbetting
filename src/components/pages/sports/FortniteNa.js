@@ -6,7 +6,7 @@ import $ from "jquery";
 import Stats from "./FortniteComponents/Stats";
 var firestore = firebase.firestore();
 
-export default class Fortnite extends Component {
+export default class FortniteNA extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -42,7 +42,7 @@ export default class Fortnite extends Component {
   }
 
   componentDidMount() {
-    fetch("/getFortniteTournamentDataEU", {
+    fetch("/getFortniteTournamentDataNA", {
       method: "GET",
     })
       .then((res) => res.json())
@@ -346,7 +346,7 @@ export default class Fortnite extends Component {
     const pastBet = firestore.doc(
       "users/" +
         auth.currentUser.uid +
-        "pointsNumber/FortniteBetsEU/" +
+        "pointsNumber/FortniteBetsNA/" +
         cupName +
         "OutrightWin"
     );
@@ -438,7 +438,7 @@ export default class Fortnite extends Component {
     const pastBet = firestore.doc(
       "users/" +
         auth.currentUser.uid +
-        "pointsNumber/FortniteBetsEU/" +
+        "pointsNumber/FortniteBetsNA/" +
         cupName +
         "Top100"
     );
@@ -532,7 +532,7 @@ export default class Fortnite extends Component {
     const pastBet = firestore.doc(
       "users/" +
         auth.currentUser.uid +
-        "pointsNumber/FortniteBetsEU/" +
+        "pointsNumber/FortniteBetsNA/" +
         cupName +
         "customPlacement"
     );
@@ -661,7 +661,7 @@ export default class Fortnite extends Component {
     console.log(this.state.currentCoinCount);
     return (
       <div onLoad={this.loadedcomponentDidMount()}>
-       <Link to="/fortnitena"> <button className="regionButtonFortnite">VISIT NA</button></Link>
+       <Link to="/fortnite"> <button className="regionButtonFortnite">VISIT EU</button></Link>
         <div className="minigamesNumberDisplay" id="minigamesNumberGet">
           {this.state.currentCoinCount}
         </div>
@@ -758,9 +758,6 @@ export default class Fortnite extends Component {
             </div>
           </div>
         </section>
-        <div className="advertiserSectionCont">
-        <div className="advertForFortnite"><p className="displayTextIncenterforfnadd">ADD WILL BE DISPLAYED HERE</p></div>
-        </div>
         <Stats />
         <section className="completebottomLeftSection">
           <h2 className="selectTournament">SELECT A CUP TO BEGIN BETTING</h2>

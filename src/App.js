@@ -40,7 +40,8 @@ import tictactoe from "./components/pages/minigames/tic-tac-toe";
 import TicTacToe4 from "./components/pages/minigames/tic-tac-toe4x4";
 
 //Esports
-import Fortnite from "./components/pages/sports/fortnite";
+import Fortnite from "./components/pages/sports/Fortnite";
+import FortniteNA from "./components/pages/sports/FortniteNa"
 import Valorant from "./components/pages/sports/Valorant"
 
 import Test from "./test.js"
@@ -55,6 +56,7 @@ const App = ({location}) => {
     "/myaccount",
     "/usernameselect",
     "/fortnite",
+    "/fortnitena",
     "/valorant",
     "/Test"
 ]
@@ -86,6 +88,7 @@ const App = ({location}) => {
   "/circleshooterhard",
   "/snake",
   "/fortnite",
+  "/fortnitena",
   "/valorant",
   "/Test"
  ]
@@ -122,6 +125,7 @@ const App = ({location}) => {
 
       {/*Sports */}
       <Route exact path="/fortnite" component={Fortnite} />
+      <Route exact path="/fortnitena" component={FortniteNA} />
       <Route exact path="/valorant" component={Valorant} />
       <Route component={Test} exact path="/Test"/>
       {/*404 ERROR PAGE */}

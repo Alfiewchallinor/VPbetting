@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import firebase from "firebase";
 import { auth } from "../../../firebase";
 import $ from "jquery";
+var firestore = firebase.firestore();
 
 
 
@@ -31,16 +32,16 @@ export default class Test extends Component {
     }
     
     componentDidMount() {
-      fetch("http://localhost:3000/", {
+      fetch("/getValorantTournamentData", {
         method: "GET", 
         
       }).then(res => res.json())
       .then(json => {
         console.log(json)
-        // this.setState({
-        //     tournamentData: json,
-        //     tournamentLoaded: true
-        // })
+        this.setState({
+            tournamentData: json,
+            tournamentLoaded: true
+        })
       });
     }
     loaded = () => {

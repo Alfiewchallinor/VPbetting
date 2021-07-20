@@ -13,21 +13,7 @@ export default function MyAccount() {
   const history = useHistory();
   const [error, setError] = useState("");
 
-  const displayphotoURL = () => {
-    if (currentUser.displayName === null) {
-      document.getElementById("currentuserPhone").innerHTML =
-        "You can add a Username";
-    }
-    firebase.storage().ref("users/" + currentUser.uid + "/profile.jpg").getDownloadURL().then(onResolve, onReject);
-      function onResolve(imgUrl) {
-        const defaultLogo = document.getElementById("defaultLogo");
-      defaultLogo.src = imgUrl;
-    }
-    
-    function onReject() { 
-      console.log("DON'T WORRY! This error is on our side not yours")
-    }
-  };
+  
 
   const wouldYouLikeToDelete = () => {
     $("#areyouSureContainer").css("display", "block");
@@ -57,12 +43,6 @@ export default function MyAccount() {
 
     user
       .delete()
-      .then(function () {
-        firebase
-          .storage()
-          .ref("users/" + auth.currentUser.uid + "/profile.jpg")
-          .delete();
-      })
       .then(() => {
         history.push("/");
       })
@@ -138,7 +118,7 @@ export default function MyAccount() {
   }
   const { currentUser } = useAuth();
   return (
-    <div onLoad={displayphotoURL()}>
+    <div>
       <LogotopleftWhite />
       <div className="completeprofilecontainer">
         <div id="formcontainer">
