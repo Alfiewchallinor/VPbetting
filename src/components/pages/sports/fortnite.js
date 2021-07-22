@@ -660,7 +660,7 @@ export default class Fortnite extends Component {
 
     console.log(this.state.currentCoinCount);
     return (
-      <div onLoad={this.loadedcomponentDidMount()}>
+      <div onLoad={this.loadedcomponentDidMount()} className="containerForSports" >
        <Link to="/fortnitena"> <button className="regionButtonFortnite">VISIT NA</button></Link>
         <div className="minigamesNumberDisplay" id="minigamesNumberGet">
           {this.state.currentCoinCount}
@@ -746,7 +746,7 @@ export default class Fortnite extends Component {
                 className="tournamentposterClass"
               />
               <h1 className="tournamenttitle" id="fourthtournamentlineone">
-                Loading...
+                Loading
               </h1>
               <h1
                 className="tournamenttitle secondlineposition"
@@ -759,7 +759,8 @@ export default class Fortnite extends Component {
           </div>
         </section>
         <div className="advertiserSectionCont">
-        <div className="advertForFortnite"><p className="displayTextIncenterforfnadd">ADD WILL BE DISPLAYED HERE</p></div>
+        <div className="advertForFortnite"><p className="displayTextIncenterforfnadd">ADS WILL BE DISPLAYED HERE</p></div>
+        <div className="advertForFortnite" id="secondaryAdFortnite"><p className="displayTextIncenterforfnadd">ADS WILL BE DISPLAYED HERE</p></div>
         </div>
         <Stats />
         <section className="completebottomLeftSection">

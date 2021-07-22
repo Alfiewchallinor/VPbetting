@@ -10,6 +10,14 @@ app.get("/getValorantTournamentData", (req, res)=> {
     }
   });
 });
+app.get("/getLeagueTournamentData", (req, res)=> {
+  request("https://api.pandascore.co/lol/tournaments/upcoming?token=PmaEjpFPkBScWgYPkHnHzNF5hg98itu6h1OcooMZv7gxlWjEknM", function(error, response, body) {
+    if (!error && response.statusCode == 200) {
+      res.set("Cache-Control", "public, max-age=300, s-maxage=600");
+      res.send(body);
+    }
+  });
+});
 
 app.get("/getFortniteTournamentDataEU", (req, res) => {
   request("https://fortniteapi.io/v1/events/list?lang=en&region=EU", {headers: {
@@ -21,6 +29,7 @@ app.get("/getFortniteTournamentDataEU", (req, res) => {
     }
   });
 });
+
 
 app.get("/getFortniteTournamentDataNA", (req, res) => {
   request("https://fortniteapi.io/v1/events/list?lang=en&region=NAE", {headers: {

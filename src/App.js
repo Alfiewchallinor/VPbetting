@@ -16,7 +16,7 @@ import NotFoundPage from "./NotFoundPage";
 //Master
 import Footer from "./components/master/Footer"
 import MinigamesHeader from "./components/master/minigamesHeader";
-import SportsHeader from "./components/master/sportsheader"
+import CoinNumber from "./components/pages/CoinNumber"
 
 //PAGES START HERE AND BELOW
 //Default pages
@@ -42,9 +42,8 @@ import TicTacToe4 from "./components/pages/minigames/tic-tac-toe4x4";
 //Esports
 import Fortnite from "./components/pages/sports/Fortnite";
 import FortniteNA from "./components/pages/sports/FortniteNa"
-import Valorant from "./components/pages/sports/Valorant"
-
-import Test from "./test.js"
+import Valorant from "./components/pages/sports/Valorant";
+import LeagueOfLegends from "./components/pages/sports/LeagueOfLegends"
 
 const App = ({location}) => {
   const minigamesheaderexclusion = [
@@ -55,27 +54,8 @@ const App = ({location}) => {
     "/login",
     "/myaccount",
     "/usernameselect",
-    "/fortnite",
-    "/fortnitena",
-    "/valorant",
-    "/Test"
 ]
- const sportsheaderexclusion = [
-  '/',
-  "/privacypolicy",
-  "/createaccount",
-  "/termsofservice",
-  "/login",
-  "/myaccount",
-  "/usernameselect",
-  "/tictactoe",
-  "/tictactoe4x4",
-  "/circleshooter",
-  "/circleshootereasy",
-  "/circleshooterhard",
-  "/snake",
-  
- ]
+
  const footerexclusion = [
   "/createaccount",
   "/login",
@@ -90,7 +70,19 @@ const App = ({location}) => {
   "/fortnite",
   "/fortnitena",
   "/valorant",
-  "/Test"
+  "/leagueoflegends",
+ ]
+
+ const coinNumberExclusion = [
+  "/createaccount",
+  "/login",
+  "/myaccount",
+  "/usernameselect",
+  "/",
+  "/termsofservice",
+  "/valorant",
+  "/leagueoflegends",
+  "/privacypolicy"
  ]
 
 
@@ -100,8 +92,8 @@ const App = ({location}) => {
       <Adduserbets />
     <div className="App">
       {/*MinigamesHeader addition*/}
+    {coinNumberExclusion.indexOf(location.pathname) < 0 && <CoinNumber />}
     {minigamesheaderexclusion.indexOf(location.pathname) < 0 && <MinigamesHeader/>}
-    {sportsheaderexclusion.indexOf(location.pathname) < 0 && <SportsHeader />}
       <Switch>
         
       {/*Index */}
@@ -127,7 +119,7 @@ const App = ({location}) => {
       <Route exact path="/fortnite" component={Fortnite} />
       <Route exact path="/fortnitena" component={FortniteNA} />
       <Route exact path="/valorant" component={Valorant} />
-      <Route component={Test} exact path="/Test"/>
+      <Route exact path="/leagueoflegends" component={LeagueOfLegends} />
       {/*404 ERROR PAGE */}
       <Route component={NotFoundPage} />
       

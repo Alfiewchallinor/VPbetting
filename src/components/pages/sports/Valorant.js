@@ -3,24 +3,28 @@ import { Link } from "react-router-dom";
 import firebase from "firebase";
 import { auth } from "../../../firebase";
 import $ from "jquery";
+var jp = require("jsonpath")
 var firestore = firebase.firestore();
-
-
-
 
 export default class Test extends Component {
   constructor(props) {
       super(props);
       this.state = {
-          outrightName: '',
-          outrightCoin: '',
           matchesLength: '',
           tournamentData: [],
           tournamentLoaded: false,
+          overallTeamData: [],
+
+          currentCoinCount: "",
+          gotCoinAmount: false,
+
+          outrightName: '',
+          outrightCoin: '',
+          
           matchTitle: '',
           MatchId: '',
           OutrightErrorMessage: '',
-          OutrightsuccessMessage: '',
+          OutrightsuccessMessage: '', 
       };
 
       this.handleoutrightCoinChange = this.handleoutrightCoinChange.bind(this);
@@ -28,22 +32,56 @@ export default class Test extends Component {
       this.handleOutrightSubmit = this.handleOutrightSubmit.bind(this);
       this.sectionLoadValorantBetting = this.sectionLoadValorantBetting.bind(this);
       this.resetSuccessMessage = this.resetSuccessMessage.bind(this);
-      this.successMessageShown = this.successMessageShown.bind(this);
+      this.displayCoinCurrentAmount = this.displayCoinCurrentAmount.bind(this);
+      this.fetchTeamData = this.fetchTeamData.bind(this);
     }
     
     componentDidMount() {
+      this.displayCoinCurrentAmount()
       fetch("/getValorantTournamentData", {
         method: "GET", 
         
       }).then(res => res.json())
       .then(json => {
-        console.log(json)
         this.setState({
             tournamentData: json,
             tournamentLoaded: true
         })
+        this.fetchTeamData()
       });
     }
+
+    fetchTeamData () {
+      fetch("ValorantPublicTeamsData.json" , {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      }).then(res => res.json())
+      .then(json => {
+        this.setState({
+          overallTeamData: json
+        }); console.log("sent")
+      })
+    }
+    displayCoinCurrentAmount () {
+      const gotCoinAmount = this.state.gotCoinAmount;
+    if (gotCoinAmount === true) {
+      return;
+    }
+    if (gotCoinAmount === false) {
+      const docRef = firestore.doc(
+        "users/" + auth.currentUser.uid + "pointsNumber"
+      );
+      docRef.get().then((doc) => {
+        this.setState({
+          currentCoinCount: doc.data().pointsNumber,
+          gotCoinAmount: true,
+        });
+      });
+    }
+    }
+    
     loaded = () => {
         if(this.state.tournamentLoaded === false) {
             return
@@ -91,10 +129,10 @@ export default class Test extends Component {
           $("#timeOne").html(FinalDate)
           $("#descriptionOne").html(lineTopper)
           $("#teamsOne").html(lineBottomer)
-          if(lineBottomer.includes("TBD vs TBD")) {
+          if(lineBottomer.includes("TBD")) {
             $("#teamsOne").html("TO BE DECIDED");
           }
-          if(lineBottomer.includes("TBD vs TBD") === false) {
+          if(lineBottomer.includes("TBD") === false) {
             firebase.auth().onAuthStateChanged((user) => {
               if(user) {
                 $("#matchOne").click(function(){
@@ -124,10 +162,10 @@ export default class Test extends Component {
           $("#timeTwo").html(FinalDate)
         $("#descriptionTwo").html(lineTopper)
         $("#teamsTwo").html(lineBottomer)
-        if(lineBottomer.includes("TBD vs TBD")) {
+        if(lineBottomer.includes("TBD")) {
           $("#teamsTwo").html("TO BE DECIDED");
         }
-        if(lineBottomer.includes("TBD vs TBD") === false) {
+        if(lineBottomer.includes("TBD") === false) {
           firebase.auth().onAuthStateChanged((user) => {
             if(user) {
               $("#matchTwo").click(function(){
@@ -156,10 +194,10 @@ export default class Test extends Component {
           $("#timeThree").html(FinalDate)
         $("#descriptionThree").html(lineTopper)
         $("#teamsThree").html(lineBottomer)
-        if(lineBottomer.includes("TBD vs TBD")) {
+        if(lineBottomer.includes("TBD")) {
           $("#teamsThree").html("TO BE DECIDED");
         }
-        if(lineBottomer.includes("TBD vs TBD") === false) {
+        if(lineBottomer.includes("TBD") === false) {
           firebase.auth().onAuthStateChanged((user) => {
             if(user) {
               $("#matchThree").click(function(){
@@ -189,10 +227,10 @@ export default class Test extends Component {
           $("#timeFour").html(FinalDate)
         $("#descriptionFour").html(lineTopper)
         $("#teamsFour").html(lineBottomer);
-        if(lineBottomer.includes("TBD vs TBD")) {
+        if(lineBottomer.includes("TBD")) {
           $("#teamsFour").html("TO BE DECIDED");
         }
-        if(lineBottomer.includes("TBD vs TBD") === false) {
+        if(lineBottomer.includes("TBD") === false) {
           firebase.auth().onAuthStateChanged((user) => {
             if(user) {
               $("#matchFour").click(function(){
@@ -221,10 +259,10 @@ export default class Test extends Component {
           $("#timeFive").html(FinalDate)
         $("#descriptionFive").html(lineTopper);
         $("#teamsFive").html(lineBottomer);
-        if(lineBottomer.includes("TBD vs TBD")) {
+        if(lineBottomer.includes("TBD")) {
           $("#teamsFive").html("TO BE DECIDED");
         }
-        if(lineBottomer.includes("TBD vs TBD") === false) {
+        if(lineBottomer.includes("TBD") === false) {
           firebase.auth().onAuthStateChanged((user) => {
             if(user) {
               $("#matchFive").click(function(){
@@ -253,10 +291,10 @@ export default class Test extends Component {
           $("#timeSix").html(FinalDate)
         $("#descriptionSix").html(lineTopper)
         $("#teamsSix").html(lineBottomer)
-        if(lineBottomer.includes("TBD vs TBD")) {
+        if(lineBottomer.includes("TBD")) {
           $("#teamsSix").html("TO BE DECIDED");
         }
-        if(lineBottomer.includes("TBD vs TBD") === false) {
+        if(lineBottomer.includes("TBD") === false) {
         firebase.auth().onAuthStateChanged((user) => {
           if(user) {
             $("#matchSix").click(function(){
@@ -284,10 +322,10 @@ export default class Test extends Component {
           $("#timeSeven").html(FinalDate)
         $("#descriptionSeven").html(lineTopper)
         $("#teamsSeven").html(lineBottomer)
-        if(lineBottomer.includes("TBD vs TBD")) {
+        if(lineBottomer.includes("TBD")) {
           $("#teamsSeven").html("TO BE DECIDED");
         } 
-        if(lineBottomer.includes("TBD vs TBD") === false) {
+        if(lineBottomer.includes("TBD") === false) {
           firebase.auth().onAuthStateChanged((user) => {
             if(user) {
               $("#matchSeven").click(function(){
@@ -316,10 +354,10 @@ export default class Test extends Component {
           $("#timeEight").html(FinalDate)
         $("#descriptionEight").html(lineTopper)
         $("#teamsEight").html(lineBottomer)
-        if(lineBottomer.includes("TBD vs TBD")) {
+        if(lineBottomer.includes("TBD")) {
           $("#teamsEight").html("TO BE DECIDED");
         }
-        if(lineBottomer.includes("TBD vs TBD") === false) {
+        if(lineBottomer.includes("TBD") === false) {
           firebase.auth().onAuthStateChanged((user) => {
             if(user) {
               $("#matchEight").click(function(){
@@ -348,10 +386,10 @@ export default class Test extends Component {
           $("#timeNine").html(FinalDate)
         $("#descriptionNine").html(lineTopper)
         $("#teamsNine").html(lineBottomer)
-        if(lineBottomer.includes("TBD vs TBD")) {
+        if(lineBottomer.includes("TBD")) {
           $("#teamsNine").html("TO BE DECIDED");
         }
-        if(lineBottomer.includes("TBD vs TBD") === false) {
+        if(lineBottomer.includes("TBD") === false) {
           firebase.auth().onAuthStateChanged((user) => {
             if(user) {
               $("#matchNine").click(function(){
@@ -380,10 +418,10 @@ export default class Test extends Component {
           $("#timeTen").html(FinalDate)
         $("#descriptionTen").html(lineTopper)
         $("#teamsTen").html(lineBottomer)
-        if(lineBottomer.includes("TBD vs TBD")) {
+        if(lineBottomer.includes("TBD")) {
           $("#teamsTen").html("TO BE DECIDED");
         }
-        if(lineBottomer.includes("TBD vs TBD") === false) {
+        if(lineBottomer.includes("TBD") === false) {
           firebase.auth().onAuthStateChanged((user) => {
             if(user) {
               $("#matchTen").click(function(){
@@ -394,7 +432,6 @@ export default class Test extends Component {
                 $(".valorantBettingSectionTournamentTitle").html(teamOne + "VS" + teamTwo)
                 const matchId = matchesEndpoint[9].id
                 $(".rclxTShbvDIxLxLfrkHiiMaJZtzyPVSsVoFZtxly").html(matchId)
-                     
               })
             } else{
               return;
@@ -414,16 +451,12 @@ export default class Test extends Component {
          this.resetSuccessMessage();
     };
     resetSuccessMessage() {
-      $(
-          "#ifYourBetIsSUCCESSFULOutright, #playerNameLableFortniteOutright, #tooutrightwinTOURNAMENTNAMEOutright, #coinamountOutright"
-        ).css("display", "block");
-        $(
-          "#inputForFortnieBRBettingSectionOutright, #inputForFortnieBRBettingSectionOutrightSecond"
-        ).show();
+      
         this.setState({
          OutrightErrorMessage: '',
-         
+         OutrightsuccessMessage: '',
       });
+      console.log("hi")
     }
 
     handleoutrightNameChange(event) {
@@ -441,11 +474,7 @@ export default class Test extends Component {
       const matchId = this.state.MatchId;
       const firstTeam = matchTitle.split("  VS  ")[0];
       const secondTeam = matchTitle.split(" VS  ")[1];
-      const pointOfficialNumber = firestore.doc(
-          "users/" + auth.currentUser.uid + "pointsNumber"
-      );
-      pointOfficialNumber.get().then((doc) => {
-          const coinAmountInAccount = doc.data().pointsNumber
+      const coinAmountInAccount = this.state.currentCoinCount
 
           const checkCupBet = firestore.doc(
               "users/" +
@@ -455,11 +484,10 @@ export default class Test extends Component {
           );
           checkCupBet.get().then((docsecondary) => {
               if(docsecondary.exists) {
-                  this.successMessageShown()
-                  return this.setState({OutrightErrorMessage: "ERROR: YOU HAVE ALREADY BET ON THIS MATCH"})
+                  return this.setState({OutrightErrorMessage: "ERROR: YOU HAVE ALREADY BET ON THIS MATCH:  " + docsecondary.data().ToWin + " TO WIN IN " + docsecondary.data().TeamNames + " WITH " + docsecondary.data().coinAmount + " COIN(S) "})
               }
               if(coinAmountInAccount < coinAmount) {
-                  return this.setState({OutrightErrorMessage: "ERROR: YOU DO NOT HAVE ENOUGH COINS, TRY PLAYING MINIGAMES"})
+                  return this.setState({OutrightErrorMessage: "ERROR: YOU DO NOT HAVE ENOUGH COINS"})
               }
               if(coinAmount.length < 1 || teamName.length < 1) {
                   return this.setState({OutrightErrorMessage: "ERROR: MUST FILL IN ALL FIELD"}) 
@@ -470,77 +498,42 @@ export default class Test extends Component {
                 if(coinAmount === "0") {
                   return this.setState({OutrightErrorMessage: "ERROR: YOU CAN'T BET 0 COINS ?!?!?"})
                 }if(teamName !== firstTeam && teamName !== secondTeam) {
-                  return this.setState({OutrightErrorMessage: "YOU MUST BET FOR EITHER '" +firstTeam +"' or '" + secondTeam + "' (capital letters included)"}) 
+                  return this.setState({OutrightErrorMessage: "ERROR: YOU MUST BET FOR EITHER '" +firstTeam +"' or '" + secondTeam + "' (capital letters included)"}) 
                 } 
                 else {
-                  fetch("https://api.pandascore.co/valorant/teams?search[name]=" + teamName, {
-                      method: "GET",
-                      headers: {
-                        Authorization: process.env.REACT_APP_PANDA_SCORE_KEY
-                      }
-                      
-                    }).then((res) => res.json())
-                    .then(function(response) {
-                      const toWinId = response[0].id
+                  const response = this.state.overallTeamData
+                  
+                      const teamsgg = jp.query(response, '$[*].name')
+                      const teamPositiongg = teamsgg.indexOf(teamName)
+                      const toWinId = response[teamPositiongg].id;
+                      console.log(toWinId)
                       const valorantFirestoreDoc = firestore.doc("users/" +
                       auth.currentUser.uid +
                       "pointsNumber/ValorantBets/" +
                       matchId +
-                      "OutrightWin");
+                       "OutrightWin"); 
                       valorantFirestoreDoc.set({
                         TeamNames: matchTitle,
                         ToWin: teamName,
                         ToWinId: toWinId,
                         MatchId: matchId,
                         coinAmount: coinAmount,
-                        betplaced: true,
-                      }).then(function() {
+                      }).then(()=> {
+                        const pointOfficialNumber = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber")
+
                         pointOfficialNumber.update({
                           pointsNumber: firebase.firestore.FieldValue.increment(
                             -coinAmount
                           )
-                        }).then(function(){
-                          
-                          $("#fortnitemessageSuccessContainereal").html("BET SUCCESSFULL")
+                        }).then(()=> {
+                          this.setState({
+                            OutrightsuccessMessage: "ADDED BET: " + teamName +" TO WIN IN " + matchTitle+ " WITH " +coinAmount +" COINS " ,
+                            currentCoinCount: this.state.currentCoinCount -coinAmount,
                         })
                       })
-                    })
+                      })      
                 }
           })
-      });
-    }
-    successMessageShown() {
-
-        const matchId = this.state.MatchId
-      $(
-          "#ifYourBetIsSUCCESSFULOutright, #playerNameLableFortniteOutright, #tooutrightwinTOURNAMENTNAMEOutright, #coinamountOutright"
-        ).css("display", "none");
-        $(
-          "#inputForFortnieBRBettingSectionOutright, #inputForFortnieBRBettingSectionOutrightSecond"
-        ).hide();
-        this.setState({OutrightErrorMessage: ''})
-        //find the data from firebase
-        const valorantOutrightMatch = firestore.doc("users/" +
-        auth.currentUser.uid +
-        "pointsNumber/ValorantBets/" +
-        matchId +
-        "OutrightWin");
-        valorantOutrightMatch.get().then((doc) => {
-          const TeamNames = JSON.stringify(doc.data().TeamNames);
-    const ToWin = JSON.stringify(doc.data().ToWin);
-    const coinAmount = JSON.stringify(doc.data().coinAmount);
-          this.setState({
-              OutrightsuccessMessage: 
-              "CURRENT BET: " +
-              ToWin + 
-              " to win in " +
-              TeamNames +
-              " with " +
-              coinAmount + 
-              " coins "
-          })
-
-        })
     }
             
     render() {
@@ -554,7 +547,10 @@ export default class Test extends Component {
         });
 
       return (
-          <div onLoad={this.loaded()}>
+          <div onLoad={this.loaded()} className="containerForSports">
+            <div className="minigamesNumberDisplay" id="minigamesNumberGet">
+          {this.state.currentCoinCount}
+        </div>
           <section className="valorantupcommingtounramentssection">
       <div className="upcommingeventsWrapper" >
         <div style={{ display: "flex" }}>
@@ -641,7 +637,11 @@ export default class Test extends Component {
         
       </div>
     </section>
-
+    <div className="ValorantadvertSection">
+        <div className="advertForFortnite valorantadd"><p className="displayTextIncenterforfnadd">ADS WILL BE DISPLAYED HERE</p></div>
+        <div className="advertForFortnite" id="secondaryAdFortnite"><p className="displayTextIncenterforfnadd">ADS WILL BE DISPLAYED HERE</p></div>
+        </div>
+    
     <section className="bottomsectionContainer">
       <div style={{ marginLeft: "40px", marginRight: "40px" }}>
         <div className="valorantBettingSectionMargin">
@@ -747,8 +747,9 @@ export default class Test extends Component {
             className="fortniteBrContainerErrorContainer fortniteSuccessMessage"
             id="fortnitemessageSuccessContainereal"
           >{this.state.OutrightsuccessMessage}</div>
+          
         </div>
-
+        <div className="fixBottomVaLORANTBEt"></div>
             </div>
           </div>
         </div>

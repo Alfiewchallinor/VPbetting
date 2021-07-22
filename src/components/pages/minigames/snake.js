@@ -14,12 +14,16 @@ import firebase from "firebase";
 
 
 export default class Snake extends React.Component {
-  state = {
-    reload: false
-  };
+  constructor(props) {
+    super(props) 
+    this.state = {
+      gameStarted: false
+    }
+    this.componentRefresh = this.componentRefresh.bind(this)
+  }
       
    game = () => {
-    
+    this.setState({gameStarted: true})
     $("#clicker").hide();
     let lastRenderTime = 0;
     let gameOver = false;
@@ -62,8 +66,7 @@ export default class Snake extends React.Component {
   leo = () => {
     $("#game-board").css("background-image", "url('../images/leoard.png')");
   };
-  componentRefresh = () => {
-    window.location.reload(false);
+  componentRefresh  ()  {
     this.forceUpdate();
   }
   render () {

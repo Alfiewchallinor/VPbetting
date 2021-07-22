@@ -3,6 +3,7 @@ import $ from "jquery";
 
 
 const instantSlideRight = () => {
+    $(".containerForSports").css({left: "-90px"})
     $(".toprcloser, .middleer").css({ left: "-182px" });
     $(
       ".lineuua, .lineuub, .accountyou, .topperfixer, .lineuu, .lineuul, .logobar,  .reposya, .feedbackj, controller"

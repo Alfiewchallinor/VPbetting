@@ -660,7 +660,7 @@ export default class FortniteNA extends Component {
 
     console.log(this.state.currentCoinCount);
     return (
-      <div onLoad={this.loadedcomponentDidMount()}>
+      <div onLoad={this.loadedcomponentDidMount()} className="containerForSports">
        <Link to="/fortnite"> <button className="regionButtonFortnite">VISIT EU</button></Link>
         <div className="minigamesNumberDisplay" id="minigamesNumberGet">
           {this.state.currentCoinCount}
@@ -746,7 +746,7 @@ export default class FortniteNA extends Component {
                 className="tournamentposterClass"
               />
               <h1 className="tournamenttitle" id="fourthtournamentlineone">
-                Loading...
+                Loading
               </h1>
               <h1
                 className="tournamenttitle secondlineposition"
@@ -758,6 +758,10 @@ export default class FortniteNA extends Component {
             </div>
           </div>
         </section>
+        <div className="advertiserSectionCont">
+        <div className="advertForFortnite"><p className="displayTextIncenterforfnadd">ADS WILL BE DISPLAYED HERE</p></div>
+        <div className="advertForFortnite" id="secondaryAdFortnite"><p className="displayTextIncenterforfnadd">ADS WILL BE DISPLAYED HERE</p></div>
+        </div>
         <Stats />
         <section className="completebottomLeftSection">
           <h2 className="selectTournament">SELECT A CUP TO BEGIN BETTING</h2>

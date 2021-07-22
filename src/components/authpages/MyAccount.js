@@ -98,24 +98,6 @@ export default function MyAccount() {
         });
     }
   }
-  let file = {};
-
-  function readURL(e) {
-    file = e.target.files[0];
-    firebase
-      .storage()
-      .ref("users/" + auth.currentUser.uid + "/profile.jpg")
-      .put(file)
-      .then(function () {
-        firebase.storage()
-        .ref("users/" + currentUser.uid + "/profile.jpg")
-        .getDownloadURL()
-        .then((imgUrl) => {
-          const defaultLogo = document.getElementById("defaultLogo");
-          defaultLogo.src = imgUrl;
-        })
-      });
-  }
   const { currentUser } = useAuth();
   return (
     <div>
@@ -124,32 +106,6 @@ export default function MyAccount() {
         <div id="formcontainer">
           <div className="profileContainer">
             <section id="myaccountwrapper">
-              <img id="defaultLogo" alt="logo" 
-              src="https://firebasestorage.googleapis.com/v0/b/vpbetting-120f3.appspot.com/o/uploadthiscoin.png?alt=media&token=da0991dc-d4e5-40bc-8203-83d3698da39d"
-              
-              />
-              <img
-                id="defaultLogoicon"
-                alt="logo"
-                src="images/hoveroverimage.png"
-              />
-              
-
-              <input
-                id="file"
-                type="file"
-                accept="image/*"
-                onChange={readURL}
-              ></input>
-              <label
-                htmlFor="file"
-                id="file"
-                className="changepicturebutton"
-                onChange={readURL}
-              >
-                CHANGE AVATAR
-              </label>
-              <div id="circle"></div>
               <div id="bottomTopSection">
                 <ol>
                   <li>

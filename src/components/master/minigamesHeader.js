@@ -14,6 +14,7 @@ function MinigamesHeader() {
   // bigger screen that 1040px closer
   const Slider = () => {
     $(".toprcloser, .middleer").animate({ left: "-182px" }, 450);
+    $(".containerForSports").animate({ left: "-90px"}, 450)
     $(
       ".lineuua, .lineuub, .accountyou, .topperfixer, .lineuu, .lineuul, .logobar,  .reposya, .feedbackj, controller"
     ).animate({ left: "-265px" }, 450);
@@ -37,6 +38,7 @@ function MinigamesHeader() {
   //bigger than 1040px opener
   
   const backwardfunction = () => {
+    $(".containerForSports").animate({ left: "0px"}, 450)
     $(".toprcloser, .middleer").animate({ left: "83px" }, 450);
     $(
       ".lineuua, .lineuub, .accountyou, .topperfixer,.lineuu, .lineuul, .logobar,  .reposya, .feedbackj, controller"
@@ -118,16 +120,6 @@ function MinigamesHeader() {
     if (user) {
       $(".pointsNumberDisplay, .minigamesNumberDisplay, #minigamesNumberGet").css("display", "block");
       $(".coiniconForMinigames").css("display", "block");
-      const docRef = firestore.doc(
-        "users/" + auth.currentUser.uid + "pointsNumber"
-      );
-      docRef
-        .get()
-        .then((doc) => {
-            document.getElementById("minigamesNumberGet").innerHTML = JSON.stringify(
-              doc.data().pointsNumber
-            );
-        }) 
     } else {
       $(".pointsNumberDisplay, .minigamesNumberDisplay, #minigamesNumberGet").css("display", "none");
       $(".coiniconForMinigames").css("display", "none");
@@ -236,7 +228,7 @@ function MinigamesHeader() {
                       <p className="miniilinks">VALORANT</p>
                     </div>{" "}
                   </Link>
-                  <Link to="/">
+                  <Link to="/leagueoflegends">
                     <div className="contforssecond">
                       <p className="miniilinks">LEAGUE OF LEGENDS</p>
                     </div>
@@ -390,7 +382,7 @@ function MinigamesHeader() {
                   </button>
                 </div>
               </div>
-              <Link to="/">
+              <Link to="/myaccount">
                 {" "}
                 <div id="youraa">
                   <p className=" reposyaa">YOUR ACCOUNT</p>
@@ -440,22 +432,22 @@ function MinigamesHeader() {
                 </div>
                 <p id="minigtitlea">ESPORTS</p>
                 <li>
-                  <Link to="/circleshooter">
+                  <Link to="/fortnite">
                     <div className="contforsa">
                       <p className="miniilinksa">FORTNITE EU</p>
                     </div>{" "}
                   </Link>
-                  <Link to="/">
+                  <Link to="/fortnitena">
                     <div className="contforsseconda">
                       <p className="miniilinksa">FORTNITE NA</p>
                     </div>{" "}
                   </Link>
-                  <Link to="/">
+                  <Link to="/valorant">
                     <div className="contforsseconda">
                       <p className="miniilinksa">VALORANT</p>
                     </div>{" "}
                   </Link>
-                  <Link to="/">
+                  <Link to="/leagueoflegends">
                     <div className="contforsseconda">
                       <p className="miniilinksa">LEAGUE OF LEGENDS</p>
                     </div>
@@ -561,7 +553,6 @@ function MinigamesHeader() {
             />
           </div>
         </div>
-        <div className="pointsNumberDisplay minigamesNumberDisplay" id="minigamesNumberGet"></div>
         <img src="../images/coin.png" className="coiniconForMinigames" alt="coinicon"/>
       </div>
     );

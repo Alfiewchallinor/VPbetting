@@ -91,6 +91,7 @@
     height: 60px;
     transition: all 0.3s;
     margin: 0px;
+    z-index: 9999
   }
   #LOGIN {
     position: fixed;
@@ -2169,6 +2170,7 @@
     margin-top: 5px;
     left: 83px;
     position: fixed;
+    z-index: 9999;
   }
   .seperatork:nth-child(2) {
     left: 167px;
@@ -3588,7 +3590,7 @@ input[type="file"] {
   margin-left: 299px;
   position: relative;
   border-radius: 25px;
-  padding: 10px;
+  padding: 5px;
   color: white;
   font-family: 'roboto', sans-serif;
   font-weight: 450;
@@ -3605,10 +3607,24 @@ input[type="file"] {
   background: white;
   
 }
-.advertiserSectionCont {
+.advertiserSectionCont, .ValorantadvertSection {
   margin-left: 299px;
   position: relative;
   width: calc(100vw - 321px);
+  display: flex;
+  margin-top: 40px
+}
+.ValorantadvertSection {
+  width: calc(100vw - 295px);
+  margin-left: 255px;
+  margin-top: 40px
+}
+.valorantadd {
+  margin-left: 40px
+}
+
+#secondaryAdFortnite{
+  margin-left: 2%;
 }
 .advertForFortnite {
   background:rgba(255, 255, 255, 0.842);
@@ -4136,6 +4152,8 @@ color: hsla(41, 87%, 65%, 0.959);
   border-left: solid 1px #fa4453
 }
 
+
+
 .sectionFortniteBrTitle {
   text-align: center;
   color: rgb(0, 83, 238);
@@ -4192,6 +4210,11 @@ color: hsla(41, 87%, 65%, 0.959);
 }
 .valorantReDContFxer {
   border: solid 1px #fa4453;
+  margin-bottom: 19px;
+}
+.fixBottomVaLORANTBEt {
+  height: 6px;
+  width: 20px;
 }
 
 
@@ -4390,3 +4413,60 @@ color: hsla(41, 87%, 65%, 0.959);
   z-index: -9999 !important;
 }
 
+.containerForSports {
+  position: absolute;
+}
+
+@media(max-width: 1040px) {
+  .containerForSports {
+    left: -90px
+  }
+}
+
+.eventLoL {
+  background: transparent;
+  background-position: center;
+  background-repeat: repeat;
+}
+
+.leagueColour {
+  color: #FFDC00;
+}
+
+.leaguecolor {
+  background:#FFDC00;
+}
+
+
+.leftsectionLeague {
+  border-right: solid 1px #FFDC00;
+}
+.middlesectionLeague {
+  border-right: solid 1px#FFDC00;
+  border-left: solid 1px #FFDC00;
+}
+.rightsectionLeague {
+  border-left: solid 1px #FFDC00
+}
+.LeagueReDContFxer {
+  border: solid 1px #FFDC00;
+  margin-bottom: 19px;
+}
+
+.leaguebettingSectionInput {
+  border: 2px solid black; 
+
+}
+
+.leaguebettingSectionInput:focus {
+  border: solid 2px #FFDC00;
+  outline: none;
+}
+
+
+.leagueBettingSectionAfter {
+  background: rgb(252, 252, 252);
+}
+.makeacoolbottom {
+  height: 40px
+}
