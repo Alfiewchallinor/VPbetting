@@ -249,7 +249,7 @@ function MinigamesHeader() {
                       <p className="miniilinks">CRICKET</p>
                     </div>{" "}
                   </Link>
-                  <Link to="/">
+                  <Link to="/football">
                     <div className="contforssecond">
                       <p className="miniilinks">FOOTBALL</p>
                     </div>{" "}

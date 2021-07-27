@@ -14,6 +14,7 @@ export default class Test extends Component {
           tournamentData: [],
           tournamentLoaded: false,
           overallTeamData: [],
+          tournamentOverallName: '',
 
           currentCoinCount: "",
           gotCoinAmount: false,
@@ -26,7 +27,6 @@ export default class Test extends Component {
           OutrightErrorMessage: '',
           OutrightsuccessMessage: '', 
       };
-
       this.handleoutrightCoinChange = this.handleoutrightCoinChange.bind(this);
       this.handleoutrightNameChange = this.handleoutrightNameChange.bind(this);
       this.handleOutrightSubmit = this.handleOutrightSubmit.bind(this);
@@ -45,12 +45,12 @@ export default class Test extends Component {
       .then(json => {
         this.setState({
             tournamentData: json,
-            tournamentLoaded: true
+            tournamentLoaded: true,
+            tournamentOverallName: 'Current Event: '+json[0].league.name
         })
         this.fetchTeamData()
       });
     }
-
     fetchTeamData () {
       fetch("ValorantPublicTeamsData.json" , {
         headers: {
@@ -506,14 +506,12 @@ export default class Test extends Component {
                       const teamsgg = jp.query(response, '$[*].name')
                       const teamPositiongg = teamsgg.indexOf(teamName)
                       const toWinId = response[teamPositiongg].id;
-                      console.log(toWinId)
                       const valorantFirestoreDoc = firestore.doc("users/" +
                       auth.currentUser.uid +
                       "pointsNumber/ValorantBets/" +
                       matchId +
                        "OutrightWin"); 
                       valorantFirestoreDoc.set({
-                        TeamNames: matchTitle,
                         ToWin: teamName,
                         ToWinId: toWinId,
                         MatchId: matchId,
@@ -551,6 +549,7 @@ export default class Test extends Component {
             <div className="minigamesNumberDisplay" id="minigamesNumberGet">
           {this.state.currentCoinCount}
         </div>
+        <div className="tournamentName">{this.state.tournamentOverallName}</div>
           <section className="valorantupcommingtounramentssection">
       <div className="upcommingeventsWrapper" >
         <div style={{ display: "flex" }}>

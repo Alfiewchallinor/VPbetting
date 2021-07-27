@@ -4430,26 +4430,26 @@ color: hsla(41, 87%, 65%, 0.959);
 }
 
 .leagueColour {
-  color: #FFDC00;
+  color: #867922;
 }
 
 .leaguecolor {
-  background:#FFDC00;
+  background:#867922;
 }
 
 
 .leftsectionLeague {
-  border-right: solid 1px #FFDC00;
+  border-right: solid 1px #867922;
 }
 .middlesectionLeague {
-  border-right: solid 1px#FFDC00;
-  border-left: solid 1px #FFDC00;
+  border-right: solid 1px#867922;
+  border-left: solid 1px #867922;
 }
 .rightsectionLeague {
-  border-left: solid 1px #FFDC00
+  border-left: solid 1px #867922;
 }
 .LeagueReDContFxer {
-  border: solid 1px #FFDC00;
+  border: solid 1px #867922;
   margin-bottom: 19px;
 }
 
@@ -4459,7 +4459,7 @@ color: hsla(41, 87%, 65%, 0.959);
 }
 
 .leaguebettingSectionInput:focus {
-  border: solid 2px #FFDC00;
+  border: solid 2px #867922;
   outline: none;
 }
 
@@ -4469,4 +4469,14 @@ color: hsla(41, 87%, 65%, 0.959);
 }
 .makeacoolbottom {
   height: 40px
+}
+
+.tournamentName {
+  font-weight: 450;
+  font-size: 25px;
+  margin-left: 295px;
+  color: white;
+  position: absolute;
+  margin-top: 10px;
+  font-family: 'roboto', sans-serif;
 }

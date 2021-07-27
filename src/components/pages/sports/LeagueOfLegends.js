@@ -13,6 +13,7 @@ export default class LeagueOfLegends extends Component {
         this.state = {
             tournamentDataLoaded: false,
             tournamentData: [],
+            tournamentOverallName: '',
             matchesLength: '',
 
             currentCoinCount: '',
@@ -23,13 +24,14 @@ export default class LeagueOfLegends extends Component {
             team1: '',
             team2: '',
 
+            teamBetId:'',
+
             outrightTeamName: '',
             outrightCoinAmount: '',
 
             outrightErrorMessage: '',
             outrightSuccessMessage: '',
-
-            
+ 
             desc1: 'LOADING...',
             desc2: 'LOADING...',
             desc3: 'LOADING...',
@@ -76,14 +78,16 @@ export default class LeagueOfLegends extends Component {
     }
     componentDidMount() {
         ///getLeagueTournamentData for production
-        fetch("https://api.pandascore.co/lol/tournaments/upcoming?token=PmaEjpFPkBScWgYPkHnHzNF5hg98itu6h1OcooMZv7gxlWjEknM", {
+        fetch("/getLeagueTournamentData", {
             method: "GET",
         }).then(res => res.json())
         .then(json => {
             this.setState({
                 tournamentDataLoaded: true,
                 tournamentData: json[0].matches,
+                teamsData: json[0].teams,
                 matchesLength: json[0].matches.length,
+                tournamentOverallName: 'Current Event: '+json[0].league.name
             })
         }).then(()=> {
             this.setCardsData()
@@ -302,7 +306,7 @@ export default class LeagueOfLegends extends Component {
                         } else {
                           this.setState({
                             matchTitle: this.state.teams2 ,
-                            matchId: this.state.tournamentData[0].id,
+                            matchId: this.state.tournamentData[1].id,
                             team1: (this.state.teams2).split(' vs ')[0],
                             team2: (this.state.teams2).split(' vs ')[1]
                           })
@@ -315,7 +319,7 @@ export default class LeagueOfLegends extends Component {
                         } else {
                           this.setState({
                             matchTitle: this.state.teams3 ,
-                            matchId: this.state.tournamentData[0].id,
+                            matchId: this.state.tournamentData[2].id,
                             team1: (this.state.teams3).split(' vs ')[0],
                             team2: (this.state.teams3).split(' vs ')[1]
                           })
@@ -328,7 +332,7 @@ export default class LeagueOfLegends extends Component {
                         } else {
                           this.setState({
                             matchTitle: this.state.teams4 ,
-                            matchId: this.state.tournamentData[0].id,
+                            matchId: this.state.tournamentData[3].id,
                             team1: (this.state.teams4).split(' vs ')[0],
                             team2: (this.state.teams4).split(' vs ')[1]
                           })
@@ -341,7 +345,7 @@ export default class LeagueOfLegends extends Component {
                         } else {
                           this.setState({
                             matchTitle: this.state.teams5 ,
-                            matchId: this.state.tournamentData[0].id,
+                            matchId: this.state.tournamentData[4].id,
                             team1: (this.state.teams5).split(' vs ')[0],
                             team2: (this.state.teams5).split(' vs ')[1]
                           })
@@ -354,7 +358,7 @@ export default class LeagueOfLegends extends Component {
                         } else {
                           this.setState({
                             matchTitle: this.state.teams6 ,
-                            matchId: this.state.tournamentData[0].id,
+                            matchId: this.state.tournamentData[5].id,
                             team1: (this.state.teams6).split(' vs ')[0],
                             team2: (this.state.teams6).split(' vs ')[1]
                           })
@@ -367,7 +371,7 @@ export default class LeagueOfLegends extends Component {
                         } else {
                           this.setState({
                             matchTitle: this.state.teams7 ,
-                            matchId: this.state.tournamentData[0].id,
+                            matchId: this.state.tournamentData[6].id,
                             team1: (this.state.teams7).split(' vs ')[0],
                             team2: (this.state.teams7).split(' vs ')[1]
                           })
@@ -380,7 +384,7 @@ export default class LeagueOfLegends extends Component {
                         } else {
                           this.setState({
                             matchTitle: this.state.teams8 ,
-                            matchId: this.state.tournamentData[0].id,
+                            matchId: this.state.tournamentData[7].id,
                             team1: (this.state.teams8).split(' vs ')[0],
                             team2: (this.state.teams8).split(' vs ')[1]
                           })
@@ -393,7 +397,7 @@ export default class LeagueOfLegends extends Component {
                         } else {
                           this.setState({
                             matchTitle: this.state.teams9 ,
-                            matchId: this.state.tournamentData[0].id,
+                            matchId: this.state.tournamentData[8].id,
                             team1: (this.state.teams9).split(' vs ')[0],
                             team2: (this.state.teams9).split(' vs ')[1]
                           })
@@ -406,22 +410,24 @@ export default class LeagueOfLegends extends Component {
                         } else {
                           this.setState({
                             matchTitle: this.state.teams10 ,
-                            matchId: this.state.tournamentData[0].id,
+                            matchId: this.state.tournamentData[9].id,
                             team1: (this.state.teams10).split(' vs ')[0],
                             team2: (this.state.teams10).split(' vs ')[1]
                           })
                           this.displayBettingSection();
                         }
                     })
-
                 }
             })
-
         }
     }
     displayBettingSection() {
       $(".imagebackgroundValorantContainer").css("display", "none");
       $(".leagueBettingSectionAfter").css("display", "block");
+      this.setState({
+        outrightErrorMessage: '',
+        outrightSuccessMessage: '',
+      })
     }
 
     handleoutrightNameChange(e) {
@@ -441,7 +447,7 @@ export default class LeagueOfLegends extends Component {
       const pastBet = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber/LoLBets/" +matchId +"OutrightWin" );
       pastBet.get().then((doc) => {
         if(doc.exists) {
-          return this.setState({outrightErrorMessage: "ERROR: YOU HAVE ALREADY BET ON THIS MATCH:  " + doc.data().ToWin + " TO WIN IN " + doc.data().TeamNames + " WITH " + doc.data().coinAmount + " COIN(S) "})
+          return this.setState({outrightErrorMessage: "ERROR: YOU HAVE ALREADY BET ON THIS MATCH:  " + doc.data().ToWin + " TO WIN WITH " + doc.data().coinAmount + " COIN(S) "})
         }
         if(teamName.length < 1 || coinAmount.length < 1) {
           return this.setState({outrightErrorMessage: "ERROR: FILL IN All FIELDS"})
@@ -458,16 +464,55 @@ export default class LeagueOfLegends extends Component {
         if(coinAmount === "0" ) {
           return this.setState({outrightErrorMessage: "ERROR: YOU CAN'T BET 0 COINS?!?!?"})
         } else {
+            const response = this.state.teamsData;
+            const jsonTeamacronym = jp.query(response, '$[*].acronym')
+            const positionOfTeam = jsonTeamacronym.indexOf(teamName)
+            
+            if(positionOfTeam === -1) {
+              const jsonTeamNames = jp.query(response, '$[*].name')
+              const indexIng = jsonTeamNames.indexOf(teamName)
+              this.setState({teamBetId: response[indexIng].id})
+            } else {
+            this.setState({teamBetId: response[positionOfTeam].id})
+            }
+            pastBet.set({
+              ToWin: teamName,
+              ToWinId: this.state.teamBetId,
+              MatchId: matchId,
+              coinAmount: coinAmount,
+            }).then(()=> {
+              const pointNumber = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber");
+              pointNumber.update({
+                pointsNumber: firebase.firestore.FieldValue.increment(-coinAmount)
+              })
+            }).then(()=> {
+              this.setState({
+                outrightErrorMessage: '',
+                outrightSuccessMessage: "BET ADDED: " + teamName +" TO WIN IN " + this.state.matchTitle + " WITH " + coinAmount + " COIN(s)",
+                currentCoinCount: this.state.currentCoinCount - coinAmount
+              })
+            })
         }
       })
     }
 
+    
+
     render() {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          $(".selectTournament").html("SELECT A MATCH TO BEGIN BETTING");
+        } else {
+          $(".selectTournament").html("YOU MUST BE LOGGED INTO BET COINS");
+          $(".selectTournament").css("color", "red");
+        }
+      });
         return (
             <div className="containerForSports">
                 <div className="minigamesNumberDisplay" id="minigamesNumberGet">
             {this.state.currentCoinCount}
                 </div>
+                <div className="tournamentName">{this.state.tournamentOverallName}</div>
                 <section className="valorantupcommingtounramentssection">
       <div className="upcommingeventsWrapper" >
         <div style={{ display: "flex" }}>

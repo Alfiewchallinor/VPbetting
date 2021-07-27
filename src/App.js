@@ -45,6 +45,9 @@ import FortniteNA from "./components/pages/sports/FortniteNa"
 import Valorant from "./components/pages/sports/Valorant";
 import LeagueOfLegends from "./components/pages/sports/LeagueOfLegends"
 
+//Sports
+import Football from "./components/pages/sports/Football";
+
 const App = ({location}) => {
   const minigamesheaderexclusion = [
     '/',
@@ -71,6 +74,7 @@ const App = ({location}) => {
   "/fortnitena",
   "/valorant",
   "/leagueoflegends",
+  "/football"
  ]
 
  const coinNumberExclusion = [
@@ -82,16 +86,26 @@ const App = ({location}) => {
   "/termsofservice",
   "/valorant",
   "/leagueoflegends",
-  "/privacypolicy"
+  "/privacypolicy",
+  "/football"
+ ]
+
+ const adduserBetsExclusion = [
+  "/tictactoe",
+  "/tictactoe4x4",
+  "/circleshooter",
+  "/circleshootereasy",
+  "/circleshooterhard",
+  "/snake",
+
  ]
 
 
   
   return (
     <AuthProvider>
-      <Adduserbets />
     <div className="App">
-      {/*MinigamesHeader addition*/}
+    {adduserBetsExclusion.indexOf(location.pathname) < 0 && <Adduserbets />}
     {coinNumberExclusion.indexOf(location.pathname) < 0 && <CoinNumber />}
     {minigamesheaderexclusion.indexOf(location.pathname) < 0 && <MinigamesHeader/>}
       <Switch>
@@ -120,6 +134,9 @@ const App = ({location}) => {
       <Route exact path="/fortnitena" component={FortniteNA} />
       <Route exact path="/valorant" component={Valorant} />
       <Route exact path="/leagueoflegends" component={LeagueOfLegends} />
+
+      {/*REAL SPORTS */}
+      <Route exact path="/football" component={Football} />
       {/*404 ERROR PAGE */}
       <Route component={NotFoundPage} />
       

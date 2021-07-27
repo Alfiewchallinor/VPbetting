@@ -72,7 +72,7 @@ class Header extends React.Component {
           </div>
           <div id="sizingf">
             {" "}
-            <Link to="/">
+            <Link to="/fortnite">
               {" "}
               <img
                 src="images/categories/c_fortnite_t.jpg"
@@ -158,7 +158,7 @@ class Header extends React.Component {
           </div>
           <div id="sizingf">
             {" "}
-            <Link to="tictactoe">
+            <Link to="/tictactoe">
               <img
                 src="images/categories/c_tic-tac-toe_t.jpg"
                 id="the-lb"

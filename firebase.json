@@ -16,15 +16,31 @@
     ],
     "rewrites": [
       {
-        "source": "/getValorantTournamentData",
-        "function": "app"
-      },
-      {
         "source": "/getFortniteTournamentDataEU",
         "function": "app"
       },
       {
         "source": "/getFortniteTournamentDataNA",
+        "function": "app"
+      },
+      {
+        "source": "/getValorantTournamentData",
+        "function": "app"
+      },
+      {
+        "source": "/getValorantPastTournamentData",
+        "function": "app"
+      },
+      {
+        "source": "/getLeagueTournamentData",
+        "function": "app"
+      },
+      {
+        "source": "/getLeagueMatchDataPast",
+        "function": "app"
+      },
+      {
+        "source": "/getOverallLeagueTeamsData",
         "function": "app"
       },
       {
