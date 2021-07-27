@@ -23,6 +23,7 @@ import CoinNumber from "./components/pages/CoinNumber"
 import Home from "./components/pages/home"; 
 import Tos from "./components/pages/legalpages/termsofservice";
 import Privacypolicy from "./components/pages/legalpages/privacypolicy";
+import Support from "./components/pages/Support"
 
 //Authentication 
 import createAccount from "./components/authpages/createAccount";
@@ -57,6 +58,7 @@ const App = ({location}) => {
     "/login",
     "/myaccount",
     "/usernameselect",
+    "/support"
 ]
 
  const footerexclusion = [
@@ -74,7 +76,8 @@ const App = ({location}) => {
   "/fortnitena",
   "/valorant",
   "/leagueoflegends",
-  "/football"
+  "/football",
+  "/support"
  ]
 
  const coinNumberExclusion = [
@@ -87,7 +90,8 @@ const App = ({location}) => {
   "/valorant",
   "/leagueoflegends",
   "/privacypolicy",
-  "/football"
+  "/football",
+  "/support",
  ]
 
  const adduserBetsExclusion = [
@@ -115,6 +119,7 @@ const App = ({location}) => {
       {/*Legal */}
       <Route exact path="/termsofservice" component={Tos} />
       <Route exact path="/privacypolicy" component={Privacypolicy} />
+      <Route exact path="/support" component={Support} />
       {/*Authentication */}
       <PrivateRouteLoginAndCreateAccount exact path="/createaccount" component={createAccount} />
       <PrivateRouteLoginAndCreateAccount exact path="/login" component={Login} />

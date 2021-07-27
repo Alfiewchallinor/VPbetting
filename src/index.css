@@ -4463,6 +4463,18 @@ color: hsla(41, 87%, 65%, 0.959);
   outline: none;
 }
 
+.footballbettingSectionInput {
+  border: 2px solid black; 
+
+}
+
+.footballbettingSectionInput:focus {
+  border: solid 2px #00e600;
+  outline: none;
+}
+
+
+
 
 .leagueBettingSectionAfter {
   background: rgb(252, 252, 252);

@@ -802,7 +802,7 @@ export default class FortniteNA extends Component {
                 <p className="fortniteSectionBrExpalin">
                   Wait for the result, it can take 1-2 day(s) to recieve your
                   winnings, any errors please go to our{" "}
-                  <Link to="/">
+                  <Link to="/support">
                     <span style={{ color: "#3B82F6" }}>Customer Support</span>
                   </Link>
                   .

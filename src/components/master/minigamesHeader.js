@@ -302,7 +302,7 @@ function MinigamesHeader() {
                   </div>
                 </div>
               </Link>
-              <Link to="/">
+              <Link to="/support">
                 {" "}
                 <div className="abovebox ">
                   <p className="feedbackj">FEEDBACK</p>
@@ -521,7 +521,7 @@ function MinigamesHeader() {
                   </div>
                 </div>
               </Link>
-              <Link to="/">
+              <Link to="/support">
                 {" "}
                 <div className="aboveboxa ">
                   <p className="feedbackja">FEEDBACK</p>

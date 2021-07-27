@@ -678,7 +678,7 @@ export default class Test extends Component {
             <p className="fortniteSectionBrExpalin">
               Wait for the result, it can take 1-2 day(s) to recieve your
               winnings, any errors please go to our{" "}
-              <Link to="/">
+              <Link to="/support">
                 <span style={{ color: "#fa4454" }}>Customer Support</span>
               </Link>.
             </p>
