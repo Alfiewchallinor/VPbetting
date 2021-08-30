@@ -71,5 +71,15 @@ app.get("/getOverallLeagueTeamsData", (req, res) => {
   });
 });
 
+app.get("/getFootballPLUpcomingData", (req, res) => {
+  request("http://api.football-data.org/v2/competitions/PL/matches?status=SCHEDULED&matchday=1", {headers: {
+    "X-Auth-Token": "a6affcc783b64e789071f6f66d3ba93d",
+  }}, function(error, response, body) {
+    if (!error && response.statusCode == 200) {
+      res.set("Cache-Control", "public, max-age=300, s-maxage=600");
+      res.send(body);
+    }
+  });
+});
 
 exports.app = functions.https.onRequest(app);

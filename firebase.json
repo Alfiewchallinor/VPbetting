@@ -44,6 +44,10 @@
         "function": "app"
       },
       {
+        "source": "/getFootballPLUpcomingData",
+        "function": "app"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }

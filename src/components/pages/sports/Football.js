@@ -17,21 +17,28 @@ export default class Football extends Component {
 
       currentCoinCount: '',
 
-      outrightFootballTeamName: '',
-      outrightFootballCoinAmount: '',
-
-      outrightErrorMessage: '',
-      outrightSuccessMessage: '',
-
       team1: '',
       team2: '',
 
       matchTitle: '',
       matchId: '',
-
       officialTeam1: '',
       officialTeam2: '',
 
+      outrightFootballTeamName: '',
+      outrightFootballCoinAmount: '',
+      outrightErrorMessage: '',
+      outrightSuccessMessage: '',
+
+      drawFootballCoinAmount: '',
+      drawErrorMessage: '',
+      drawSuccessMessage: '',
+
+      firstScoreFootballTeamName: '',
+      firstScoreFootballCoinAmount: '',
+      firstScoreErrorMessage: '',
+      firstScoreSuccessMessage: '',
+      
       desc1: 'LOADING...',
       desc2: 'LOADING...',
       desc3: 'LOADING...',
@@ -64,22 +71,29 @@ export default class Football extends Component {
       time8: '',
       time9: '',
       time10: '',
-
     }
     this.displayMatchesData = this.displayMatchesData.bind(this);
     this.displayCoinData = this.displayCoinData.bind(this);
     this.onMatchClick = this.onMatchClick.bind(this);
     this.showBottomSection = this.showBottomSection.bind(this);
+
     this.handleoutrightNameChange = this.handleoutrightNameChange.bind(this);
     this.handleoutrightCoinChange = this.handleoutrightCoinChange.bind(this);
     this.handleFootballOutrightSubmit = this.handleFootballOutrightSubmit.bind(this);
+
+    this.drawCoinChange = this.drawCoinChange.bind(this);
+    this.handleFootballdrawSubmit = this.handleFootballdrawSubmit.bind(this);
+
+    this.handlefirstScoreNameChange = this.handlefirstScoreNameChange.bind(this);
+    this.handlefirstScoreCoinChange = this.handlefirstScoreCoinChange.bind(this);
+    this.handlefirstScoreSubmit = this.handlefirstScoreSubmit.bind(this);
   }
 
   componentDidMount() {
     fetch("http://api.football-data.org/v2/competitions/PL/matches?status=SCHEDULED&matchday=1", {
       method: "GET",
       headers: {
-        'X-Auth-Token': 'a6affcc783b64e789071f6f66d3ba93d'
+        "X-Auth-Token": "a6affcc783b64e789071f6f66d3ba93d"
       }
     }).then(res => res.json())
       .then(json => {
@@ -329,6 +343,99 @@ export default class Football extends Component {
             outrightSuccessMessage: "BET ADDED: " + teamName + " TO WIN IN " + this.state.matchTitle + " WITH " + coinAmount + " COIN(s)",
             currentCoinCount: this.state.currentCoinCount - coinAmount
           })
+        })
+      }
+    })
+  }
+
+  handlefirstScoreNameChange(e) {
+    return this.setState({ firstScoreFootballTeamName: e.target.value })
+  }
+  handlefirstScoreCoinChange(e) {
+    return this.setState({ firstScoreFootballCoinAmount: e.target.value })
+  }
+
+  handlefirstScoreSubmit(e) {
+    e.preventDefault();
+    
+    const officialTeam1 = this.state.officialTeam1;
+    const officialTeam2 = this.state.officialTeam2;
+    const teamName = this.state.firstScoreFootballTeamName;
+    const coinAmount = this.state.firstScoreFootballCoinAmount;
+    const matchId = this.state.matchId;
+    const pastBet = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber/FootballBets/" + matchId + "scoreFirst");
+    pastBet.get().then((doc) => {
+      if(doc.exists) {
+        return this.setState({ firstScoreErrorMessage: 'ERROR: YOU HAVE ALREADY BET FOR THIS MATCH: ' + doc.data().scoreFirst + " TO SCORE FIRST" })
+      }
+      if (coinAmount > this.state.currentCoinCount) {
+        return this.setState({ firstScoreErrorMessage: "ERROR: YOU DO NOT HAVE ENOUGH COINS" })
+      }
+      if (coinAmount.includes("-")) {
+        return this.setState({ firstScoreErrorMessage: "ERROR: YOU CANNOT BET - COINS?!?!?" })
+      }
+      if (teamName !== officialTeam1 && teamName !== officialTeam2) {
+        return this.setState({ firstScoreErrorMessage: "ERROR: YOU CAN ONLY BET FOR " + officialTeam1 + " OR " + officialTeam2 + " (capital letters included)" })
+      }
+      if (coinAmount === "0") {
+        return this.setState({ firstScoreErrorMessage: "ERROR: YOU CAN'T BET 0 COINS?!?!?" })
+      }
+      else {
+        pastBet.set({
+          matchId: matchId,
+          scoreFirst: teamName,
+          coinAmount: coinAmount
+        }).then(()=> {
+          const pointNumber = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber");
+          pointNumber.update({
+            pointsNumber: firebase.firestore.FieldValue.increment(-coinAmount)
+          })
+        }).then(()=> {
+          return this.setState({ firstScoreSuccessMessage: 'BET SUCCESSFUL: "' + teamName + '" TO SCORE FIRST',
+          firstScoreErrorMessage: ''
+        })
+        })
+      }
+      })
+  }
+
+  drawCoinChange(e) {
+    this.setState({ drawFootballCoinAmount: e.target.value })
+  }
+
+  handleFootballdrawSubmit(e) {
+    const matchId = this.state.matchId
+    const coinAmount = this.state.drawFootballCoinAmount
+    e.preventDefault()
+    console.log("clicked " + this.state.drawFootballCoinAmount)
+    const pastBet = firestore.doc('users/' + auth.currentUser.uid + "pointsNumber/FootballBets/" + matchId + "draw")
+    pastBet.get().then((doc)=> {
+      if(doc.exists) {
+        return this.setState({ drawErrorMessage: 'ERROR: YOU HAVE ALREADY BET FOR THIS MATCH TO DRAW:' })
+      }
+      if(this.state.currentCoinCount < coinAmount) {
+        return this.setState({ drawErrorMessage: 'ERROR: YOU DO NOT HAVE ENOUGH COINS' })
+      }
+      if(coinAmount.includes('-')) {
+        return this.setState({ drawErrorMessage: "ERROR: YOU CANNOT BET - COINS?!?!?" })
+      }
+      if(coinAmount === '0') {
+        return this.setState({ drawErrorMessage: "ERROR: YOU CAN'T BET 0 COINS?!?!?" })
+      }
+      else {
+        pastBet.set({
+          coinAmount: coinAmount,
+          matchId: matchId
+        })
+        .then(() => {
+          const pointNumber = firestore.doc("users/" + auth.currentUser.uid + "pointsNumber");
+          pointNumber.update({
+            pointsNumber: firebase.firestore.FieldValue.increment(-coinAmount)
+          })
+        }).then(()=> {
+          return this.setState({ drawSuccessMessage: 'BET SUCCESSFUL: "' + this.state.matchTitle + '" TO DRAW!',
+          drawErrorMessage: ''
+        })
         })
       }
     })
@@ -588,6 +695,120 @@ export default class Football extends Component {
                     >{this.state.outrightSuccessMessage}</div>
 
                   </div>
+
+                  <div className="fortniteBRBettingSectionContainer LeagueReDContFxer" style={{ borderColor: '#00e600' }}>
+                    <h3 className="fortniteBRBettingSectionTitle">TO SCORE FIRST</h3>
+                    <p
+                      className="ifYourBetIsSUCCESSFUL leagueColour"
+                      id="ifYourBetIsSUCCESSFULOutright"
+                      style={{ color: '#00e600' }}
+                    >
+                      IF YOUR BET IS SUCCESSFUL YOU WILL RECIEVE A RETURN OF{" "}
+                      <strong>2X</strong> <br />
+                      There is only <strong> 1 </strong> bet per match.
+                    </p>
+                    <div style={{ display: "flex" }}>
+                      <p
+                        className="playerNameLableFortnite"
+                        id="playerNameLableFortniteOutright"
+                      >
+                        TEAM NAME
+                      </p>
+                      <p
+                        className="playerNameLableFortnite secondaryFortniteLable"
+                        id="coinamountOutright"
+                      >
+                        COIN AMOUNT
+                      </p>
+                    </div>
+                    <form onSubmit={this.handlefirstScoreSubmit}>
+                      <input
+                        className="inputForFortnieBRBettingSection footballbettingSectionInput"
+                        id="inputForFortnieBRBettingSectionOutrightSecond"
+                        placeholder="Team name here"
+                        type="name"
+                        value={this.state.firstScoreFootballTeamName}
+                        onChange={this.handlefirstScoreNameChange}
+                      />
+                      <input
+                        className="inputForFortnieBRBettingSection footballbettingSectionInput"
+                        id="inputForFortnieBRBettingSectionOutright"
+                        type="number"
+                        placeholder=""
+                        value={this.state.firstScoreFootballCoinAmount}
+                        onChange={this.handlefirstScoreCoinChange}
+                      />
+
+                      <button
+                        type="submit"
+                        className="tooutrightwinTOURNAMENTNAME"
+                        id="tooutrightwinTOURNAMENTNAMEOutright"
+                      >
+                        Confirm to outright score first (irreversible)
+                      </button>
+                    </form>
+
+                    <div
+                      className="fortniteBrContainerErrorContainer"
+                      id="toourightwinErrorCont"
+                    >{this.state.firstScoreErrorMessage}
+                    </div>
+                    <div
+                      className="fortniteBrContainerErrorContainer fortniteSuccessMessage"
+                      id="fortnitemessageSuccessContainereal"
+                    >{this.state.firstScoreSuccessMessage}</div>
+
+                  </div>
+
+                  <div className="fortniteBRBettingSectionContainer LeagueReDContFxer" style={{ borderColor: '#00e600' }}>
+                    <h3 className="fortniteBRBettingSectionTitle">TO OUTRIGHT DRAW</h3>
+                    <p
+                      className="ifYourBetIsSUCCESSFUL leagueColour"
+                      id="ifYourBetIsSUCCESSFULOutright"
+                      style={{ color: '#00e600' }}
+                    >
+                      IF YOUR BET IS SUCCESSFUL YOU WILL RECIEVE A RETURN OF{" "}
+                      <strong>1.4X</strong> <br />
+                      There is only <strong> 1 </strong> bet per match.
+                    </p>
+                    <div style={{ display: "flex" }}>
+                      <p
+                        className="playerNameLableFortnite secondaryFortniteLable playlableFb"
+                        id="coinamountOutright"
+                      >
+                        COIN AMOUNT
+                      </p>
+                    </div>
+                    <form onSubmit={this.handleFootballdrawSubmit}>
+                      <input
+                        className="inputForFortnieBRBettingSection footballbettingSectionInput"
+                        id="inputForFortnieBRBettingSectionOutright"
+                        type="number"
+                        placeholder=""
+                        value={this.state.drawFootballCoinAmount}
+                        onChange={this.drawCoinChange}
+                      />
+
+                      <button
+                        type="submit"
+                        className="tooutrightwinTOURNAMENTNAME"
+                        id="tooutrightwinTOURNAMENTNAMEOutright"
+                      >
+                        Confirm to outright draw (irreversible)
+                      </button>
+                    </form>
+
+                    <div
+                      className="fortniteBrContainerErrorContainer"
+                      id="toourightwinErrorCont"
+                    >{this.state.drawErrorMessage}
+                    </div>
+                    <div
+                      className="fortniteBrContainerErrorContainer fortniteSuccessMessage"
+                      id="fortnitemessageSuccessContainereal"
+                    >{this.state.drawSuccessMessage}</div>
+
+                    </div>
                   <div className="fixBottomVaLORANTBEt"></div>
                 </div>
               </div>
@@ -595,8 +816,9 @@ export default class Football extends Component {
 
           </div>
         </section>
-
+        <div className="makeacoolbottom"></div>
       </div>
+      
     )
   }
 }

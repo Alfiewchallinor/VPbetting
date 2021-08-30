@@ -496,8 +496,6 @@ export default class LeagueOfLegends extends Component {
       })
     }
 
-    
-
     render() {
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {

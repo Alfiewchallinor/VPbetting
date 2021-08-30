@@ -19,7 +19,6 @@ export default class Adduserbets extends Component {
       valorantDocData: [],
       valorantMatchIds: '',
       thecurrentValorantBet: ''
-
     }
     this.leagueUpdateData = this.leagueUpdateData.bind(this);
     this.shouldLeagueBeUpdatedAgain = this.shouldLeagueBeUpdatedAgain.bind(this);

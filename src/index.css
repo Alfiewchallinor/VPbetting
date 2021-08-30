@@ -4492,3 +4492,37 @@ color: hsla(41, 87%, 65%, 0.959);
   margin-top: 10px;
   font-family: 'roboto', sans-serif;
 }
+
+.playlableFb {
+  white-space: normal;
+}
+
+@media(max-width: 725px) {
+  .playlableFb {
+    font-size: 15px
+  }
+  .playerNameLableFortnite {
+    font-size: 14px
+  }
+  .bottomsectionContainer {
+    width: calc(100vw - 120px);
+    position: relative;
+    justify-content: center;
+    margin-left: 190px;
+    margin-top: 50px;
+  }
+  .advertiserSectionCont, .ValorantadvertSection {
+    margin-left: 190px;
+    position: relative;
+    width: calc(100vw - 120px);
+    display: flex;
+    margin-top: 40px
+  }
+  .valorantupcommingtounramentssection {
+    width: calc(100vw - 120px);
+    position: relative;
+    justify-content: center;
+    margin-left: 190px;
+    margin-top: 44px;
+  }
+}
